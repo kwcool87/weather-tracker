@@ -1,0 +1,71 @@
+name: Daily Weather Fetch
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+
+jobs:
+  fetch-weather:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: daily-fetch-${{ github.run_number }}
+      cancel-in-progress: false
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic requests
+
+      - name: Check if already fetched today
+        id: check
+        run: |
+          TODAY=$(TZ="America/Indiana/Indianapolis" date +%Y-%m-%d)
+          echo "today=$TODAY" >> $GITHUB_OUTPUT
+          if [ -f data/meta.json ]; then
+            LAST=$(python3 -c "import json; d=json.load(open('data/meta.json')); print(d.get('last_run','')[:10])")
+            if [ "$LAST" = "$TODAY" ]; then
+              echo "already_ran=true" >> $GITHUB_OUTPUT
+            else
+              echo "already_ran=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "already_ran=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run weather fetch
+        if: steps.check.outputs.already_ran != 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python fetch_weather.py
+
+      - name: Commit and push updated data
+        if: steps.check.outputs.already_ran != 'true'
+        run: |
+          git config --local user.email "weather-bot@users.noreply.github.com"
+          git config --local user.name "Weather Bot"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "🌤 Weather data update: ${{ steps.check.outputs.today }}"
+            git push
+          fi
+
+      - name: Report status
+        if: always()
+        run: |
+          echo "Workflow complete. Status: ${{ job.status }}"
+          echo "Date: ${{ steps.check.outputs.today }}"
