@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⛅ Forecast Accuracy Tracker — ZIP 47341</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg:     #06091a;
+    --card:   #0c1424;
+    --border: #182035;
+    --muted:  #2a3a55;
+    --dim:    #3d5070;
+    --text:   #c8d3e6;
+    --bright: #e8f0ff;
+    --wu:     #38bdf8;
+    --wc:     #a78bfa;
+    --aw:     #fb923c;
+    --good:   #4ade80;
+    --warn:   #fbbf24;
+    --bad:    #f87171;
+    --blue:   #60a5fa;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: #0e1526; }
+  ::-webkit-scrollbar-thumb { background: #2a3a5a; border-radius: 3px; }
+
+  header {
+    background: #080e20;
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  header h1 { font-size: 18px; font-weight: 700; color: var(--bright); letter-spacing: -.02em; }
+  .zip-badge { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); background: #0f1a30; padding: 3px 9px; border-radius: 20px; }
+  .last-update { margin-left: auto; font-size: 12px; color: var(--dim); }
+  .pulse-dot { width: 7px; height: 7px; background: var(--good); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.85)} }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 60px; }
+
+  .tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 24px; overflow-x: auto; }
+  .tab { background: transparent; border: none; border-bottom: 2px solid transparent; color: var(--dim); padding: 10px 20px; font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+  .tab.active { color: var(--wu); border-bottom-color: var(--wu); }
+  .tab:hover:not(.active) { color: #7a9ab8; }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 14px; margin-bottom: 20px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 14px; margin-bottom: 20px; }
+
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+  .card-sm { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+
+  .label { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; display: block; }
+
+  .src-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; display: inline-block; }
+  .dot-wu { background: var(--wu); }
+  .dot-wc { background: var(--wc); }
+  .dot-aw { background: var(--aw); }
+
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .tbl th { color: var(--dim); font-weight: 500; font-size: 10px; text-transform: uppercase; letter-spacing: .07em; padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .tbl td { padding: 6px 10px; border-bottom: 1px solid #080f1e; vertical-align: middle; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tbody tr:hover td { background: rgba(255,255,255,.02); }
+
+  select {
+    background: #0d1729; border: 1px solid #1e2e4a; color: #e2eaf8;
+    border-radius: 6px; padding: 6px 10px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+    outline: none; cursor: pointer;
+  }
+
+  .scroll { overflow-x: auto; }
+  .section-title { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; font-weight: 600; }
+  .empty { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; }
+
+  .src-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .mae-val { font-size: 26px; font-weight: 500; font-family: 'IBM Plex Mono', monospace; }
+  .medal { font-size: 20px; margin-left: auto; }
+
+  .chart-wrap { position: relative; height: 220px; margin-bottom: 8px; }
+  .chart-sm { position: relative; height: 160px; margin-bottom: 8px; }
+
+  .tag-good { color: var(--good); background: rgba(74,222,128,.1); }
+  .tag-warn { color: var(--warn); background: rgba(251,191,36,.1); }
+  .tag-bad  { color: var(--bad);  background: rgba(248,113,113,.1); }
+
+  .loading-overlay { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; z-index: 999; }
+  .loading-overlay.hidden { display: none; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner-lg { width: 36px; height: 36px; border-radius: 50%; border: 3px solid rgba(56,189,248,.2); border-top-color: var(--wu); animation: spin .8s linear infinite; }
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loader">
+  <div class="spinner-lg"></div>
+  <div style="color:var(--wu);font-family:'IBM Plex Mono',monospace;font-size:13px">Loading weather data…</div>
+</div>
+
+<header>
+  <div class="pulse-dot"></div>
+  <h1>⛅ Forecast Accuracy Tracker</h1>
+  <span class="zip-badge">ZIP 47341 · Hagerstown, IN</span>
+  <span class="last-update" id="lastUpdate">—</span>
+</header>
+
+<main>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('overview')">📊 Overview</button>
+    <button class="tab" onclick="showTab('forecasts')">📋 Forecasts</button>
+    <button class="tab" onclick="showTab('evolution')">📈 Evolution</button>
+    <button class="tab" onclick="showTab('actuals')">✅ Actuals</button>
+  </div>
+
+  <!-- ══ OVERVIEW ════════════════════════════════════════════════════════ -->
+  <div class="panel active" id="panel-overview">
+    <div class="section-title">Overall Accuracy (all verified forecasts)</div>
+    <div class="grid-3" id="scorecards"></div>
+
+    <div class="section-title" style="margin-top:8px">High Temp Error by Lead Days — all sources</div>
+    <div class="card" style="margin-bottom:16px">
+      <div class="chart-wrap"><canvas id="chartLeadHigh"></canvas></div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">Reversed x-axis: left = furthest out, right = closest to event. Lower = better.</div>
+    </div>
+
+    <div class="section-title">Low Temp Error by Lead Days</div>
+    <div class="card">
+      <div class="chart-sm"><canvas id="chartLeadLow"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ══ FORECASTS ═══════════════════════════════════════════════════════ -->
+  <div class="panel" id="panel-forecasts">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap">
+      <div>
+        <span class="label">Logged Date</span>
+        <select id="fxDateSel" onchange="renderForecasts()"></select>
+      </div>
+      <div style="margin-left:auto;font-size:12px;color:var(--muted)" id="fxCount"></div>
+    </div>
+    <div class="scroll"><table class="tbl" id="fxTable">
+      <thead><tr>
+        <th>Source</th><th>Target Date</th><th>Lead</th>
+        <th>High °F</th><th>Low °F</th><th>Cloud %</th><th>Precip %</th><th>Precip "</th>
+        <th>Actual H</th><th>Actual L</th><th>Err H</th><th>Err L</th>
+      </tr></thead>
+      <tbody id="fxBody"></tbody>
+    </table></div>
+  </div>
+
+  <!-- ══ EVOLUTION ══════════════════════════════════════════════════════ -->
+  <div class="panel" id="panel-evolution">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap">
+      <div>
+        <span class="label">Target Date</span>
+        <select id="evoDateSel" onchange="renderEvolution()"></select>
+      </div>
+      <div id="evoActualBadge" style="font-size:12px"></div>
+    </div>
+    <div id="evoContent"></div>
+  </div>
+
+  <!-- ══ ACTUALS ════════════════════════════════════════════════════════ -->
+  <div class="panel" id="panel-actuals">
+    <div class="section-title">Observed Conditions on File</div>
+    <div class="card scroll">
+      <table class="tbl" id="actualsTable">
+        <thead><tr><th>Date</th><th>High</th><th>Low</th><th>Cloud %</th><th>Precip "</th><th>Condition</th></tr></thead>
+        <tbody id="actualsBody"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script>
+// ── Data ──────────────────────────────────────────────────────────────────
+let DB = { forecasts: [], actuals: {}, meta: {} };
+const SOURCES = [
+  { id: "wunderground", label: "Weather Underground", color: "#38bdf8", dot: "dot-wu" },
+  { id: "weather_com",  label: "Weather.com",          color: "#a78bfa", dot: "dot-wc" },
+  { id: "accuweather",  label: "AccuWeather",           color: "#fb923c", dot: "dot-aw" },
+];
+const SRC = Object.fromEntries(SOURCES.map(s => [s.id, s]));
+let charts = {};
+
+// ── Load ──────────────────────────────────────────────────────────────────
+async function load() {
+  const base = location.pathname.replace(/\/[^\/]*$/, "");
+  const [fxR, acR, metaR] = await Promise.all([
+    fetch(`${base}/data/forecasts.json?t=${Date.now()}`).catch(()=>null),
+    fetch(`${base}/data/actuals.json?t=${Date.now()}`).catch(()=>null),
+    fetch(`${base}/data/meta.json?t=${Date.now()}`).catch(()=>null),
+  ]);
+  if (fxR?.ok)   DB.forecasts = await fxR.json();
+  if (acR?.ok)   DB.actuals   = await acR.json();
+  if (metaR?.ok) DB.meta      = await metaR.json();
+
+  // Last update
+  if (DB.meta.last_run) {
+    const dt = new Date(DB.meta.last_run);
+    document.getElementById("lastUpdate").textContent =
+      "Last updated: " + dt.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}) +
+      " at " + dt.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
+  }
+
+  document.getElementById("loader").classList.add("hidden");
+  renderAll();
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────
+const fmt  = d => new Date(d+"T12:00:00Z").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",timeZone:"UTC"});
+const num  = v => { const n = parseFloat(v); return isNaN(n) ? null : n; };
+const dBetween = (a,b) => Math.round((new Date(b+"T12:00:00Z")-new Date(a+"T12:00:00Z"))/86400000);
+
+const errColor = (e) => e==null ? "var(--dim)" : e<=2 ? "var(--good)" : e<=5 ? "var(--warn)" : "var(--bad)";
+const errTag   = (e) => e==null ? "" : e<=2 ? "tag-good" : e<=5 ? "tag-warn" : "tag-bad";
+
+const pill = (txt, color) =>
+  `<span class="pill mono" style="color:${color};background:${color}18">${txt}</span>`;
+
+const signedErr = (diff) => {
+  if (diff == null) return `<span style="color:var(--dim)">—</span>`;
+  const abs = Math.abs(diff);
+  const cls = errTag(abs);
+  return `<span class="pill ${cls} mono">${diff>0?"+":""}${diff.toFixed(0)}°</span>`;
+};
+
+// ── Accuracy calcs ────────────────────────────────────────────────────────
+function calcAccuracy() {
+  const byLead = {};
+  SOURCES.forEach(src => {
+    byLead[src.id] = {};
+    DB.forecasts.filter(f => f.source === src.id).forEach(f => {
+      const act = DB.actuals[f.target_date];
+      if (!act) return;
+      const ld = f.lead_days;
+      if (!byLead[src.id][ld]) byLead[src.id][ld] = { hE:[], lE:[], n:0 };
+      if (f.high!=null && act.high!=null) byLead[src.id][ld].hE.push(Math.abs(f.high-act.high));
+      if (f.low !=null && act.low !=null) byLead[src.id][ld].lE.push(Math.abs(f.low -act.low ));
+      byLead[src.id][ld].n++;
+    });
+  });
+
+  const overall = {};
+  SOURCES.forEach(src => {
+    const fxs = DB.forecasts.filter(f => f.source===src.id && DB.actuals[f.target_date]);
+    const hE=[], lE=[];
+    fxs.forEach(f => {
+      const act = DB.actuals[f.target_date];
+      if (f.high!=null && act.high!=null) hE.push(Math.abs(f.high-act.high));
+      if (f.low !=null && act.low !=null) lE.push(Math.abs(f.low -act.low ));
+    });
+    const mae = a => a.length ? a.reduce((x,y)=>x+y,0)/a.length : null;
+    overall[src.id] = { high_mae: mae(hE), low_mae: mae(lE), n: fxs.length };
+  });
+
+  return { byLead, overall };
+}
+
+// ── Tab switching ─────────────────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  document.querySelector(`[onclick="showTab('${id}')"]`).classList.add("active");
+  document.getElementById(`panel-${id}`).classList.add("active");
+}
+
+// ── Render all ────────────────────────────────────────────────────────────
+function renderAll() {
+  renderOverview();
+  populateFxDateSel();
+  renderForecasts();
+  populateEvoDateSel();
+  renderActuals();
+}
+
+// ══ OVERVIEW ═════════════════════════════════════════════════════════════
+function renderOverview() {
+  const { byLead, overall } = calcAccuracy();
+
+  // Scorecards
+  const ranked = [...SOURCES].sort((a,b) => {
+    const ma = overall[a.id]?.high_mae ?? 999;
+    const mb = overall[b.id]?.high_mae ?? 999;
+    return ma - mb;
+  });
+  const medals = ["🥇","🥈","🥉"];
+
+  const sc = document.getElementById("scorecards");
+  sc.innerHTML = SOURCES.map(src => {
+    const o = overall[src.id];
+    const rank = ranked.findIndex(s => s.id === src.id);
+    const medal = o?.n > 0 ? medals[rank] ?? "" : "";
+    const maeColor = v => v==null ? "var(--dim)" : v<=2 ? "var(--good)" : v<=4 ? "var(--warn)" : "var(--bad)";
+    return `
+      <div class="card-sm" style="border-color:${o?.n>0?src.color+"25":"var(--border)"}">
+        <div class="src-row" style="margin-bottom:12px">
+          <span class="src-dot ${src.dot}"></span>
+          <span style="font-weight:600;color:var(--bright)">${src.label}</span>
+          <span class="medal">${medal}</span>
+        </div>
+        ${o?.n > 0 ? `
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div>
+              <span class="label">HIGH MAE</span>
+              <div class="mae-val" style="color:${maeColor(o.high_mae)}">${o.high_mae!=null?o.high_mae.toFixed(1)+"°":"—"}</div>
+            </div>
+            <div>
+              <span class="label">LOW MAE</span>
+              <div class="mae-val" style="color:${maeColor(o.low_mae)}">${o.low_mae!=null?o.low_mae.toFixed(1)+"°":"—"}</div>
+            </div>
+            <div style="grid-column:1/-1;font-size:11px;color:var(--muted)">${o.n} verified forecast${o.n!==1?"s":""}</div>
+          </div>
+        ` : `<div style="font-size:12px;color:var(--muted)">No verified data yet.<br>Data appears once actuals are logged.</div>`}
+      </div>`;
+  }).join("");
+
+  // Build combined chart data
+  const allLeads = new Set();
+  SOURCES.forEach(s => Object.keys(byLead[s.id]||{}).forEach(ld => allLeads.add(+ld)));
+  const leadsSorted = [...allLeads].sort((a,b) => b-a); // furthest first
+
+  const makeDatasets = (field) => SOURCES.map(src => ({
+    label: src.label,
+    data: leadsSorted.map(ld => {
+      const d = byLead[src.id]?.[ld];
+      if (!d) return null;
+      const arr = field === "h" ? d.hE : d.lE;
+      return arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : null;
+    }),
+    borderColor: src.color,
+    backgroundColor: src.color + "30",
+    borderWidth: 2,
+    pointRadius: 4,
+    pointHoverRadius: 6,
+    tension: 0.3,
+    spanGaps: false,
+  }));
+
+  const chartOpts = {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: "#7a9ab8", font: { size: 12 } } },
+      tooltip: {
+        backgroundColor: "#0c1424", borderColor: "#182035", borderWidth: 1,
+        titleColor: "#7a9ab8", bodyColor: "#c8d3e6",
+        callbacks: {
+          label: ctx => ctx.parsed.y != null ? `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}°F` : null
+        }
+      },
+      annotation: {}
+    },
+    scales: {
+      x: {
+        reverse: true,
+        ticks: { color: "#3d5070", font: { size: 11 } },
+        grid: { color: "#182035" },
+        title: { display: true, text: "Days before event (left=further out)", color: "#2a3a55", font: { size: 11 } }
+      },
+      y: {
+        ticks: { color: "#3d5070", font: { size: 11 }, callback: v => v + "°" },
+        grid: { color: "#182035" },
+        title: { display: true, text: "MAE (°F)", color: "#2a3a55", font: { size: 11 } },
+        min: 0,
+      }
+    }
+  };
+
+  if (leadsSorted.length > 0) {
+    const makeChart = (id, field) => {
+      if (charts[id]) charts[id].destroy();
+      const ctx = document.getElementById(id).getContext("2d");
+      charts[id] = new Chart(ctx, {
+        type: "line",
+        data: { labels: leadsSorted.map(l => `${l}d`), datasets: makeDatasets(field) },
+        options: JSON.parse(JSON.stringify(chartOpts))
+      });
+    };
+    makeChart("chartLeadHigh", "h");
+    makeChart("chartLeadLow",  "l");
+  } else {
+    ["chartLeadHigh","chartLeadLow"].forEach(id => {
+      const ctx = document.getElementById(id);
+      ctx.parentElement.innerHTML = `<div class="empty">Accuracy charts appear once forecasts + actuals exist for the same date.</div>`;
+    });
+  }
+}
+
+// ══ FORECASTS ════════════════════════════════════════════════════════════
+function populateFxDateSel() {
+  const dates = [...new Set(DB.forecasts.map(f=>f.logged_date))].sort().reverse();
+  const sel = document.getElementById("fxDateSel");
+  sel.innerHTML = dates.length
+    ? dates.map(d=>`<option value="${d}">${fmt(d)} ${DB.actuals[d]?"✓":""}</option>`).join("")
+    : `<option value="">No data yet</option>`;
+}
+
+function renderForecasts() {
+  const date = document.getElementById("fxDateSel").value;
+  const rows = DB.forecasts.filter(f => f.logged_date === date)
+    .sort((a,b) => a.source.localeCompare(b.source) || a.lead_days - b.lead_days);
+  document.getElementById("fxCount").textContent = rows.length ? `${rows.length} entries` : "";
+
+  const tbody = document.getElementById("fxBody");
+  if (!rows.length) { tbody.innerHTML = `<tr><td colspan="12" class="empty">No data for this date.</td></tr>`; return; }
+
+  tbody.innerHTML = rows.map(f => {
+    const src = SRC[f.source];
+    const act = DB.actuals[f.target_date];
+    const dH = act && f.high!=null && act.high!=null ? f.high - act.high : null;
+    const dL = act && f.low !=null && act.low !=null ? f.low  - act.low  : null;
+    return `<tr>
+      <td><span class="src-dot ${src?.dot}" style="margin-right:6px"></span><span style="color:${src?.color};font-size:12px">${src?.label}</span></td>
+      <td style="color:#7a9ab8;white-space:nowrap">${fmt(f.target_date)}</td>
+      <td>${pill(`+${f.lead_days}d`, src?.color)}</td>
+      <td class="mono" style="color:var(--bad)">${f.high??"-"}</td>
+      <td class="mono" style="color:var(--blue)">${f.low??"-"}</td>
+      <td class="mono">${f.cloud_cover!=null?f.cloud_cover+"%":"—"}</td>
+      <td class="mono">${f.precip_prob!=null?f.precip_prob+"%":"—"}</td>
+      <td class="mono">${f.precip_amount!=null?f.precip_amount+'"':"—"}</td>
+      <td class="mono" style="color:var(--bad)">${act?.high??"-"}</td>
+      <td class="mono" style="color:var(--blue)">${act?.low??"-"}</td>
+      <td>${signedErr(dH)}</td>
+      <td>${signedErr(dL)}</td>
+    </tr>`;
+  }).join("");
+}
+
+// ══ EVOLUTION ════════════════════════════════════════════════════════════
+function populateEvoDateSel() {
+  const dates = [...new Set(DB.forecasts.map(f=>f.target_date))].sort().reverse();
+  const sel = document.getElementById("evoDateSel");
+  sel.innerHTML = dates.length
+    ? dates.map(d=>`<option value="${d}">${fmt(d)}${DB.actuals[d]?" ✓":""}</option>`).join("")
+    : `<option value="">No data yet</option>`;
+  if (dates.length) renderEvolution();
+}
+
+function renderEvolution() {
+  const date = document.getElementById("evoDateSel").value;
+  if (!date) return;
+
+  const actual = DB.actuals[date];
+  const badge = document.getElementById("evoActualBadge");
+  badge.innerHTML = actual
+    ? `<span class="pill tag-good mono">✓ Actual: H:${actual.high}°/L:${actual.low}° · ${actual.condition||""}</span>`
+    : `<span class="pill tag-warn mono">⚠ No actuals yet for this date</span>`;
+
+  const content = document.getElementById("evoContent");
+  content.innerHTML = "";
+
+  SOURCES.forEach(src => {
+    const fxs = DB.forecasts
+      .filter(f => f.target_date===date && f.source===src.id)
+      .sort((a,b) => b.lead_days - a.lead_days);
+
+    if (!fxs.length) {
+      content.innerHTML += `
+        <div class="card-sm" style="margin-bottom:10px;opacity:.4;display:flex;align-items:center;gap:10px">
+          <span class="src-dot ${src.dot}"></span>
+          <span style="font-weight:600">${src.label}</span>
+          <span style="font-size:12px;color:var(--muted)">— no data logged for this date</span>
+        </div>`;
+      return;
+    }
+
+    const chartId = `evo_${src.id}`;
+    content.innerHTML += `
+      <div class="card" style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+          <span class="src-dot ${src.dot}"></span>
+          <span style="font-weight:600;color:var(--bright)">${src.label}</span>
+          <span style="font-size:12px;color:var(--muted)">${fxs.length} snapshot${fxs.length!==1?"s":""} · ${fxs[0].lead_days}d → ${fxs[fxs.length-1].lead_days}d lead</span>
+        </div>
+        <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Temperature Evolution</div>
+        <div class="chart-sm"><canvas id="${chartId}"></canvas></div>
+        <div class="scroll" style="margin-top:14px">
+          <table class="tbl" style="font-size:12px">
+            <thead><tr>
+              <th>Lead</th><th>Logged</th><th>High</th><th>Low</th><th>Cloud%</th><th>Precip%</th><th>Precip"</th>
+              ${actual?`<th style="color:var(--bad)">Δ High</th><th style="color:var(--blue)">Δ Low</th>`:""}
+            </tr></thead>
+            <tbody>
+              ${fxs.map(f => {
+                const dH = actual && f.high!=null && actual.high!=null ? f.high-actual.high : null;
+                const dL = actual && f.low !=null && actual.low !=null ? f.low -actual.low  : null;
+                return `<tr>
+                  <td>${pill(`+${f.lead_days}d`, src.color)}</td>
+                  <td style="color:var(--dim)">${f.logged_date}</td>
+                  <td class="mono">${f.high??"-"}</td><td class="mono">${f.low??"-"}</td>
+                  <td class="mono">${f.cloud_cover!=null?f.cloud_cover+"%":"—"}</td>
+                  <td class="mono">${f.precip_prob!=null?f.precip_prob+"%":"—"}</td>
+                  <td class="mono">${f.precip_amount!=null?f.precip_amount+'"':"—"}</td>
+                  ${actual?`<td>${signedErr(dH)}</td><td>${signedErr(dL)}</td>`:""}
+                </tr>`;
+              }).join("")}
+              ${actual?`<tr style="background:rgba(251,191,36,.05)">
+                <td>${pill("ACTUAL","#fbbf24")}</td><td style="color:var(--dim)">${date}</td>
+                <td class="mono" style="color:var(--bad)">${actual.high??"-"}</td>
+                <td class="mono" style="color:var(--blue)">${actual.low??"-"}</td>
+                <td class="mono">${actual.cloud_cover!=null?actual.cloud_cover+"%":"—"}</td>
+                <td class="mono">—</td>
+                <td class="mono">${actual.precip_amount!=null?actual.precip_amount+'"':"—"}</td>
+                <td>—</td><td>—</td>
+              </tr>`:""}
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;gap:14px;margin-top:8px;font-size:11px;color:var(--muted)">
+          <span><span style="color:var(--good)">■</span> ≤2° excellent</span>
+          <span><span style="color:var(--warn)">■</span> ≤5° acceptable</span>
+          <span><span style="color:var(--bad)">■</span> >5° poor</span>
+        </div>
+      </div>`;
+
+    // Draw chart after DOM update
+    requestAnimationFrame(() => {
+      const ctx = document.getElementById(chartId);
+      if (!ctx) return;
+      if (charts[chartId]) charts[chartId].destroy();
+      const labels = fxs.map(f=>`${f.lead_days}d`);
+      const ds = [
+        { label:"Fcst High", data:fxs.map(f=>f.high), borderColor:"#f87171", backgroundColor:"#f8717120", borderWidth:2, pointRadius:4, tension:.3, spanGaps:false },
+        { label:"Fcst Low",  data:fxs.map(f=>f.low),  borderColor:"#60a5fa", backgroundColor:"#60a5fa20", borderWidth:2, pointRadius:4, tension:.3, spanGaps:false },
+      ];
+      if (actual?.high!=null) ds.push({ label:"Actual High", data:fxs.map(()=>actual.high), borderColor:"#fbbf24", borderDash:[5,4], borderWidth:1.5, pointRadius:0, tension:0 });
+      if (actual?.low !=null) ds.push({ label:"Actual Low",  data:fxs.map(()=>actual.low),  borderColor:"#818cf8", borderDash:[5,4], borderWidth:1.5, pointRadius:0, tension:0 });
+      charts[chartId] = new Chart(ctx, {
+        type:"line", data:{ labels, datasets:ds },
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{ legend:{ labels:{ color:"#7a9ab8", font:{size:11} } }, tooltip:{ backgroundColor:"#0c1424", borderColor:"#182035", borderWidth:1, titleColor:"#7a9ab8", bodyColor:"#c8d3e6" } },
+          scales:{
+            x:{ ticks:{ color:"#3d5070", font:{size:11} }, grid:{ color:"#182035" } },
+            y:{ ticks:{ color:"#3d5070", font:{size:11}, callback:v=>v+"°" }, grid:{ color:"#182035" } }
+          }
+        }
+      });
+    });
+  });
+}
+
+// ══ ACTUALS ══════════════════════════════════════════════════════════════
+function renderActuals() {
+  const tbody = document.getElementById("actualsBody");
+  const entries = Object.entries(DB.actuals).sort((a,b)=>b[0].localeCompare(a[0]));
+  if (!entries.length) { tbody.innerHTML = `<tr><td colspan="6" class="empty">No actuals recorded yet.</td></tr>`; return; }
+  tbody.innerHTML = entries.map(([dt,act]) => `
+    <tr>
+      <td style="color:#7a9ab8;white-space:nowrap">${fmt(dt)}</td>
+      <td class="mono" style="color:var(--bad)">${act.high??"-"}</td>
+      <td class="mono" style="color:var(--blue)">${act.low??"-"}</td>
+      <td class="mono">${act.cloud_cover!=null?act.cloud_cover+"%":"—"}</td>
+      <td class="mono">${act.precip_amount!=null?act.precip_amount+'"':"—"}</td>
+      <td style="color:var(--dim);font-size:12px">${act.condition||"—"}</td>
+    </tr>`).join("");
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────
+load();
+</script>
+</body>
+</html>
