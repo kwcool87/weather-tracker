@@ -2,8 +2,11 @@ name: Daily Weather Fetch
 
 on:
   schedule:
-    - cron: '0 12 * * *'
-    - cron: '0 13 * * *'
+    - cron: '0 12 * * *'   # 8 AM EDT
+    - cron: '0 13 * * *'   # 9 AM EDT / 8 AM EST
+    - cron: '0 14 * * *'   # 10 AM EDT fallback
+    - cron: '0 15 * * *'   # 11 AM EDT fallback
+    - cron: '0 16 * * *'   # 12 PM EDT fallback
   workflow_dispatch:
 
 jobs:
