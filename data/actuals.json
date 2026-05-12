@@ -1,1 +1,9 @@
-{}
+{
+  "2026-05-10": {
+    "high": 64,
+    "low": 51,
+    "cloud_cover": 44,
+    "precip_amount": 0.03,
+    "condition": "Rain"
+  }
+}
