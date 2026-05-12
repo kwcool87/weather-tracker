@@ -5,5 +5,12 @@
     "cloud_cover": 44,
     "precip_amount": 0.03,
     "condition": "Rain"
+  },
+  "2026-05-11": {
+    "high": 67,
+    "low": 44,
+    "cloud_cover": 20,
+    "precip_amount": 0.0,
+    "condition": "Mostly Clear"
   }
 }
