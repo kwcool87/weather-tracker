@@ -2,10 +2,16 @@
 Weather Forecast Accuracy Tracker — Daily Fetch Script
 Runs via GitHub Actions at 8 AM ET every day.
 
-Sources (all free, no API key required):
-  nws        — NWS / Weather.gov  (official NOAA forecast)
-  open_meteo — Open-Meteo         (free global weather model)
-  wttr       — wttr.in            (aggregated forecast service)
+Forecast sources (all free, no API key required):
+  nws        — NWS / Weather.gov       (official NOAA forecast)
+  om_gfs     — Open-Meteo / GFS        (US global model)
+  om_ecmwf   — Open-Meteo / ECMWF      (European model, global gold standard)
+  om_icon    — Open-Meteo / ICON        (German DWD model)
+  wttr       — wttr.in                  (aggregated forecast service)
+
+Actuals sources:
+  Open-Meteo archive (primary)
+  NASA POWER         (secondary validation)
 """
 
 import json
@@ -22,9 +28,11 @@ ZIP = "47341"
 HEADERS = {"User-Agent": "weather-tracker/1.0 (github.com/kwcool87/weather-tracker)"}
 
 SOURCES = [
-    {"id": "nws",        "label": "NWS / Weather.gov"},
-    {"id": "open_meteo", "label": "Open-Meteo"},
-    {"id": "wttr",       "label": "wttr.in"},
+    {"id": "nws",      "label": "NWS / Weather.gov"},
+    {"id": "om_gfs",   "label": "Open-Meteo GFS"},
+    {"id": "om_ecmwf", "label": "Open-Meteo ECMWF"},
+    {"id": "om_icon",  "label": "Open-Meteo ICON"},
+    {"id": "wttr",     "label": "wttr.in"},
 ]
 
 def today_et():
@@ -69,9 +77,9 @@ def fetch_nws(log_date):
 
     return [
         {
-            "date": dt,
-            "high": days[dt].get("high"),
-            "low":  days[dt].get("low"),
+            "date":          dt,
+            "high":          days[dt].get("high"),
+            "low":           days[dt].get("low"),
             "cloud_cover":   None,
             "precip_prob":   days[dt].get("precip_prob"),
             "precip_amount": None,
@@ -80,27 +88,27 @@ def fetch_nws(log_date):
         if dt >= log_date
     ]
 
-# ── Source 2: Open-Meteo ──────────────────────────────────────────────────
-def fetch_open_meteo(log_date):
-    r = requests.get(
-        "https://api.open-meteo.com/v1/forecast",
-        params={
-            "latitude":  LAT,
-            "longitude": LON,
-            "daily": ",".join([
-                "temperature_2m_max",
-                "temperature_2m_min",
-                "precipitation_sum",
-                "precipitation_probability_max",
-                "cloud_cover_mean",
-            ]),
-            "temperature_unit":   "fahrenheit",
-            "precipitation_unit": "inch",
-            "timezone":           "America/Indiana/Indianapolis",
-            "forecast_days":      10,
-        },
-        timeout=20,
-    )
+# ── Open-Meteo shared helper ──────────────────────────────────────────────
+def _fetch_open_meteo(log_date, model=None):
+    params = {
+        "latitude":           LAT,
+        "longitude":          LON,
+        "daily":              ",".join([
+            "temperature_2m_max",
+            "temperature_2m_min",
+            "precipitation_sum",
+            "precipitation_probability_max",
+            "cloud_cover_mean",
+        ]),
+        "temperature_unit":   "fahrenheit",
+        "precipitation_unit": "inch",
+        "timezone":           "America/Indiana/Indianapolis",
+        "forecast_days":      10,
+    }
+    if model:
+        params["models"] = model
+
+    r = requests.get("https://api.open-meteo.com/v1/forecast", params=params, timeout=20)
     r.raise_for_status()
     d = r.json()["daily"]
     n = len(d["time"])
@@ -126,7 +134,19 @@ def fetch_open_meteo(log_date):
         if dt >= log_date
     ]
 
-# ── Source 3: wttr.in ─────────────────────────────────────────────────────
+# ── Source 2: Open-Meteo GFS (US model) ──────────────────────────────────
+def fetch_om_gfs(log_date):
+    return _fetch_open_meteo(log_date, model="gfs_seamless")
+
+# ── Source 3: Open-Meteo ECMWF (European model) ──────────────────────────
+def fetch_om_ecmwf(log_date):
+    return _fetch_open_meteo(log_date, model="ecmwf_ifs025")
+
+# ── Source 4: Open-Meteo ICON (German DWD model) ─────────────────────────
+def fetch_om_icon(log_date):
+    return _fetch_open_meteo(log_date, model="icon_seamless")
+
+# ── Source 5: wttr.in ─────────────────────────────────────────────────────
 def fetch_wttr(log_date):
     r = requests.get(
         f"https://wttr.in/{ZIP}?format=j1",
@@ -164,12 +184,14 @@ def fetch_wttr(log_date):
     return result
 
 FETCH_FNS = {
-    "nws":        fetch_nws,
-    "open_meteo": fetch_open_meteo,
-    "wttr":       fetch_wttr,
+    "nws":      fetch_nws,
+    "om_gfs":   fetch_om_gfs,
+    "om_ecmwf": fetch_om_ecmwf,
+    "om_icon":  fetch_om_icon,
+    "wttr":     fetch_wttr,
 }
 
-# ── Actuals: Open-Meteo archive ───────────────────────────────────────────
+# ── Actuals: Open-Meteo archive (primary) ────────────────────────────────
 def _cloud_to_condition(cloud_cover, precip_amount):
     if precip_amount and precip_amount > 0.01:
         return "Rain"
@@ -182,6 +204,7 @@ def _cloud_to_condition(cloud_cover, precip_amount):
     return "Overcast"
 
 def fetch_actual(target_date):
+    # Primary: Open-Meteo archive
     r = requests.get(
         "https://archive-api.open-meteo.com/v1/archive",
         params={
@@ -189,7 +212,7 @@ def fetch_actual(target_date):
             "longitude":          LON,
             "start_date":         target_date,
             "end_date":           target_date,
-            "daily": ",".join([
+            "daily":              ",".join([
                 "temperature_2m_max",
                 "temperature_2m_min",
                 "precipitation_sum",
@@ -211,18 +234,59 @@ def fetch_actual(target_date):
     precip = d["precipitation_sum"][0]
     cloud  = d["cloud_cover_mean"][0]
 
-    high_r   = round(high)   if high   is not None else None
-    low_r    = round(low)    if low    is not None else None
+    high_r   = round(high)      if high   is not None else None
+    low_r    = round(low)       if low    is not None else None
     precip_r = round(precip, 2) if precip is not None else None
-    cloud_r  = round(cloud)  if cloud  is not None else None
+    cloud_r  = round(cloud)     if cloud  is not None else None
 
-    return {
+    actual = {
         "high":          high_r,
         "low":           low_r,
         "cloud_cover":   cloud_r,
         "precip_amount": precip_r,
         "condition":     _cloud_to_condition(cloud_r, precip_r),
     }
+
+    # Secondary: NASA POWER (cross-check, fills in if primary missing)
+    try:
+        rp = requests.get(
+            "https://power.larc.nasa.gov/api/temporal/daily/point",
+            params={
+                "parameters": "T2M_MAX,T2M_MIN,PRECTOTCORR,CLOUD_AMT",
+                "community":  "AG",
+                "longitude":  LON,
+                "latitude":   LAT,
+                "start":      target_date.replace("-", ""),
+                "end":        target_date.replace("-", ""),
+                "format":     "JSON",
+            },
+            timeout=30,
+        )
+        rp.raise_for_status()
+        pd = rp.json()["properties"]["parameter"]
+        dt_key = target_date.replace("-", "")
+
+        def c_to_f(c):
+            return round(c * 9/5 + 32) if c is not None and c != -999 else None
+
+        nasa_high   = c_to_f(pd.get("T2M_MAX", {}).get(dt_key))
+        nasa_low    = c_to_f(pd.get("T2M_MIN", {}).get(dt_key))
+        nasa_precip = pd.get("PRECTOTCORR", {}).get(dt_key)
+        nasa_cloud  = pd.get("CLOUD_AMT",   {}).get(dt_key)
+
+        actual["nasa_high"]   = nasa_high
+        actual["nasa_low"]    = nasa_low
+        actual["nasa_precip"] = round(float(nasa_precip) * 0.0394, 2) if nasa_precip and float(nasa_precip) != -999 else None
+        actual["nasa_cloud"]  = round(float(nasa_cloud)) if nasa_cloud and float(nasa_cloud) != -999 else None
+
+        # Fill primary gaps with NASA data
+        if actual["high"]   is None: actual["high"]   = nasa_high
+        if actual["low"]    is None: actual["low"]    = nasa_low
+
+    except Exception as e:
+        print(f"  NASA POWER actuals failed (non-fatal): {e}")
+
+    return actual
 
 # ── Data persistence ──────────────────────────────────────────────────────
 DATA_DIR = Path("data")
@@ -271,7 +335,7 @@ def main():
     forecasts, actuals = load_data()
     results = {"fetched": {}, "errors": [], "actual": None}
 
-    # 1. Fetch forecasts from all 3 sources
+    # 1. Fetch forecasts from all sources
     for src in SOURCES:
         print(f"Fetching {src['label']}...")
         try:
