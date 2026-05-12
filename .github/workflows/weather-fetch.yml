@@ -26,7 +26,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install anthropic requests
+        run: pip install requests
 
       - name: Check if already fetched today
         id: check
@@ -47,7 +47,6 @@ jobs:
       - name: Run weather fetch
         if: steps.check.outputs.already_ran != 'true'
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: python fetch_weather.py
 

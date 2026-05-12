@@ -1,21 +1,31 @@
 """
 Weather Forecast Accuracy Tracker — Daily Fetch Script
 Runs via GitHub Actions at 8 AM ET every day.
-Fetches forecasts from Weather Underground, Weather.com, and AccuWeather
-for ZIP 47341 (Hagerstown, IN), then fetches yesterday's actuals.
+
+Sources (all free, no API key required):
+  nws        — NWS / Weather.gov  (official NOAA forecast)
+  open_meteo — Open-Meteo         (free global weather model)
+  wttr       — wttr.in            (aggregated forecast service)
 """
 
-import anthropic
 import json
 import os
-import re
 import requests
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, date
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-# ── Timezone ───────────────────────────────────────────────────────────────
-ET = ZoneInfo("America/Indiana/Indianapolis")
+ET  = ZoneInfo("America/Indiana/Indianapolis")
+LAT = 39.9499
+LON = -84.9385
+ZIP = "47341"
+HEADERS = {"User-Agent": "weather-tracker/1.0 (github.com/kwcool87/weather-tracker)"}
+
+SOURCES = [
+    {"id": "nws",        "label": "NWS / Weather.gov"},
+    {"id": "open_meteo", "label": "Open-Meteo"},
+    {"id": "wttr",       "label": "wttr.in"},
+]
 
 def today_et():
     return datetime.now(ET).strftime("%Y-%m-%d")
@@ -24,73 +34,197 @@ def yesterday_et():
     return (datetime.now(ET) - timedelta(days=1)).strftime("%Y-%m-%d")
 
 def days_between(a, b):
-    from datetime import date
     return (date.fromisoformat(b) - date.fromisoformat(a)).days
 
-# ── Claude API with web search ─────────────────────────────────────────────
-def call_claude(prompt, max_tokens=2000):
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-    response = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=max_tokens,
-        tools=[{"type": "web_search_20250305", "name": "web_search"}],
-        messages=[{"role": "user", "content": prompt}],
+# ── Source 1: NWS (Weather.gov) ───────────────────────────────────────────
+def fetch_nws(log_date):
+    r = requests.get(
+        f"https://api.weather.gov/points/{LAT},{LON}",
+        headers=HEADERS, timeout=20
     )
-    return "".join(b.text for b in response.content if hasattr(b, "text"))
+    r.raise_for_status()
+    props = r.json()["properties"]
+    office, gx, gy = props["gridId"], props["gridX"], props["gridY"]
 
-def extract_json(text):
-    text = re.sub(r"```json|```", "", text).strip()
-    m = re.search(r"\[[\s\S]*\]", text)
-    if m:
-        try: return json.loads(m.group())
-        except: pass
-    m = re.search(r"\{[\s\S]*\}", text)
-    if m:
-        try: return json.loads(m.group())
-        except: pass
-    return json.loads(text)
-
-# ── Weather sources ────────────────────────────────────────────────────────
-SOURCES = [
-    {"id": "wunderground", "label": "Weather Underground", "site": "wunderground.com"},
-    {"id": "weather_com",  "label": "Weather.com",          "site": "weather.com"},
-    {"id": "accuweather",  "label": "AccuWeather",           "site": "accuweather.com"},
-]
-
-def fetch_forecast(source, log_date):
-    prompt = (
-        f"Search {source['site']} for the current 10-day weather forecast for ZIP code 47341 "
-        f"Fountain City Indiana. Today is {log_date}. "
-        f"Return ONLY a raw JSON array, no markdown, no explanation: "
-        f'[{{"date":"YYYY-MM-DD","high":75,"low":58,"cloud_cover":40,"precip_prob":20,"precip_amount":0.1}}] '
-        f"Rules: dates YYYY-MM-DD starting {log_date}. high/low = °F integers. "
-        f"cloud_cover = sky cover 0-100 int (null if not listed). precip_prob = 0-100 int. "
-        f"precip_amount = inches decimal (null if not listed). ONLY the JSON array, nothing else."
+    r = requests.get(
+        f"https://api.weather.gov/gridpoints/{office}/{gx},{gy}/forecast",
+        headers=HEADERS, timeout=20
     )
-    raw = call_claude(prompt, max_tokens=2000)
-    data = extract_json(raw)
-    if not isinstance(data, list) or not data:
-        raise ValueError("Empty or invalid forecast array")
-    return [d for d in data if d.get("date") and (d.get("high") is not None or d.get("low") is not None)]
+    r.raise_for_status()
+    periods = r.json()["properties"]["periods"]
 
-def fetch_actual(date):
-    prompt = (
-        f"Search for actual observed weather conditions in Fountain City Indiana ZIP 47341 on {date}. "
-        f"Check wunderground.com/history, weather.gov, or climate data sources. "
-        f"Return ONLY a raw JSON object, no markdown: "
-        f'{{"high":75,"low":58,"cloud_cover":40,"precip_amount":0.12,"condition":"Partly Cloudy"}} '
-        f"high/low = actual max/min °F integers. cloud_cover = avg sky cover % (null if unknown). "
-        f"precip_amount = total precipitation inches, 0.0 if none fell. "
-        f"condition = one of: Clear, Mostly Clear, Partly Cloudy, Mostly Cloudy, Overcast, Rain, Thunderstorms, Snow. "
-        f"ONLY the JSON object."
+    days = {}
+    for p in periods:
+        dt = p["startTime"][:10]
+        if dt not in days:
+            days[dt] = {}
+        prob = (p.get("probabilityOfPrecipitation") or {}).get("value")
+        if p["isDaytime"]:
+            days[dt]["high"] = p["temperature"]
+            days[dt]["precip_prob"] = prob
+        else:
+            days[dt]["low"] = p["temperature"]
+            if "precip_prob" not in days[dt]:
+                days[dt]["precip_prob"] = prob
+
+    return [
+        {
+            "date": dt,
+            "high": days[dt].get("high"),
+            "low":  days[dt].get("low"),
+            "cloud_cover":   None,
+            "precip_prob":   days[dt].get("precip_prob"),
+            "precip_amount": None,
+        }
+        for dt in sorted(days)
+        if dt >= log_date
+    ]
+
+# ── Source 2: Open-Meteo ──────────────────────────────────────────────────
+def fetch_open_meteo(log_date):
+    r = requests.get(
+        "https://api.open-meteo.com/v1/forecast",
+        params={
+            "latitude":  LAT,
+            "longitude": LON,
+            "daily": ",".join([
+                "temperature_2m_max",
+                "temperature_2m_min",
+                "precipitation_sum",
+                "precipitation_probability_max",
+                "cloud_cover_mean",
+            ]),
+            "temperature_unit":   "fahrenheit",
+            "precipitation_unit": "inch",
+            "timezone":           "America/Indiana/Indianapolis",
+            "forecast_days":      10,
+        },
+        timeout=20,
     )
-    raw = call_claude(prompt, max_tokens=600)
-    obj = extract_json(raw)
-    if not isinstance(obj, dict) or isinstance(obj, list):
-        raise ValueError("Not a JSON object")
-    return obj
+    r.raise_for_status()
+    d = r.json()["daily"]
+    n = len(d["time"])
 
-# ── Data persistence ───────────────────────────────────────────────────────
+    def iv(key, i):
+        v = d.get(key, [None] * n)[i]
+        return round(v) if v is not None else None
+
+    def fv(key, i):
+        v = d.get(key, [None] * n)[i]
+        return round(v, 2) if v is not None else None
+
+    return [
+        {
+            "date":          dt,
+            "high":          iv("temperature_2m_max", i),
+            "low":           iv("temperature_2m_min", i),
+            "cloud_cover":   iv("cloud_cover_mean", i),
+            "precip_prob":   iv("precipitation_probability_max", i),
+            "precip_amount": fv("precipitation_sum", i),
+        }
+        for i, dt in enumerate(d["time"])
+        if dt >= log_date
+    ]
+
+# ── Source 3: wttr.in ─────────────────────────────────────────────────────
+def fetch_wttr(log_date):
+    r = requests.get(
+        f"https://wttr.in/{ZIP}?format=j1",
+        headers={"User-Agent": "curl/7.68.0"},
+        timeout=20,
+    )
+    r.raise_for_status()
+    weather = r.json().get("weather", [])
+
+    result = []
+    base = date.fromisoformat(log_date)
+    for i, day in enumerate(weather):
+        dt = str(base + timedelta(days=i))
+        hourly = day.get("hourly", [])
+        avg_cloud = (
+            round(sum(int(h.get("cloudcover", 0)) for h in hourly) / len(hourly))
+            if hourly else None
+        )
+        max_precip_prob = (
+            max(int(h.get("chanceofrain", 0)) for h in hourly)
+            if hourly else None
+        )
+        total_precip = (
+            round(sum(float(h.get("precipMM", 0)) for h in hourly) * 0.0394, 2)
+            if hourly else None
+        )
+        result.append({
+            "date":          dt,
+            "high":          round(float(day["maxtempF"])),
+            "low":           round(float(day["mintempF"])),
+            "cloud_cover":   avg_cloud,
+            "precip_prob":   max_precip_prob,
+            "precip_amount": total_precip,
+        })
+    return result
+
+FETCH_FNS = {
+    "nws":        fetch_nws,
+    "open_meteo": fetch_open_meteo,
+    "wttr":       fetch_wttr,
+}
+
+# ── Actuals: Open-Meteo archive ───────────────────────────────────────────
+def _cloud_to_condition(cloud_cover, precip_amount):
+    if precip_amount and precip_amount > 0.01:
+        return "Rain"
+    if cloud_cover is None:
+        return "Unknown"
+    if cloud_cover < 20:  return "Clear"
+    if cloud_cover < 40:  return "Mostly Clear"
+    if cloud_cover < 60:  return "Partly Cloudy"
+    if cloud_cover < 80:  return "Mostly Cloudy"
+    return "Overcast"
+
+def fetch_actual(target_date):
+    r = requests.get(
+        "https://archive-api.open-meteo.com/v1/archive",
+        params={
+            "latitude":           LAT,
+            "longitude":          LON,
+            "start_date":         target_date,
+            "end_date":           target_date,
+            "daily": ",".join([
+                "temperature_2m_max",
+                "temperature_2m_min",
+                "precipitation_sum",
+                "cloud_cover_mean",
+            ]),
+            "temperature_unit":   "fahrenheit",
+            "precipitation_unit": "inch",
+            "timezone":           "America/Indiana/Indianapolis",
+        },
+        timeout=20,
+    )
+    r.raise_for_status()
+    d = r.json()["daily"]
+    if not d.get("time"):
+        raise ValueError("No archive data returned")
+
+    high   = d["temperature_2m_max"][0]
+    low    = d["temperature_2m_min"][0]
+    precip = d["precipitation_sum"][0]
+    cloud  = d["cloud_cover_mean"][0]
+
+    high_r   = round(high)   if high   is not None else None
+    low_r    = round(low)    if low    is not None else None
+    precip_r = round(precip, 2) if precip is not None else None
+    cloud_r  = round(cloud)  if cloud  is not None else None
+
+    return {
+        "high":          high_r,
+        "low":           low_r,
+        "cloud_cover":   cloud_r,
+        "precip_amount": precip_r,
+        "condition":     _cloud_to_condition(cloud_r, precip_r),
+    }
+
+# ── Data persistence ──────────────────────────────────────────────────────
 DATA_DIR = Path("data")
 
 def load_data():
@@ -105,36 +239,28 @@ def save_data(forecasts, actuals):
     DATA_DIR.mkdir(exist_ok=True)
     (DATA_DIR / "forecasts.json").write_text(json.dumps(forecasts, indent=2))
     (DATA_DIR / "actuals.json").write_text(json.dumps(actuals, indent=2))
-
-    # Also write a "last_updated" metadata file for the dashboard
     meta = {
-        "last_run": datetime.now(ET).isoformat(),
+        "last_run":               datetime.now(ET).isoformat(),
         "total_forecast_entries": len(forecasts),
-        "total_actuals": len(actuals),
+        "total_actuals":          len(actuals),
     }
     (DATA_DIR / "meta.json").write_text(json.dumps(meta, indent=2))
 
-# ── ntfy.sh notification ───────────────────────────────────────────────────
+# ── ntfy.sh notification ──────────────────────────────────────────────────
 def send_notification(title, message, ntfy_topic):
     if not ntfy_topic:
-        print("NTFY_TOPIC not set — skipping push notification")
         return
     try:
-        r = requests.post(
+        requests.post(
             f"https://ntfy.sh/{ntfy_topic}",
             data=message.encode("utf-8"),
-            headers={
-                "Title": title,
-                "Priority": "default",
-                "Tags": "partly_sunny,white_check_mark",
-            },
+            headers={"Title": title, "Priority": "default", "Tags": "partly_sunny"},
             timeout=10,
         )
-        print(f"Notification sent (status {r.status_code})")
     except Exception as e:
         print(f"Notification failed: {e}")
 
-# ── Main ───────────────────────────────────────────────────────────────────
+# ── Main ──────────────────────────────────────────────────────────────────
 def main():
     log_date  = today_et()
     yesterday = yesterday_et()
@@ -145,14 +271,15 @@ def main():
     forecasts, actuals = load_data()
     results = {"fetched": {}, "errors": [], "actual": None}
 
-    # ── 1. Fetch forecasts from all 3 sources ──────────────────────────────
+    # 1. Fetch forecasts from all 3 sources
     for src in SOURCES:
-        print(f"Fetching {src['label']} ({src['site']})...")
+        print(f"Fetching {src['label']}...")
         try:
-            days = fetch_forecast(src, log_date)
-            print(f"  ✓ {len(days)} days retrieved")
+            days = FETCH_FNS[src["id"]](log_date)
+            if not days:
+                raise ValueError("Empty response")
+            print(f"  OK: {len(days)} days")
 
-            # Replace any existing entries for this source+date
             forecasts = [
                 f for f in forecasts
                 if not (f["logged_date"] == log_date and f["source"] == src["id"])
@@ -172,56 +299,42 @@ def main():
             results["fetched"][src["id"]] = len(days)
 
         except Exception as e:
-            print(f"  ✗ Error: {e}")
+            print(f"  ERROR: {e}")
             results["errors"].append(f"{src['label']}: {e}")
 
-    # ── 2. Fetch yesterday's actuals ───────────────────────────────────────
+    # 2. Fetch yesterday's actuals
     print(f"\nFetching actuals for {yesterday}...")
     try:
         act = fetch_actual(yesterday)
-        actuals[yesterday] = {
-            "high":          act.get("high"),
-            "low":           act.get("low"),
-            "cloud_cover":   act.get("cloud_cover"),
-            "precip_amount": act.get("precip_amount"),
-            "condition":     act.get("condition", ""),
-        }
-        print(f"  ✓ H:{act.get('high')}° / L:{act.get('low')}° — {act.get('condition','')}")
+        actuals[yesterday] = act
+        print(f"  OK: H:{act.get('high')}° / L:{act.get('low')}° — {act.get('condition','')}")
         results["actual"] = act
-
     except Exception as e:
-        print(f"  ✗ Error: {e}")
+        print(f"  ERROR: {e}")
         results["errors"].append(f"Actuals ({yesterday}): {e}")
 
-    # ── 3. Save ────────────────────────────────────────────────────────────
+    # 3. Save
     save_data(forecasts, actuals)
-    print(f"\nSaved: {len(forecasts)} forecast entries, {len(actuals)} actuals on file")
+    print(f"\nSaved: {len(forecasts)} forecast entries, {len(actuals)} actuals")
 
-    # ── 4. Notify ──────────────────────────────────────────────────────────
-    src_lines = []
-    for src in SOURCES:
-        n = results["fetched"].get(src["id"])
-        src_lines.append(f"  {src['label']}: {'✓ ' + str(n) + ' days' if n else '✗ failed'}")
-
+    # 4. Notify
+    src_lines = [
+        f"  {src['label']}: " +
+        (f"OK {results['fetched'][src['id']]} days" if src["id"] in results["fetched"] else "FAILED")
+        for src in SOURCES
+    ]
     act = results["actual"]
     act_line = (
-        f"  Yesterday ({yesterday}): H:{act.get('high')}°/L:{act.get('low')}° {act.get('condition','')}"
-        if act else f"  Yesterday ({yesterday}): ✗ not found"
+        f"  {yesterday}: H:{act.get('high')}°/L:{act.get('low')}° {act.get('condition','')}"
+        if act else f"  {yesterday}: not found"
     )
-
-    err_line = f"\n⚠ {len(results['errors'])} error(s):\n" + "\n".join(f"  {e}" for e in results["errors"]) \
-               if results["errors"] else ""
-
-    message = (
-        f"Forecasts logged for {log_date}:\n"
-        + "\n".join(src_lines)
-        + f"\n\nActuals:\n{act_line}"
-        + err_line
+    err_line = (
+        f"\n{len(results['errors'])} error(s):\n" + "\n".join(f"  {e}" for e in results["errors"])
+        if results["errors"] else ""
     )
-
-    send_notification(f"⛅ Weather Tracker Updated — {log_date}", message, ntfy_topic)
-    print(f"\n{message}")
-    print("\n=== Done ===")
+    message = "Forecasts logged for " + log_date + ":\n" + "\n".join(src_lines) + "\n\nActuals:\n" + act_line + err_line
+    send_notification(f"Weather Tracker Updated — {log_date}", message, ntfy_topic)
+    print(f"\n{message}\n=== Done ===")
 
 
 if __name__ == "__main__":

@@ -17,7 +17,7 @@
     --text:   #c8d3e6;
     --bright: #e8f0ff;
     --wu:     #38bdf8;
-    --wc:     #a78bfa;
+    --wc:     #4ade80;
     --aw:     #fb923c;
     --good:   #4ade80;
     --warn:   #fbbf24;
@@ -204,9 +204,9 @@
 // ── Data ──────────────────────────────────────────────────────────────────
 let DB = { forecasts: [], actuals: {}, meta: {} };
 const SOURCES = [
-  { id: "wunderground", label: "Weather Underground", color: "#38bdf8", dot: "dot-wu" },
-  { id: "weather_com",  label: "Weather.com",          color: "#a78bfa", dot: "dot-wc" },
-  { id: "accuweather",  label: "AccuWeather",           color: "#fb923c", dot: "dot-aw" },
+  { id: "nws",        label: "NWS / Weather.gov", color: "#38bdf8", dot: "dot-wu" },
+  { id: "open_meteo", label: "Open-Meteo",       color: "#4ade80", dot: "dot-wc" },
+  { id: "wttr",       label: "wttr.in",           color: "#fb923c", dot: "dot-aw" },
 ];
 const SRC = Object.fromEntries(SOURCES.map(s => [s.id, s]));
 let charts = {};
