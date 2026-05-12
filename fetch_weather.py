@@ -60,7 +60,7 @@ SOURCES = [
 def fetch_forecast(source, log_date):
     prompt = (
         f"Search {source['site']} for the current 10-day weather forecast for ZIP code 47341 "
-        f"Hagerstown Indiana. Today is {log_date}. "
+        f"Fountain City Indiana. Today is {log_date}. "
         f"Return ONLY a raw JSON array, no markdown, no explanation: "
         f'[{{"date":"YYYY-MM-DD","high":75,"low":58,"cloud_cover":40,"precip_prob":20,"precip_amount":0.1}}] '
         f"Rules: dates YYYY-MM-DD starting {log_date}. high/low = °F integers. "
@@ -75,7 +75,7 @@ def fetch_forecast(source, log_date):
 
 def fetch_actual(date):
     prompt = (
-        f"Search for actual observed weather conditions in Hagerstown Indiana ZIP 47341 on {date}. "
+        f"Search for actual observed weather conditions in Fountain City Indiana ZIP 47341 on {date}. "
         f"Check wunderground.com/history, weather.gov, or climate data sources. "
         f"Return ONLY a raw JSON object, no markdown: "
         f'{{"high":75,"low":58,"cloud_cover":40,"precip_amount":0.12,"condition":"Partly Cloudy"}} '
