@@ -11,6 +11,10 @@
     "low": 44,
     "cloud_cover": 20,
     "precip_amount": 0.0,
-    "condition": "Mostly Clear"
+    "condition": "Mostly Clear",
+    "nasa_high": null,
+    "nasa_low": null,
+    "nasa_precip": null,
+    "nasa_cloud": null
   }
 }
