@@ -34,7 +34,7 @@ jobs:
           TODAY=$(TZ="America/Indiana/Indianapolis" date +%Y-%m-%d)
           echo "today=$TODAY" >> $GITHUB_OUTPUT
           if [ -f data/meta.json ]; then
-            LAST=$(python3 -c "import json; d=json.load(open('data/meta.json')); print(d.get('last_run','')[:10])")
+            LAST=$(python3 -c "import json; d=json.load(open('data/meta.json')); print((d.get('last_run') or '')[:10])")
             if [ "$LAST" = "$TODAY" ]; then
               echo "already_ran=true" >> $GITHUB_OUTPUT
             else
