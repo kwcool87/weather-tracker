@@ -16,5 +16,16 @@
     "nasa_low": null,
     "nasa_precip": null,
     "nasa_cloud": null
+  },
+  "2026-05-12": {
+    "high": 70,
+    "low": 42,
+    "cloud_cover": 28,
+    "precip_amount": 0.0,
+    "condition": "Mostly Clear",
+    "nasa_high": null,
+    "nasa_low": null,
+    "nasa_precip": null,
+    "nasa_cloud": null
   }
 }
