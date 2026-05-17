@@ -32,7 +32,7 @@ SOURCES = [
     {"id": "om_gfs",   "label": "Open-Meteo GFS"},
     {"id": "om_ecmwf", "label": "Open-Meteo ECMWF"},
     {"id": "om_icon",  "label": "Open-Meteo ICON"},
-    {"id": "wttr",     "label": "wttr.in"},
+    {"id": "hrrr",     "label": "NOAA HRRR"},
 ]
 
 def today_et():
@@ -146,40 +146,168 @@ def fetch_om_ecmwf(log_date):
 def fetch_om_icon(log_date):
     return _fetch_open_meteo(log_date, model="icon_seamless")
 
-# ── Source 5: wttr.in ─────────────────────────────────────────────────────
-def fetch_wttr(log_date):
-    r = requests.get(
-        f"https://wttr.in/{ZIP}?format=j1",
-        headers={"User-Agent": "curl/7.68.0"},
-        timeout=20,
+# ── Source 5: NOAA HRRR via Herbie ───────────────────────────────────────
+def fetch_hrrr(log_date):
+    """
+    NOAA HRRR 3-km CONUS model pulled directly via the Herbie library
+    (byte-range GRIB2 from NOAA AWS S3 / NOMADS).
+
+    Variables fetched for each forecast hour 1-48:
+      TMP   2 m temperature          (K → °F)
+      RH    2 m relative humidity    (%)
+      APCP  1-h precipitation        (mm → in, 1-h accumulations)
+      DSWRF downward SW radiation    (W/m² → summed to MJ/m²/day)
+      UGRD/VGRD  10 m wind components (m/s → mph resultant vector speed)
+
+    Grid point: nearest HRRR 3-km cell to LAT/LON.
+    HRRR is a deterministic model — cloud_cover and precip_prob are null.
+    Extended agronomic fields are stored alongside the base schema.
+    """
+    from herbie import FastHerbie, Herbie
+    from collections import defaultdict
+    from pathlib import Path
+    from datetime import timezone
+    import numpy as np
+    import pandas as pd
+
+    SAVE_DIR = Path("/tmp/hrrr")
+    SAVE_DIR.mkdir(exist_ok=True)
+
+    # Most recent 6-h HRRR cycle (00/06/12/18 Z) that is ≥ 2 h old
+    # to ensure NOMADS/AWS ingestion is complete.
+    now_utc  = datetime.now(timezone.utc)
+    run_hour = (now_utc.hour // 6) * 6
+    run_dt   = now_utc.replace(hour=run_hour, minute=0, second=0, microsecond=0)
+    if (now_utc - run_dt).total_seconds() < 7_200:
+        run_dt -= timedelta(hours=6)
+    run_str = run_dt.strftime("%Y-%m-%d %H:%M")
+    print(f"  HRRR run: {run_str} UTC  fxx 1-48")
+
+    FH = FastHerbie(
+        run_str,
+        model   = "hrrr",
+        product = "sfc",
+        fxx     = list(range(1, 49)),
+        save_dir= str(SAVE_DIR),
+        verbose = False,
     )
-    r.raise_for_status()
-    weather = r.json().get("weather", [])
+
+    # ── nearest-point helper ─────────────────────────────────────────────
+    def _point(ds):
+        """Return (DatetimeIndex, float[]) for our grid point from any Herbie dataset."""
+        if ds is None or not ds.data_vars:
+            return pd.DatetimeIndex([]), np.array([])
+
+        v    = ds[list(ds.data_vars)[0]]
+        lats = np.asarray(ds.latitude).ravel()
+        lons = np.asarray(ds.longitude).ravel()
+        lons = np.where(lons > 180, lons - 360, lons)   # 0-360 → ±180
+        idx  = int(((lats - LAT)**2 + (lons - LON)**2).argmin())
+
+        # Resolve valid times
+        if "valid_time" in ds.coords:
+            vt = pd.DatetimeIndex(np.atleast_1d(ds.valid_time.values))
+        else:
+            base = pd.Timestamp(np.atleast_1d(ds.time.values)[0])
+            vt   = pd.DatetimeIndex(
+                [base + pd.Timedelta(s) for s in np.atleast_1d(ds.step.values)]
+            )
+
+        # Flatten spatial dims; shape becomes (n_time, n_pts)
+        arr  = v.values.reshape(-1, lats.size)
+        vals = arr[:, idx].astype(float)
+        return vt, vals
+
+    # ── instantaneous variables — concatenate cleanly across fxx ─────────
+    raw: dict = {}
+    for key, search in [
+        ("tmp",   "TMP:2 m above ground"),
+        ("rh",    "RH:2 m above ground"),
+        ("dswrf", "DSWRF:surface"),
+        ("ugrd",  "UGRD:10 m above ground"),
+        ("vgrd",  "VGRD:10 m above ground"),
+    ]:
+        try:
+            ds = FH.xarray(search, remove_grib=True)
+            vt, vals = _point(ds)
+            raw[key] = dict(zip(vt, vals))
+            print(f"    {key}: {len(vt)} h OK")
+        except Exception as e:
+            raw[key] = {}
+            print(f"    {key} WARN: {e}")
+
+    # ── APCP: 1-h accumulations — batch first, per-hour fallback ─────────
+    # cfgrib may reject concatenation when each fxx has a different step_range
+    # tag (0-1 h, 1-2 h, …). The fallback fetches each file individually.
+    raw["apcp"] = {}
+    try:
+        ds_p = FH.xarray(":APCP:surface:", remove_grib=True)
+        vt, vals = _point(ds_p)
+        raw["apcp"] = dict(zip(vt, vals))
+        print(f"    apcp: {len(vt)} h OK (batch)")
+    except Exception as e_batch:
+        print(f"    apcp batch failed ({e_batch}); per-hour fallback…")
+        for fx in range(1, 49):
+            try:
+                H1 = Herbie(run_str, model="hrrr", product="sfc",
+                            fxx=fx, save_dir=str(SAVE_DIR), verbose=False)
+                ds_p = H1.xarray(":APCP:surface:", remove_grib=True)
+                vt, vals = _point(ds_p)
+                for t, val in zip(vt, vals):
+                    raw["apcp"][t] = val
+            except Exception:
+                pass
+        print(f"    apcp (fallback): {len(raw['apcp'])} h")
+
+    # ── aggregate hourly → daily in local ET time ─────────────────────────
+    all_vt = sorted(set().union(*(set(v.keys()) for v in raw.values())))
+    days   = defaultdict(lambda: {
+        "temps_f": [], "rh": [], "precip_mm": 0.0,
+        "rad_wm2": [], "wind_ms": [],
+    })
+
+    for vt in all_vt:
+        local_d = (
+            vt.tz_localize("UTC")
+              .tz_convert("America/Indiana/Indianapolis")
+              .strftime("%Y-%m-%d")
+        )
+        if local_d < log_date:
+            continue
+        day = days[local_d]
+        if (t  := raw["tmp"].get(vt))   is not None: day["temps_f"].append(t * 9/5 - 459.67)
+        if (rh := raw["rh"].get(vt))    is not None: day["rh"].append(rh)
+        if (p  := raw["apcp"].get(vt))  is not None: day["precip_mm"] += max(0.0, p)
+        if (s  := raw["dswrf"].get(vt)) is not None: day["rad_wm2"].append(max(0.0, s))
+        u  = raw["ugrd"].get(vt)
+        vc = raw["vgrd"].get(vt)
+        if u is not None and vc is not None:
+            day["wind_ms"].append(np.sqrt(u**2 + vc**2))
+
+    MM_TO_IN  = 0.0394
+    MS_TO_MPH = 2.237
+    RAD_TO_MJ = 3600 / 1_000_000   # W/m² × 1 h → MJ/m²/day
 
     result = []
-    base = date.fromisoformat(log_date)
-    for i, day in enumerate(weather):
-        dt = str(base + timedelta(days=i))
-        hourly = day.get("hourly", [])
-        avg_cloud = (
-            round(sum(int(h.get("cloudcover", 0)) for h in hourly) / len(hourly))
-            if hourly else None
-        )
-        max_precip_prob = (
-            max(int(h.get("chanceofrain", 0)) for h in hourly)
-            if hourly else None
-        )
-        total_precip = (
-            round(sum(float(h.get("precipMM", 0)) for h in hourly) * 0.0394, 2)
-            if hourly else None
-        )
+    for dt in sorted(days):
+        d   = days[dt]
+        t_  = d["temps_f"]
+        rh_ = d["rh"]
+        r_  = d["rad_wm2"]
+        w_  = d["wind_ms"]
         result.append({
-            "date":          dt,
-            "high":          round(float(day["maxtempF"])),
-            "low":           round(float(day["mintempF"])),
-            "cloud_cover":   avg_cloud,
-            "precip_prob":   max_precip_prob,
-            "precip_amount": total_precip,
+            "date":                dt,
+            "high":                round(max(t_))               if t_  else None,
+            "low":                 round(min(t_))               if t_  else None,
+            "cloud_cover":         None,   # deterministic model — not output
+            "precip_prob":         None,   # deterministic model — no probability
+            "precip_amount":       round(d["precip_mm"] * MM_TO_IN, 2),
+            # ── native HRRR GRIB2 agronomic fields ───────────────────────
+            "shortwave_radiation": round(sum(r_) * RAD_TO_MJ, 2) if r_  else None,
+            "wind_speed_max":      round(max(w_) * MS_TO_MPH, 1) if w_  else None,
+            "humidity_avg":        round(sum(rh_) / len(rh_))    if rh_ else None,
+            "humidity_max":        round(max(rh_))               if rh_ else None,
+            "humidity_min":        round(min(rh_))               if rh_ else None,
         })
     return result
 
@@ -188,7 +316,7 @@ FETCH_FNS = {
     "om_gfs":   fetch_om_gfs,
     "om_ecmwf": fetch_om_ecmwf,
     "om_icon":  fetch_om_icon,
-    "wttr":     fetch_wttr,
+    "hrrr":     fetch_hrrr,
 }
 
 # ── Actuals: Open-Meteo archive (primary) ────────────────────────────────
@@ -349,7 +477,7 @@ def main():
                 if not (f["logged_date"] == log_date and f["source"] == src["id"])
             ]
             for day in days:
-                forecasts.append({
+                entry = {
                     "logged_date":   log_date,
                     "target_date":   day["date"],
                     "source":        src["id"],
@@ -359,7 +487,13 @@ def main():
                     "cloud_cover":   day.get("cloud_cover"),
                     "precip_prob":   day.get("precip_prob"),
                     "precip_amount": day.get("precip_amount"),
-                })
+                }
+                # Persist extended agronomic fields (HRRR only — absent on other sources)
+                for xk in ("shortwave_radiation", "wind_speed_max",
+                            "humidity_max", "humidity_min", "humidity_avg"):
+                    if xk in day:
+                        entry[xk] = day[xk]
+                forecasts.append(entry)
             results["fetched"][src["id"]] = len(days)
 
         except Exception as e:

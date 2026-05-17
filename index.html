@@ -19,6 +19,7 @@
     --wu:     #38bdf8;
     --wc:     #4ade80;
     --aw:     #fb923c;
+    --hrrr:   #fb923c;
     --good:   #4ade80;
     --warn:   #fbbf24;
     --bad:    #f87171;
@@ -79,8 +80,9 @@
 
   .src-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; display: inline-block; }
   .dot-wu { background: var(--wu); }
-  .dot-wc { background: var(--wc); }
-  .dot-aw { background: var(--aw); }
+  .dot-wc   { background: var(--wc); }
+  .dot-aw   { background: var(--aw); }
+  .dot-hrrr { background: var(--hrrr); }
 
   .pill { display: inline-block; padding: 2px 8px; border-radius: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
 
@@ -155,6 +157,9 @@
     <div class="card">
       <div class="chart-sm"><canvas id="chartLeadLow"></canvas></div>
     </div>
+
+    <!-- HRRR agronomic panel injected by JS -->
+    <div id="hrrr-agro-panel"></div>
   </div>
 
   <!-- ══ FORECASTS ═══════════════════════════════════════════════════════ -->
@@ -204,11 +209,11 @@
 // ── Data ──────────────────────────────────────────────────────────────────
 let DB = { forecasts: [], actuals: {}, meta: {} };
 const SOURCES = [
-  { id: "nws",      label: "NWS / Weather.gov",  color: "#38bdf8", dot: "dot-wu" },
-  { id: "om_gfs",   label: "Open-Meteo GFS",     color: "#4ade80", dot: "dot-wc" },
-  { id: "om_ecmwf", label: "Open-Meteo ECMWF",   color: "#a78bfa", dot: "dot-ecmwf" },
+  { id: "nws",      label: "NWS / Weather.gov",  color: "#38bdf8", dot: "dot-wu"   },
+  { id: "om_gfs",   label: "Open-Meteo GFS",     color: "#4ade80", dot: "dot-wc"   },
+  { id: "om_ecmwf", label: "Open-Meteo ECMWF",   color: "#a78bfa", dot: "dot-ecmwf"},
   { id: "om_icon",  label: "Open-Meteo ICON",     color: "#f472b6", dot: "dot-icon" },
-  { id: "wttr",     label: "wttr.in",             color: "#fb923c", dot: "dot-aw" },
+  { id: "hrrr",     label: "NOAA HRRR",           color: "#fb923c", dot: "dot-hrrr" },
 ];
 const SRC = Object.fromEntries(SOURCES.map(s => [s.id, s]));
 let charts = {};
@@ -298,10 +303,85 @@ function showTab(id) {
 // ── Render all ────────────────────────────────────────────────────────────
 function renderAll() {
   renderOverview();
+  renderHrrrPanel();
   populateFxDateSel();
   renderForecasts();
   populateEvoDateSel();
   renderActuals();
+}
+
+// ══ HRRR AGRONOMIC PANEL ══════════════════════════════════════════════════
+function renderHrrrPanel() {
+  const panel = document.getElementById("hrrr-agro-panel");
+  if (!panel) return;
+
+  // Find the most recent logged date that has HRRR entries
+  const hrrrFx = DB.forecasts.filter(f => f.source === "hrrr");
+  if (!hrrrFx.length) { panel.innerHTML = ""; return; }
+
+  const latestLogged = hrrrFx.map(f => f.logged_date).sort().at(-1);
+  const days = hrrrFx
+    .filter(f => f.logged_date === latestLogged)
+    .sort((a, b) => a.target_date.localeCompare(b.target_date));
+
+  const cards = days.map(f => `
+    <div class="card-sm" style="border-color:#fb923c25">
+      <div style="font-weight:600;color:var(--bright);margin-bottom:12px;font-size:13px">
+        ${fmt(f.target_date)}
+        ${f.lead_days === 0 ? '<span style="font-size:10px;color:var(--hrrr);margin-left:6px">TODAY</span>' :
+          f.lead_days === 1 ? '<span style="font-size:10px;color:var(--dim);margin-left:6px">TOMORROW</span>' : ""}
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+        <div>
+          <div class="label">☀️ SOLAR RAD</div>
+          <div class="mono" style="color:var(--bright);font-size:13px;margin-top:3px">
+            ${f.shortwave_radiation != null ? f.shortwave_radiation + " MJ/m²" : "—"}
+          </div>
+        </div>
+        <div>
+          <div class="label">💨 WIND MAX</div>
+          <div class="mono" style="color:var(--bright);font-size:13px;margin-top:3px">
+            ${f.wind_speed_max != null ? f.wind_speed_max + " mph" : "—"}
+          </div>
+        </div>
+        <div>
+          <div class="label">💧 HUMIDITY</div>
+          <div class="mono" style="color:var(--bright);font-size:13px;margin-top:3px">
+            ${f.humidity_min != null ? f.humidity_min + "–" + f.humidity_max + "%" : "—"}
+          </div>
+        </div>
+        <div>
+          <div class="label">🌡️ RH AVG</div>
+          <div class="mono" style="color:var(--bright);font-size:13px;margin-top:3px">
+            ${f.humidity_avg != null ? f.humidity_avg + "%" : "—"}
+          </div>
+        </div>
+        <div>
+          <div class="label">🌧️ PRECIP</div>
+          <div class="mono" style="color:var(--bright);font-size:13px;margin-top:3px">
+            ${f.precip_amount != null ? f.precip_amount + '"' : "—"}
+          </div>
+        </div>
+        <div>
+          <div class="label">📡 SOURCE</div>
+          <div class="mono" style="color:var(--hrrr);font-size:11px;margin-top:3px">
+            NOAA HRRR 3-km<br>direct GRIB2
+          </div>
+        </div>
+      </div>
+    </div>`).join("");
+
+  panel.innerHTML = `
+    <div class="section-title" style="margin-top:24px">
+      <span class="src-dot dot-hrrr" style="display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle"></span>
+      HRRR Agronomic Data
+      <span style="font-size:11px;color:var(--muted);font-weight:400;margin-left:8px">
+        NOAA 3-km model · logged ${latestLogged}
+      </span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:8px">
+      ${cards}
+    </div>`;
 }
 
 // ══ OVERVIEW ═════════════════════════════════════════════════════════════

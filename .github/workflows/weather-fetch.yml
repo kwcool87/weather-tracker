@@ -28,8 +28,11 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Install system GRIB2 library
+        run: sudo apt-get install -y libeccodes-dev
+
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests herbie-data cfgrib xarray numpy
 
       - name: Check if already fetched today
         id: check
@@ -49,6 +52,7 @@ jobs:
 
       - name: Run weather fetch
         if: steps.check.outputs.already_ran != 'true'
+        timeout-minutes: 25
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: python fetch_weather.py
