@@ -376,7 +376,7 @@ def _cloud_to_condition(cloud_cover, precip_amount):
     return "Overcast"
 
 def fetch_actual(target_date):
-    # Primary: Open-Meteo archive
+    # ── Temperature & cloud cover: Open-Meteo archive ─────────────────────
     r = requests.get(
         "https://archive-api.open-meteo.com/v1/archive",
         params={
@@ -403,23 +403,50 @@ def fetch_actual(target_date):
 
     high   = d["temperature_2m_max"][0]
     low    = d["temperature_2m_min"][0]
-    precip = d["precipitation_sum"][0]
+    om_precip = d["precipitation_sum"][0]
     cloud  = d["cloud_cover_mean"][0]
 
-    high_r   = round(high)      if high   is not None else None
-    low_r    = round(low)       if low    is not None else None
-    precip_r = round(precip, 2) if precip is not None else None
-    cloud_r  = round(cloud)     if cloud  is not None else None
+    high_r  = round(high)         if high     is not None else None
+    low_r   = round(low)          if low      is not None else None
+    cloud_r = round(cloud)        if cloud    is not None else None
+    om_p_r  = round(om_precip, 2) if om_precip is not None else None
 
     actual = {
-        "high":          high_r,
-        "low":           low_r,
-        "cloud_cover":   cloud_r,
-        "precip_amount": precip_r,
-        "condition":     _cloud_to_condition(cloud_r, precip_r),
+        "high":        high_r,
+        "low":         low_r,
+        "cloud_cover": cloud_r,
+        "precip_amount": om_p_r,   # will be overridden by MRMS if available
+        "condition":   _cloud_to_condition(cloud_r, om_p_r),
     }
 
-    # Secondary: NASA POWER (cross-check, fills in if primary missing)
+    # ── Precipitation: MRMS QPE via IEM (primary) ─────────────────────────
+    # Iowa Environmental Mesonet archives MRMS MultiSensor_QPE data and
+    # exposes a clean REST API — no GRIB2 parsing, no API key required.
+    # mrms_precip_in is the radar+gauge multi-sensor QPE for the calendar day.
+    try:
+        ri = requests.get(
+            f"https://mesonet.agron.iastate.edu/iemre/daily"
+            f"/{target_date}/{LAT}/{LON}/json",
+            headers=HEADERS,
+            timeout=20,
+        )
+        ri.raise_for_status()
+        rec = ri.json()["data"][0]
+        mrms_val = rec.get("mrms_precip_in")
+        if mrms_val is not None:
+            mrms_r = round(float(mrms_val), 2)
+            actual["precip_amount"] = mrms_r
+            actual["precip_source"] = "mrms"
+            actual["condition"]     = _cloud_to_condition(cloud_r, mrms_r)
+            print(f"  MRMS QPE precip: {mrms_r} in  (Open-Meteo was {om_p_r} in)")
+        else:
+            actual["precip_source"] = "open_meteo"
+            print(f"  MRMS QPE not yet available; using Open-Meteo ({om_p_r} in)")
+    except Exception as e:
+        actual["precip_source"] = "open_meteo"
+        print(f"  MRMS QPE failed (non-fatal): {e}; using Open-Meteo ({om_p_r} in)")
+
+    # ── Temperature gap-fill: NASA POWER ─────────────────────────────────
     try:
         rp = requests.get(
             "https://power.larc.nasa.gov/api/temporal/daily/point",
@@ -441,8 +468,8 @@ def fetch_actual(target_date):
         def c_to_f(c):
             return round(c * 9/5 + 32) if c is not None and c != -999 else None
 
-        nasa_high   = c_to_f(pd.get("T2M_MAX", {}).get(dt_key))
-        nasa_low    = c_to_f(pd.get("T2M_MIN", {}).get(dt_key))
+        nasa_high  = c_to_f(pd.get("T2M_MAX", {}).get(dt_key))
+        nasa_low   = c_to_f(pd.get("T2M_MIN", {}).get(dt_key))
         nasa_precip = pd.get("PRECTOTCORR", {}).get(dt_key)
         nasa_cloud  = pd.get("CLOUD_AMT",   {}).get(dt_key)
 
@@ -451,9 +478,9 @@ def fetch_actual(target_date):
         actual["nasa_precip"] = round(float(nasa_precip) * 0.0394, 2) if nasa_precip and float(nasa_precip) != -999 else None
         actual["nasa_cloud"]  = round(float(nasa_cloud)) if nasa_cloud and float(nasa_cloud) != -999 else None
 
-        # Fill primary gaps with NASA data
-        if actual["high"]   is None: actual["high"]   = nasa_high
-        if actual["low"]    is None: actual["low"]    = nasa_low
+        # Fill primary temperature gaps with NASA data
+        if actual["high"] is None: actual["high"] = nasa_high
+        if actual["low"]  is None: actual["low"]  = nasa_low
 
     except Exception as e:
         print(f"  NASA POWER actuals failed (non-fatal): {e}")
