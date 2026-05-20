@@ -279,14 +279,30 @@ def fetch_hrrr(log_date):
             raw[key] = _fetch_hourly(search)
             print(f"    {key}: {len(raw[key])} h (per-hour fallback)")
 
-    # APCP — always per-hour with exact 1-h step-range to avoid picking up
-    # the 6-h/24-h cumulative totals that HRRR also stores in the same file.
-    print("    apcp: fetching hourly increments…")
-    raw["apcp"] = _fetch_hourly(":APCP:surface:{fx1}-{fx} hour acc:")
-    # First-hour search falls back if the specific range isn't found
-    if 0 == len(raw["apcp"]):
-        raw["apcp"] = _fetch_hourly(":APCP:surface:")
-    print(f"    apcp: {len(raw['apcp'])} h")
+    # APCP — HRRR stores precipitation as CUMULATIVE total since run
+    # initialization (:APCP:surface:0-N hour acc:), NOT 1-hour increments.
+    # Fetch all 48 cumulative values, then diff consecutive entries to
+    # recover hourly incremental precipitation.
+    print("    apcp: fetching cumulative totals for differencing…")
+    apcp_cum = {}
+    for fx in range(1, 49):
+        try:
+            H1   = Herbie(run_str, model="hrrr", product="sfc",
+                          fxx=fx, save_dir=str(SAVE_DIR), verbose=False)
+            ds_p = H1.xarray(":APCP:surface:", remove_grib=True)
+            vt1, vals1 = _point(ds_p)
+            for t, val in zip(vt1, vals1):
+                apcp_cum[t] = float(val)
+        except Exception:
+            pass
+
+    # Diff consecutive cumulative values → hourly incremental precip (mm)
+    apcp_sorted = sorted(apcp_cum.items())   # list of (Timestamp, mm)
+    raw["apcp"] = {}
+    for i, (t, cum_val) in enumerate(apcp_sorted):
+        prev = apcp_sorted[i - 1][1] if i > 0 else 0.0
+        raw["apcp"][t] = max(0.0, cum_val - prev)
+    print(f"    apcp: {len(raw['apcp'])} hourly increments (cumulative diff)")
 
     # ── aggregate hourly → daily in local ET time ─────────────────────────
     all_vt = sorted(set().union(*(set(v.keys()) for v in raw.values())))
