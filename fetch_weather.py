@@ -183,6 +183,70 @@ def fetch_hrrr(log_date):
     run_str = run_dt.strftime("%Y-%m-%d %H:%M")
     print(f"  HRRR run: {run_str} UTC  fxx 1-48")
 
+    # ── nearest-point extractor ──────────────────────────────────────────
+    _grid_idx = None   # cache once the grid is resolved
+
+    def _point(ds):
+        """
+        Return (pd.DatetimeIndex [UTC-aware], np.float64[]) for our grid point.
+        Works for 2-D (single time) or 3-D (multi-time) HRRR fields.
+        """
+        nonlocal _grid_idx
+        if ds is None or not ds.data_vars:
+            return pd.DatetimeIndex([], tz="UTC"), np.array([])
+
+        v    = ds[list(ds.data_vars)[0]]
+        lats = np.asarray(ds.latitude).ravel()
+        lons = np.asarray(ds.longitude).ravel()
+        lons = np.where(lons > 180, lons - 360, lons)   # 0-360 → ±180
+
+        if _grid_idx is None:
+            _grid_idx = int(((lats - LAT)**2 + (lons - LON)**2).argmin())
+
+        # Resolve valid times as timezone-aware UTC Timestamps
+        if "valid_time" in ds.coords:
+            raw_vt = np.atleast_1d(ds.valid_time.values)
+        else:
+            base   = pd.Timestamp(np.atleast_1d(ds.time.values)[0])
+            raw_vt = np.array([base + pd.Timedelta(s)
+                                for s in np.atleast_1d(ds.step.values)],
+                               dtype="datetime64[ns]")
+        vt = pd.DatetimeIndex(raw_vt).tz_localize("UTC")
+
+        # Flatten spatial dims → (n_time, n_pts); works for 2-D and 3-D
+        arr  = v.values.reshape(-1, lats.size)
+        vals = arr[:, _grid_idx].astype(float)
+        return vt, vals
+
+    # ── per-hour fetch for a single variable ─────────────────────────────
+    def _fetch_hourly(search_template):
+        """
+        Download one GRIB2 file per forecast hour (1-48) and extract our
+        grid point.  `search_template` may contain `{fx}` and `{fx1}`
+        placeholders (fx1 = fx-1) for APCP step-range matching.
+        Returns {pd.Timestamp: float} mapping.
+        """
+        data = {}
+        for fx in range(1, 49):
+            search = search_template.format(fx=fx, fx1=fx - 1)
+            try:
+                H1  = Herbie(run_str, model="hrrr", product="sfc",
+                             fxx=fx, save_dir=str(SAVE_DIR), verbose=False)
+                ds1 = H1.xarray(search, remove_grib=True)
+                vt1, vals1 = _point(ds1)
+                for t, val in zip(vt1, vals1):
+                    data[t] = float(val)
+            except Exception:
+                pass
+        return data
+
+    # ── fetch all variables, batch first → per-hour fallback ─────────────
+    # Instantaneous fields (TMP, RH, DSWRF, UGRD, VGRD) usually concatenate
+    # cleanly via FastHerbie; fall back to per-hour if cfgrib chokes.
+    # APCP skips the batch entirely because the idx contains both 1-h
+    # incremental and 6-h cumulative messages; we use exact step-range
+    # matching ({fx1}-{fx} hour acc) to guarantee 1-h increments only.
+
     FH = FastHerbie(
         run_str,
         model   = "hrrr",
@@ -192,33 +256,6 @@ def fetch_hrrr(log_date):
         verbose = False,
     )
 
-    # ── nearest-point helper ─────────────────────────────────────────────
-    def _point(ds):
-        """Return (DatetimeIndex, float[]) for our grid point from any Herbie dataset."""
-        if ds is None or not ds.data_vars:
-            return pd.DatetimeIndex([]), np.array([])
-
-        v    = ds[list(ds.data_vars)[0]]
-        lats = np.asarray(ds.latitude).ravel()
-        lons = np.asarray(ds.longitude).ravel()
-        lons = np.where(lons > 180, lons - 360, lons)   # 0-360 → ±180
-        idx  = int(((lats - LAT)**2 + (lons - LON)**2).argmin())
-
-        # Resolve valid times
-        if "valid_time" in ds.coords:
-            vt = pd.DatetimeIndex(np.atleast_1d(ds.valid_time.values))
-        else:
-            base = pd.Timestamp(np.atleast_1d(ds.time.values)[0])
-            vt   = pd.DatetimeIndex(
-                [base + pd.Timedelta(s) for s in np.atleast_1d(ds.step.values)]
-            )
-
-        # Flatten spatial dims; shape becomes (n_time, n_pts)
-        arr  = v.values.reshape(-1, lats.size)
-        vals = arr[:, idx].astype(float)
-        return vt, vals
-
-    # ── instantaneous variables — concatenate cleanly across fxx ─────────
     raw: dict = {}
     for key, search in [
         ("tmp",   "TMP:2 m above ground"),
@@ -227,37 +264,29 @@ def fetch_hrrr(log_date):
         ("ugrd",  "UGRD:10 m above ground"),
         ("vgrd",  "VGRD:10 m above ground"),
     ]:
+        batch_ok = False
         try:
             ds = FH.xarray(search, remove_grib=True)
             vt, vals = _point(ds)
-            raw[key] = dict(zip(vt, vals))
-            print(f"    {key}: {len(vt)} h OK")
+            if len(vt) >= 24:          # expect at least 24 hours of data
+                raw[key] = dict(zip(vt, vals))
+                print(f"    {key}: {len(vt)} h OK (batch)")
+                batch_ok = True
         except Exception as e:
-            raw[key] = {}
-            print(f"    {key} WARN: {e}")
+            print(f"    {key} batch failed ({e}); per-hour fallback…")
 
-    # ── APCP: 1-h accumulations — batch first, per-hour fallback ─────────
-    # cfgrib may reject concatenation when each fxx has a different step_range
-    # tag (0-1 h, 1-2 h, …). The fallback fetches each file individually.
-    raw["apcp"] = {}
-    try:
-        ds_p = FH.xarray(":APCP:surface:", remove_grib=True)
-        vt, vals = _point(ds_p)
-        raw["apcp"] = dict(zip(vt, vals))
-        print(f"    apcp: {len(vt)} h OK (batch)")
-    except Exception as e_batch:
-        print(f"    apcp batch failed ({e_batch}); per-hour fallback…")
-        for fx in range(1, 49):
-            try:
-                H1 = Herbie(run_str, model="hrrr", product="sfc",
-                            fxx=fx, save_dir=str(SAVE_DIR), verbose=False)
-                ds_p = H1.xarray(":APCP:surface:", remove_grib=True)
-                vt, vals = _point(ds_p)
-                for t, val in zip(vt, vals):
-                    raw["apcp"][t] = val
-            except Exception:
-                pass
-        print(f"    apcp (fallback): {len(raw['apcp'])} h")
+        if not batch_ok:
+            raw[key] = _fetch_hourly(search)
+            print(f"    {key}: {len(raw[key])} h (per-hour fallback)")
+
+    # APCP — always per-hour with exact 1-h step-range to avoid picking up
+    # the 6-h/24-h cumulative totals that HRRR also stores in the same file.
+    print("    apcp: fetching hourly increments…")
+    raw["apcp"] = _fetch_hourly(":APCP:surface:{fx1}-{fx} hour acc:")
+    # First-hour search falls back if the specific range isn't found
+    if 0 == len(raw["apcp"]):
+        raw["apcp"] = _fetch_hourly(":APCP:surface:")
+    print(f"    apcp: {len(raw['apcp'])} h")
 
     # ── aggregate hourly → daily in local ET time ─────────────────────────
     all_vt = sorted(set().union(*(set(v.keys()) for v in raw.values())))
@@ -268,8 +297,7 @@ def fetch_hrrr(log_date):
 
     for vt in all_vt:
         local_d = (
-            vt.tz_localize("UTC")
-              .tz_convert("America/Indiana/Indianapolis")
+            vt.tz_convert("America/Indiana/Indianapolis")
               .strftime("%Y-%m-%d")
         )
         if local_d < log_date:
