@@ -150,5 +150,17 @@
     "nasa_low": null,
     "nasa_precip": null,
     "nasa_cloud": null
+  },
+  "2026-05-23": {
+    "high": 68,
+    "low": 61,
+    "cloud_cover": 97,
+    "precip_amount": 0.04,
+    "condition": "Rain",
+    "precip_source": "mrms",
+    "nasa_high": null,
+    "nasa_low": null,
+    "nasa_precip": null,
+    "nasa_cloud": null
   }
 }
