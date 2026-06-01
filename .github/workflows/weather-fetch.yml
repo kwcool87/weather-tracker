@@ -8,6 +8,9 @@ on:
     - cron: '0 15 * * *'   # 11 AM EDT fallback
     - cron: '0 16 * * *'   # 12 PM EDT fallback
   workflow_dispatch:
+  push:
+    branches:
+      - claude/weather-tracker-manual-run-WTxaI
 
 jobs:
   fetch-weather:
