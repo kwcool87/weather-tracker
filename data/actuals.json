@@ -438,5 +438,17 @@
     "nasa_low": null,
     "nasa_precip": null,
     "nasa_cloud": null
+  },
+  "2026-06-16": {
+    "high": 72,
+    "low": 52,
+    "cloud_cover": 47,
+    "precip_amount": 0.0,
+    "condition": "Partly Cloudy",
+    "precip_source": "mrms",
+    "nasa_high": null,
+    "nasa_low": null,
+    "nasa_precip": null,
+    "nasa_cloud": null
   }
 }
