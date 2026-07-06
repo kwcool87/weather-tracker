@@ -17,7 +17,7 @@ Actuals sources:
 import json
 import os
 import requests
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta, date, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -54,12 +54,15 @@ def fetch_nws(log_date):
     props = r.json()["properties"]
     office, gx, gy = props["gridId"], props["gridX"], props["gridY"]
 
+    fetched_at = datetime.now(timezone.utc).isoformat()
     r = requests.get(
         f"https://api.weather.gov/gridpoints/{office}/{gx},{gy}/forecast",
         headers=HEADERS, timeout=20
     )
     r.raise_for_status()
-    periods = r.json()["properties"]["periods"]
+    fx_props = r.json()["properties"]
+    model_run = fx_props.get("updated")
+    periods = fx_props["periods"]
 
     days = {}
     for p in periods:
@@ -77,12 +80,14 @@ def fetch_nws(log_date):
 
     return [
         {
-            "date":          dt,
-            "high":          days[dt].get("high"),
-            "low":           days[dt].get("low"),
-            "cloud_cover":   None,
-            "precip_prob":   days[dt].get("precip_prob"),
-            "precip_amount": None,
+            "date":           dt,
+            "high":           days[dt].get("high"),
+            "low":            days[dt].get("low"),
+            "cloud_cover":    None,
+            "precip_prob":    days[dt].get("precip_prob"),
+            "precip_amount":  None,
+            "model_run_utc":  model_run,
+            "fetched_at_utc": fetched_at,
         }
         for dt in sorted(days)
         if dt >= log_date
@@ -108,6 +113,7 @@ def _fetch_open_meteo(log_date, model=None):
     if model:
         params["models"] = model
 
+    fetched_at = datetime.now(timezone.utc).isoformat()
     r = requests.get("https://api.open-meteo.com/v1/forecast", params=params, timeout=20)
     r.raise_for_status()
     d = r.json()["daily"]
@@ -123,12 +129,14 @@ def _fetch_open_meteo(log_date, model=None):
 
     return [
         {
-            "date":          dt,
-            "high":          iv("temperature_2m_max", i),
-            "low":           iv("temperature_2m_min", i),
-            "cloud_cover":   iv("cloud_cover_mean", i),
-            "precip_prob":   iv("precipitation_probability_max", i),
-            "precip_amount": fv("precipitation_sum", i),
+            "date":           dt,
+            "high":           iv("temperature_2m_max", i),
+            "low":            iv("temperature_2m_min", i),
+            "cloud_cover":    iv("cloud_cover_mean", i),
+            "precip_prob":    iv("precipitation_probability_max", i),
+            "precip_amount":  fv("precipitation_sum", i),
+            "model_run_utc":  None,   # Open-Meteo doesn't expose init cycle in response
+            "fetched_at_utc": fetched_at,
         }
         for i, dt in enumerate(d["time"])
         if dt >= log_date
@@ -166,12 +174,13 @@ def fetch_hrrr(log_date):
     from herbie import FastHerbie, Herbie
     from collections import defaultdict
     from pathlib import Path
-    from datetime import timezone
     import numpy as np
     import pandas as pd
 
     SAVE_DIR = Path("/tmp/hrrr")
     SAVE_DIR.mkdir(exist_ok=True)
+
+    fetched_at = datetime.now(timezone.utc).isoformat()
 
     # Most recent 6-h HRRR cycle (00/06/12/18 Z) that is ≥ 2 h old
     # to ensure NOMADS/AWS ingestion is complete.
@@ -181,6 +190,7 @@ def fetch_hrrr(log_date):
     if (now_utc - run_dt).total_seconds() < 7_200:
         run_dt -= timedelta(hours=6)
     run_str = run_dt.strftime("%Y-%m-%d %H:%M")
+    model_run_iso = run_dt.isoformat()
     print(f"  HRRR run: {run_str} UTC  fxx 1-48")
 
     # ── nearest-point extractor ──────────────────────────────────────────
@@ -352,6 +362,8 @@ def fetch_hrrr(log_date):
             "humidity_avg":        round(sum(rh_) / len(rh_))    if rh_ else None,
             "humidity_max":        round(max(rh_))               if rh_ else None,
             "humidity_min":        round(min(rh_))               if rh_ else None,
+            "model_run_utc":       model_run_iso,
+            "fetched_at_utc":      fetched_at,
         })
     return result
 
@@ -549,15 +561,17 @@ def main():
             ]
             for day in days:
                 entry = {
-                    "logged_date":   log_date,
-                    "target_date":   day["date"],
-                    "source":        src["id"],
-                    "lead_days":     days_between(log_date, day["date"]),
-                    "high":          day.get("high"),
-                    "low":           day.get("low"),
-                    "cloud_cover":   day.get("cloud_cover"),
-                    "precip_prob":   day.get("precip_prob"),
-                    "precip_amount": day.get("precip_amount"),
+                    "logged_date":    log_date,
+                    "target_date":    day["date"],
+                    "source":         src["id"],
+                    "lead_days":      days_between(log_date, day["date"]),
+                    "high":           day.get("high"),
+                    "low":            day.get("low"),
+                    "cloud_cover":    day.get("cloud_cover"),
+                    "precip_prob":    day.get("precip_prob"),
+                    "precip_amount":  day.get("precip_amount"),
+                    "model_run_utc":  day.get("model_run_utc"),
+                    "fetched_at_utc": day.get("fetched_at_utc"),
                 }
                 # Persist extended agronomic fields (HRRR only — absent on other sources)
                 for xk in ("shortwave_radiation", "wind_speed_max",
