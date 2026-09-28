@@ -1,0 +1,17 @@
+issued,start,end,var,product,category,edge,notes,logged_on
+2026-09-25,2026-10-09,2026-10-22,temp,wk34,Below Normal,yes,BAM Week 3/4 map (Kemper); Fountain City at the west edge of Below vs Equal Chances,2026-09-28
+2026-09-25,2026-10-09,2026-10-22,prcp,wk34,Equal Chances,yes,BAM Week 3/4 map (Kemper); at the south edge of Below Normal,2026-09-28
+2026-09-21,2026-10-01,2026-10-31,temp,month,Below Normal,no,BAM October map (Walts),2026-09-28
+2026-09-22,2026-10-01,2026-10-31,prcp,month,Equal Chances,yes,BAM October map (Walts); near the south edge of Below Normal,2026-09-28
+2026-09-16,2026-11-01,2026-11-30,temp,month,Above Normal,no,BAM November map (Walts),2026-09-28
+2026-09-16,2026-11-01,2026-11-30,prcp,month,Equal Chances,yes,BAM November map (Walts); at the west edge of Below Normal,2026-09-28
+2026-09-01,2026-09-01,2026-11-30,temp,season,Above Normal,no,BAM SON map (Walts); issued on the first day of the period,2026-09-28
+2026-09-01,2026-09-01,2026-11-30,prcp,season,Below Normal,no,BAM SON map (Walts); issued on the first day of the period,2026-09-28
+2026-09-01,2026-12-01,2026-12-31,temp,month,Much Above Normal,no,BAM December map (Walts),2026-09-28
+2026-09-01,2026-12-01,2026-12-31,prcp,month,Equal Chances,no,BAM December map (Walts),2026-09-28
+2026-09-07,2027-01-01,2027-01-31,temp,month,Much Above Normal,no,BAM January map (Walts),2026-09-28
+2026-09-07,2027-01-01,2027-01-31,prcp,month,Above Normal,yes,BAM January map (Walts); near the Equal Chances band,2026-09-28
+2026-09-23,2027-02-01,2027-02-28,temp,month,Equal Chances,yes,BAM February map (Walts); at the edge of Above Normal,2026-09-28
+2026-09-23,2027-02-01,2027-02-28,prcp,month,Below Normal,yes,BAM February map (Walts); near the Equal Chances band,2026-09-28
+2026-09-01,2026-12-01,2027-02-28,temp,season,Much Above Normal,no,BAM DJF map (Walts),2026-09-28
+2026-09-01,2026-12-01,2027-02-28,prcp,season,Equal Chances,yes,BAM DJF map (Walts); near the west edge of Below Normal,2026-09-28

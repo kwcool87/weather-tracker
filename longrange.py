@@ -37,6 +37,11 @@ DATA_DIR = Path("data")
 LR_PATH = DATA_DIR / "longrange.json"
 CLIMO_PATH = DATA_DIR / "climo_gridmet.json"
 SCORES_PATH = DATA_DIR / "longrange_scores.json"
+BAM_PATH = DATA_DIR / "bam_outlooks.csv"
+# BAM maps give a CATEGORY at the point, no probability. For the probability score the favoured
+# category is given these odds (our conversion, not BAM's; the "favoured category right" hit rate
+# needs no conversion). Equal Chances = 1/3 each.
+BAM_ODDS = {"": 0.45, "much": 0.60, "extremely": 0.70}
 CPC = "https://ftp.cpc.ncep.noaa.gov/GIS/us_tempprcpfcst/"
 CLIMO_YEARS = (1991, 2020)                     # CPC's normals period
 GRIDMET = "http://thredds.northwestknowledge.net:8080/thredds/ncss/MET/{v}/{v}_{y}.nc"
@@ -98,6 +103,22 @@ def cpc_point(zbytes, lat, lon):
     return None
 
 
+def cpc_ec_record(zbytes):
+    """Some CPC files draw no polygon where the outlook is Equal Chances. Build an EC record from the
+    file's own dates (taken from any polygon's attributes)."""
+    import shapefile
+    z = zipfile.ZipFile(io.BytesIO(zbytes))
+    base = [n[:-4] for n in z.namelist() if n.lower().endswith(".shp")][0]
+    r = shapefile.Reader(shp=io.BytesIO(z.read(base + ".shp")), dbf=io.BytesIO(z.read(base + ".dbf")),
+                         shx=io.BytesIO(z.read(base + ".shx")))
+    fields = [f[0] for f in r.fields[1:]]
+    for rec in r.iterRecords():
+        a = dict(zip(fields, rec))
+        a["Cat"], a["Prob"] = "EC", 33.0
+        return a
+    return None
+
+
 def _d(v):
     if isinstance(v, date):
         return v.isoformat()
@@ -128,7 +149,9 @@ def fetch_cpc(log_date, lat, lon):
                         continue
                     a = cpc_point(r.content, lat, lon)
                     if not a:
-                        continue
+                        a = cpc_ec_record(r.content)   # no polygon here = equal chances (not drawn)
+                        if not a:
+                            continue
                     if "Valid_Seas" in a:
                         start, end = _month_bounds(a["Valid_Seas"])
                     else:
@@ -189,6 +212,34 @@ def fetch_models(log_date, lat, lon):
     return out
 
 
+def bam_entries():
+    """BAM outlooks logged by hand in data/bam_outlooks.csv, as long-range entries."""
+    import csv
+    if not BAM_PATH.exists():
+        return []
+    out = []
+    with open(BAM_PATH, newline="", encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            c = r["category"].strip().lower()
+            if "equal" in c:
+                p = (1 / 3, 1 / 3, 1 / 3)
+            else:
+                q = BAM_ODDS["extremely" if c.startswith("extremely") else "much" if c.startswith("much") else ""]
+                opp = max(0.033, 2 / 3 - q)
+                near = 1 - q - opp
+                p = (q, near, opp) if "below" in c else (opp, near, q)
+            out.append({"kind": "bam", "source": f"bam_{r['product']}", "var": r["var"], "issued": r["issued"],
+                        "logged": r.get("logged_on") or r["issued"], "start": r["start"], "end": r["end"],
+                        "cat": r["category"], "edge": r.get("edge") == "yes", "p": [round(x, 3) for x in p]})
+    return out
+
+
+def sync_bam(lr):
+    """Merge the hand-logged BAM outlooks into the long-range list (for the dashboard + scoring)."""
+    lr = [x for x in lr if x["kind"] != "bam"]
+    return lr + bam_entries()
+
+
 def collect(log_date, lat, lon):
     """Daily: append today's long-range forecasts to data/longrange.json (deduplicated)."""
     DATA_DIR.mkdir(exist_ok=True)
@@ -196,7 +247,7 @@ def collect(log_date, lat, lon):
     seen = {(x["kind"], x["source"], x.get("var"), x.get("window"), x["issued"], x["start"]) for x in lr}
     new = [x for x in fetch_cpc(log_date, lat, lon) + fetch_models(log_date, lat, lon)
            if (x["kind"], x["source"], x.get("var"), x.get("window"), x["issued"], x["start"]) not in seen]
-    lr += new
+    lr = sync_bam(lr + new)
     LR_PATH.write_text(json.dumps(lr, indent=1))
     print(f"  long-range: {len(new)} new entries ({len(lr)} total)")
     return new
@@ -284,7 +335,8 @@ def score(lat, lon):
         print("  scoring skipped (no climatology or no long-range data yet)")
         return None
     days = {k: tuple(v) for k, v in json.loads(CLIMO_PATH.read_text())["days"].items()}
-    lr = json.loads(LR_PATH.read_text())
+    lr = sync_bam(json.loads(LR_PATH.read_text()))
+    LR_PATH.write_text(json.dumps(lr, indent=1))
     ends = [date.fromisoformat(x["end"]) for x in lr]
     if not ends:
         return None
@@ -301,7 +353,7 @@ def score(lat, lon):
             if obs is None or terc is None:
                 continue
             cat = 0 if obs < terc[0] else (2 if obs > terc[1] else 1)
-            if x["kind"] == "cpc":
+            if x["kind"] in ("cpc", "bam"):
                 p = x["p"]
                 key = (x["source"], "window", var)
             else:

@@ -1,0 +1,2638 @@
+[
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "prcp",
+  "issued": "2024-04-18",
+  "logged": "2024-04-18",
+  "start": "2024-05-01",
+  "end": "2024-05-31",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "prcp",
+  "issued": "2025-09-30",
+  "logged": "2025-09-30",
+  "start": "2025-10-01",
+  "end": "2025-10-31",
+  "cat": "Below",
+  "prob": 40.0,
+  "p": [
+   0.45,
+   0.333,
+   0.217
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "prcp",
+  "issued": "2025-10-31",
+  "logged": "2025-10-31",
+  "start": "2025-11-01",
+  "end": "2025-11-30",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "prcp",
+  "issued": "2025-11-30",
+  "logged": "2025-11-30",
+  "start": "2025-12-01",
+  "end": "2025-12-31",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "prcp",
+  "issued": "2025-12-31",
+  "logged": "2025-12-31",
+  "start": "2026-01-01",
+  "end": "2026-01-31",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "prcp",
+  "issued": "2026-01-31",
+  "logged": "2026-01-31",
+  "start": "2026-02-01",
+  "end": "2026-02-28",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "prcp",
+  "issued": "2026-02-28",
+  "logged": "2026-02-28",
+  "start": "2026-03-01",
+  "end": "2026-03-31",
+  "cat": "Above",
+  "prob": 60.0,
+  "p": [
+   0.033,
+   0.317,
+   0.65
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "prcp",
+  "issued": "2026-03-31",
+  "logged": "2026-03-31",
+  "start": "2026-04-01",
+  "end": "2026-04-30",
+  "cat": "Above",
+  "prob": 40.0,
+  "p": [
+   0.217,
+   0.333,
+   0.45
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "prcp",
+  "issued": "2026-04-30",
+  "logged": "2026-04-30",
+  "start": "2026-05-01",
+  "end": "2026-05-31",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "prcp",
+  "issued": "2026-05-31",
+  "logged": "2026-05-31",
+  "start": "2026-06-01",
+  "end": "2026-06-30",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "prcp",
+  "issued": "2026-06-30",
+  "logged": "2026-06-30",
+  "start": "2026-07-01",
+  "end": "2026-07-31",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "prcp",
+  "issued": "2026-07-31",
+  "logged": "2026-07-31",
+  "start": "2026-08-01",
+  "end": "2026-08-31",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "prcp",
+  "issued": "2026-08-31",
+  "logged": "2026-08-31",
+  "start": "2026-09-01",
+  "end": "2026-09-30",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "temp",
+  "issued": "2024-04-18",
+  "logged": "2024-04-18",
+  "start": "2024-05-01",
+  "end": "2024-05-31",
+  "cat": "Above",
+  "prob": 40.0,
+  "p": [
+   0.217,
+   0.333,
+   0.45
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "temp",
+  "issued": "2025-09-30",
+  "logged": "2025-09-30",
+  "start": "2025-10-01",
+  "end": "2025-10-31",
+  "cat": "Above",
+  "prob": 60.0,
+  "p": [
+   0.033,
+   0.317,
+   0.65
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "temp",
+  "issued": "2025-10-31",
+  "logged": "2025-10-31",
+  "start": "2025-11-01",
+  "end": "2025-11-30",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "temp",
+  "issued": "2025-11-30",
+  "logged": "2025-11-30",
+  "start": "2025-12-01",
+  "end": "2025-12-31",
+  "cat": "Below",
+  "prob": 33.0,
+  "p": [
+   0.365,
+   0.333,
+   0.302
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "temp",
+  "issued": "2025-12-31",
+  "logged": "2025-12-31",
+  "start": "2026-01-01",
+  "end": "2026-01-31",
+  "cat": "Below",
+  "prob": 33.0,
+  "p": [
+   0.365,
+   0.333,
+   0.302
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "temp",
+  "issued": "2026-01-31",
+  "logged": "2026-01-31",
+  "start": "2026-02-01",
+  "end": "2026-02-28",
+  "cat": "Below",
+  "prob": 40.0,
+  "p": [
+   0.45,
+   0.333,
+   0.217
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "temp",
+  "issued": "2026-02-28",
+  "logged": "2026-02-28",
+  "start": "2026-03-01",
+  "end": "2026-03-31",
+  "cat": "Above",
+  "prob": 60.0,
+  "p": [
+   0.033,
+   0.317,
+   0.65
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "temp",
+  "issued": "2026-03-31",
+  "logged": "2026-03-31",
+  "start": "2026-04-01",
+  "end": "2026-04-30",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "temp",
+  "issued": "2026-04-30",
+  "logged": "2026-04-30",
+  "start": "2026-05-01",
+  "end": "2026-05-31",
+  "cat": "Below",
+  "prob": 40.0,
+  "p": [
+   0.45,
+   0.333,
+   0.217
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "temp",
+  "issued": "2026-05-31",
+  "logged": "2026-05-31",
+  "start": "2026-06-01",
+  "end": "2026-06-30",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "temp",
+  "issued": "2026-06-30",
+  "logged": "2026-06-30",
+  "start": "2026-07-01",
+  "end": "2026-07-31",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "temp",
+  "issued": "2026-07-31",
+  "logged": "2026-07-31",
+  "start": "2026-08-01",
+  "end": "2026-08-31",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_month",
+  "var": "temp",
+  "issued": "2026-08-31",
+  "logged": "2026-08-31",
+  "start": "2026-09-01",
+  "end": "2026-09-30",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-04-11",
+  "logged": "2025-04-11",
+  "start": "2025-04-26",
+  "end": "2025-05-09",
+  "cat": "Above",
+  "prob": 50.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-04-18",
+  "logged": "2025-04-18",
+  "start": "2025-05-03",
+  "end": "2025-05-16",
+  "cat": "Above",
+  "prob": 55.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-05-09",
+  "logged": "2025-05-09",
+  "start": "2025-05-24",
+  "end": "2025-06-06",
+  "cat": "Above",
+  "prob": 50.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-05-16",
+  "logged": "2025-05-16",
+  "start": "2025-05-31",
+  "end": "2025-06-13",
+  "cat": "Above",
+  "prob": 50.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-07-18",
+  "logged": "2025-07-18",
+  "start": "2025-08-02",
+  "end": "2025-08-15",
+  "cat": "Below",
+  "prob": 55.0,
+  "p": [
+   0.55,
+   0.333,
+   0.117
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-07-25",
+  "logged": "2025-07-25",
+  "start": "2025-08-09",
+  "end": "2025-08-22",
+  "cat": "Below",
+  "prob": 50.0,
+  "p": [
+   0.55,
+   0.333,
+   0.117
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-08-08",
+  "logged": "2025-08-08",
+  "start": "2025-08-23",
+  "end": "2025-09-05",
+  "cat": "Below",
+  "prob": 50.0,
+  "p": [
+   0.55,
+   0.333,
+   0.117
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-08-22",
+  "logged": "2025-08-22",
+  "start": "2025-09-06",
+  "end": "2025-09-19",
+  "cat": "Above",
+  "prob": 55.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-09-05",
+  "logged": "2025-09-05",
+  "start": "2025-09-20",
+  "end": "2025-10-03",
+  "cat": "Below",
+  "prob": 50.0,
+  "p": [
+   0.55,
+   0.333,
+   0.117
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-09-12",
+  "logged": "2025-09-12",
+  "start": "2025-09-27",
+  "end": "2025-10-10",
+  "cat": "Below",
+  "prob": 50.0,
+  "p": [
+   0.55,
+   0.333,
+   0.117
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-10-03",
+  "logged": "2025-10-03",
+  "start": "2025-10-18",
+  "end": "2025-10-31",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-10-10",
+  "logged": "2025-10-10",
+  "start": "2025-10-25",
+  "end": "2025-11-07",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-10-17",
+  "logged": "2025-10-17",
+  "start": "2025-11-01",
+  "end": "2025-11-14",
+  "cat": "Below",
+  "prob": 40.0,
+  "p": [
+   0.45,
+   0.333,
+   0.217
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-10-24",
+  "logged": "2025-10-24",
+  "start": "2025-11-08",
+  "end": "2025-11-21",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-10-31",
+  "logged": "2025-10-31",
+  "start": "2025-11-15",
+  "end": "2025-11-28",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-04-03",
+  "logged": "2026-04-03",
+  "start": "2026-04-18",
+  "end": "2026-05-01",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-04-10",
+  "logged": "2026-04-10",
+  "start": "2026-04-25",
+  "end": "2026-05-08",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-04-17",
+  "logged": "2026-04-17",
+  "start": "2026-05-02",
+  "end": "2026-05-15",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-04-24",
+  "logged": "2026-04-24",
+  "start": "2026-05-09",
+  "end": "2026-05-22",
+  "cat": "Above",
+  "prob": 40.0,
+  "p": [
+   0.217,
+   0.333,
+   0.45
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-05-01",
+  "logged": "2026-05-01",
+  "start": "2026-05-16",
+  "end": "2026-05-29",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-05-08",
+  "logged": "2026-05-08",
+  "start": "2026-05-23",
+  "end": "2026-06-05",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-05-15",
+  "logged": "2026-05-15",
+  "start": "2026-05-30",
+  "end": "2026-06-12",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-05-22",
+  "logged": "2026-05-22",
+  "start": "2026-06-06",
+  "end": "2026-06-19",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-05-29",
+  "logged": "2026-05-29",
+  "start": "2026-06-13",
+  "end": "2026-06-26",
+  "cat": "Above",
+  "prob": 40.0,
+  "p": [
+   0.217,
+   0.333,
+   0.45
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-06-05",
+  "logged": "2026-06-05",
+  "start": "2026-06-20",
+  "end": "2026-07-03",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-06-12",
+  "logged": "2026-06-12",
+  "start": "2026-06-27",
+  "end": "2026-07-10",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-06-19",
+  "logged": "2026-06-19",
+  "start": "2026-07-04",
+  "end": "2026-07-17",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-06-26",
+  "logged": "2026-06-26",
+  "start": "2026-07-11",
+  "end": "2026-07-24",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-07-03",
+  "logged": "2026-07-03",
+  "start": "2026-07-18",
+  "end": "2026-07-31",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-07-10",
+  "logged": "2026-07-10",
+  "start": "2026-07-25",
+  "end": "2026-08-07",
+  "cat": "Above",
+  "prob": 40.0,
+  "p": [
+   0.217,
+   0.333,
+   0.45
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-07-17",
+  "logged": "2026-07-17",
+  "start": "2026-08-01",
+  "end": "2026-08-14",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-07-24",
+  "logged": "2026-07-24",
+  "start": "2026-08-08",
+  "end": "2026-08-21",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-07-31",
+  "logged": "2026-07-31",
+  "start": "2026-08-15",
+  "end": "2026-08-28",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-08-07",
+  "logged": "2026-08-07",
+  "start": "2026-08-22",
+  "end": "2026-09-04",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-08-14",
+  "logged": "2026-08-14",
+  "start": "2026-08-29",
+  "end": "2026-09-11",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-08-21",
+  "logged": "2026-08-21",
+  "start": "2026-09-05",
+  "end": "2026-09-18",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-08-28",
+  "logged": "2026-08-28",
+  "start": "2026-09-12",
+  "end": "2026-09-25",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-09-04",
+  "logged": "2026-09-04",
+  "start": "2026-09-19",
+  "end": "2026-10-02",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-09-11",
+  "logged": "2026-09-11",
+  "start": "2026-09-26",
+  "end": "2026-10-09",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-09-18",
+  "logged": "2026-09-18",
+  "start": "2026-10-03",
+  "end": "2026-10-16",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2026-09-25",
+  "logged": "2026-09-25",
+  "start": "2026-10-10",
+  "end": "2026-10-23",
+  "cat": "Below",
+  "prob": 33.0,
+  "p": [
+   0.365,
+   0.333,
+   0.302
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-04-11",
+  "logged": "2025-04-11",
+  "start": "2025-04-26",
+  "end": "2025-05-09",
+  "cat": "Above",
+  "prob": 50.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-04-25",
+  "logged": "2025-04-25",
+  "start": "2025-05-10",
+  "end": "2025-05-23",
+  "cat": "Above",
+  "prob": 55.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-05-02",
+  "logged": "2025-05-02",
+  "start": "2025-05-17",
+  "end": "2025-05-30",
+  "cat": "Above",
+  "prob": 60.0,
+  "p": [
+   0.033,
+   0.317,
+   0.65
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-05-16",
+  "logged": "2025-05-16",
+  "start": "2025-05-31",
+  "end": "2025-06-13",
+  "cat": "Above",
+  "prob": 50.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-05-23",
+  "logged": "2025-05-23",
+  "start": "2025-06-07",
+  "end": "2025-06-20",
+  "cat": "Above",
+  "prob": 50.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-05-30",
+  "logged": "2025-05-30",
+  "start": "2025-06-14",
+  "end": "2025-06-27",
+  "cat": "Above",
+  "prob": 55.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-06-06",
+  "logged": "2025-06-06",
+  "start": "2025-06-21",
+  "end": "2025-07-04",
+  "cat": "Above",
+  "prob": 60.0,
+  "p": [
+   0.033,
+   0.317,
+   0.65
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-06-13",
+  "logged": "2025-06-13",
+  "start": "2025-06-28",
+  "end": "2025-07-11",
+  "cat": "Above",
+  "prob": 50.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-06-20",
+  "logged": "2025-06-20",
+  "start": "2025-07-05",
+  "end": "2025-07-18",
+  "cat": "Above",
+  "prob": 55.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-06-27",
+  "logged": "2025-06-27",
+  "start": "2025-07-12",
+  "end": "2025-07-25",
+  "cat": "Above",
+  "prob": 50.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-07-04",
+  "logged": "2025-07-04",
+  "start": "2025-07-19",
+  "end": "2025-08-01",
+  "cat": "Above",
+  "prob": 60.0,
+  "p": [
+   0.033,
+   0.317,
+   0.65
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-07-11",
+  "logged": "2025-07-11",
+  "start": "2025-07-26",
+  "end": "2025-08-08",
+  "cat": "Above",
+  "prob": 50.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-07-18",
+  "logged": "2025-07-18",
+  "start": "2025-08-02",
+  "end": "2025-08-15",
+  "cat": "Above",
+  "prob": 60.0,
+  "p": [
+   0.033,
+   0.317,
+   0.65
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-07-25",
+  "logged": "2025-07-25",
+  "start": "2025-08-09",
+  "end": "2025-08-22",
+  "cat": "Above",
+  "prob": 55.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-08-01",
+  "logged": "2025-08-01",
+  "start": "2025-08-16",
+  "end": "2025-08-29",
+  "cat": "Above",
+  "prob": 50.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-08-08",
+  "logged": "2025-08-08",
+  "start": "2025-08-23",
+  "end": "2025-09-05",
+  "cat": "Above",
+  "prob": 50.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-08-22",
+  "logged": "2025-08-22",
+  "start": "2025-09-06",
+  "end": "2025-09-19",
+  "cat": "Above",
+  "prob": 55.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-09-05",
+  "logged": "2025-09-05",
+  "start": "2025-09-20",
+  "end": "2025-10-03",
+  "cat": "Above",
+  "prob": 55.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-09-12",
+  "logged": "2025-09-12",
+  "start": "2025-09-27",
+  "end": "2025-10-10",
+  "cat": "Above",
+  "prob": 50.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-09-26",
+  "logged": "2025-09-26",
+  "start": "2025-10-11",
+  "end": "2025-10-24",
+  "cat": "Above",
+  "prob": 50.0,
+  "p": [
+   0.117,
+   0.333,
+   0.55
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-10-03",
+  "logged": "2025-10-03",
+  "start": "2025-10-18",
+  "end": "2025-10-31",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-10-10",
+  "logged": "2025-10-10",
+  "start": "2025-10-25",
+  "end": "2025-11-07",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-10-17",
+  "logged": "2025-10-17",
+  "start": "2025-11-01",
+  "end": "2025-11-14",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-10-24",
+  "logged": "2025-10-24",
+  "start": "2025-11-08",
+  "end": "2025-11-21",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-10-31",
+  "logged": "2025-10-31",
+  "start": "2025-11-15",
+  "end": "2025-11-28",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-04-03",
+  "logged": "2026-04-03",
+  "start": "2026-04-18",
+  "end": "2026-05-01",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-04-10",
+  "logged": "2026-04-10",
+  "start": "2026-04-25",
+  "end": "2026-05-08",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-04-17",
+  "logged": "2026-04-17",
+  "start": "2026-05-02",
+  "end": "2026-05-15",
+  "cat": "Below",
+  "prob": 33.0,
+  "p": [
+   0.365,
+   0.333,
+   0.302
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-04-24",
+  "logged": "2026-04-24",
+  "start": "2026-05-09",
+  "end": "2026-05-22",
+  "cat": "Below",
+  "prob": 40.0,
+  "p": [
+   0.45,
+   0.333,
+   0.217
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-05-01",
+  "logged": "2026-05-01",
+  "start": "2026-05-16",
+  "end": "2026-05-29",
+  "cat": "Above",
+  "prob": 40.0,
+  "p": [
+   0.217,
+   0.333,
+   0.45
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-05-08",
+  "logged": "2026-05-08",
+  "start": "2026-05-23",
+  "end": "2026-06-05",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-05-15",
+  "logged": "2026-05-15",
+  "start": "2026-05-30",
+  "end": "2026-06-12",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-05-22",
+  "logged": "2026-05-22",
+  "start": "2026-06-06",
+  "end": "2026-06-19",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-05-29",
+  "logged": "2026-05-29",
+  "start": "2026-06-13",
+  "end": "2026-06-26",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-06-05",
+  "logged": "2026-06-05",
+  "start": "2026-06-20",
+  "end": "2026-07-03",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-06-12",
+  "logged": "2026-06-12",
+  "start": "2026-06-27",
+  "end": "2026-07-10",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-06-19",
+  "logged": "2026-06-19",
+  "start": "2026-07-04",
+  "end": "2026-07-17",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-06-26",
+  "logged": "2026-06-26",
+  "start": "2026-07-11",
+  "end": "2026-07-24",
+  "cat": "Normal",
+  "prob": 33.0,
+  "p": [
+   0.318,
+   0.365,
+   0.318
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-07-03",
+  "logged": "2026-07-03",
+  "start": "2026-07-18",
+  "end": "2026-07-31",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-07-10",
+  "logged": "2026-07-10",
+  "start": "2026-07-25",
+  "end": "2026-08-07",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-07-17",
+  "logged": "2026-07-17",
+  "start": "2026-08-01",
+  "end": "2026-08-14",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-07-24",
+  "logged": "2026-07-24",
+  "start": "2026-08-08",
+  "end": "2026-08-21",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-07-31",
+  "logged": "2026-07-31",
+  "start": "2026-08-15",
+  "end": "2026-08-28",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-08-07",
+  "logged": "2026-08-07",
+  "start": "2026-08-22",
+  "end": "2026-09-04",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-08-14",
+  "logged": "2026-08-14",
+  "start": "2026-08-29",
+  "end": "2026-09-11",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-08-21",
+  "logged": "2026-08-21",
+  "start": "2026-09-05",
+  "end": "2026-09-18",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-08-28",
+  "logged": "2026-08-28",
+  "start": "2026-09-12",
+  "end": "2026-09-25",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-09-04",
+  "logged": "2026-09-04",
+  "start": "2026-09-19",
+  "end": "2026-10-02",
+  "cat": "Above",
+  "prob": 33.0,
+  "p": [
+   0.302,
+   0.333,
+   0.365
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-09-11",
+  "logged": "2026-09-11",
+  "start": "2026-09-26",
+  "end": "2026-10-09",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-09-18",
+  "logged": "2026-09-18",
+  "start": "2026-10-03",
+  "end": "2026-10-16",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2026-09-25",
+  "logged": "2026-09-25",
+  "start": "2026-10-10",
+  "end": "2026-10-23",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-04-04",
+  "logged": "2025-04-04",
+  "start": "2025-04-19",
+  "end": "2025-05-02",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-04-25",
+  "logged": "2025-04-25",
+  "start": "2025-05-10",
+  "end": "2025-05-23",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-05-02",
+  "logged": "2025-05-02",
+  "start": "2025-05-17",
+  "end": "2025-05-30",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-05-23",
+  "logged": "2025-05-23",
+  "start": "2025-06-07",
+  "end": "2025-06-20",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-05-30",
+  "logged": "2025-05-30",
+  "start": "2025-06-14",
+  "end": "2025-06-27",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-06-06",
+  "logged": "2025-06-06",
+  "start": "2025-06-21",
+  "end": "2025-07-04",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-06-13",
+  "logged": "2025-06-13",
+  "start": "2025-06-28",
+  "end": "2025-07-11",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-06-20",
+  "logged": "2025-06-20",
+  "start": "2025-07-05",
+  "end": "2025-07-18",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-06-27",
+  "logged": "2025-06-27",
+  "start": "2025-07-12",
+  "end": "2025-07-25",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-07-04",
+  "logged": "2025-07-04",
+  "start": "2025-07-19",
+  "end": "2025-08-01",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-07-11",
+  "logged": "2025-07-11",
+  "start": "2025-07-26",
+  "end": "2025-08-08",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-08-01",
+  "logged": "2025-08-01",
+  "start": "2025-08-16",
+  "end": "2025-08-29",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-08-15",
+  "logged": "2025-08-15",
+  "start": "2025-08-30",
+  "end": "2025-09-12",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-08-29",
+  "logged": "2025-08-29",
+  "start": "2025-09-13",
+  "end": "2025-09-26",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-09-19",
+  "logged": "2025-09-19",
+  "start": "2025-10-04",
+  "end": "2025-10-17",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "prcp",
+  "issued": "2025-09-26",
+  "logged": "2025-09-26",
+  "start": "2025-10-11",
+  "end": "2025-10-24",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-04-04",
+  "logged": "2025-04-04",
+  "start": "2025-04-19",
+  "end": "2025-05-02",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-04-18",
+  "logged": "2025-04-18",
+  "start": "2025-05-03",
+  "end": "2025-05-16",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-05-09",
+  "logged": "2025-05-09",
+  "start": "2025-05-24",
+  "end": "2025-06-06",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-08-15",
+  "logged": "2025-08-15",
+  "start": "2025-08-30",
+  "end": "2025-09-12",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-08-29",
+  "logged": "2025-08-29",
+  "start": "2025-09-13",
+  "end": "2025-09-26",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "cpc",
+  "source": "cpc_wk34",
+  "var": "temp",
+  "issued": "2025-09-19",
+  "logged": "2025-09-19",
+  "start": "2025-10-04",
+  "end": "2025-10-17",
+  "cat": "EC",
+  "prob": 33.0,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ],
+  "backfilled": true
+ },
+ {
+  "kind": "bam",
+  "source": "bam_wk34",
+  "var": "temp",
+  "issued": "2026-09-25",
+  "logged": "2026-09-28",
+  "start": "2026-10-09",
+  "end": "2026-10-22",
+  "cat": "Below Normal",
+  "edge": true,
+  "p": [
+   0.45,
+   0.333,
+   0.217
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_wk34",
+  "var": "prcp",
+  "issued": "2026-09-25",
+  "logged": "2026-09-28",
+  "start": "2026-10-09",
+  "end": "2026-10-22",
+  "cat": "Equal Chances",
+  "edge": true,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_month",
+  "var": "temp",
+  "issued": "2026-09-21",
+  "logged": "2026-09-28",
+  "start": "2026-10-01",
+  "end": "2026-10-31",
+  "cat": "Below Normal",
+  "edge": false,
+  "p": [
+   0.45,
+   0.333,
+   0.217
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_month",
+  "var": "prcp",
+  "issued": "2026-09-22",
+  "logged": "2026-09-28",
+  "start": "2026-10-01",
+  "end": "2026-10-31",
+  "cat": "Equal Chances",
+  "edge": true,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_month",
+  "var": "temp",
+  "issued": "2026-09-16",
+  "logged": "2026-09-28",
+  "start": "2026-11-01",
+  "end": "2026-11-30",
+  "cat": "Above Normal",
+  "edge": false,
+  "p": [
+   0.217,
+   0.333,
+   0.45
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_month",
+  "var": "prcp",
+  "issued": "2026-09-16",
+  "logged": "2026-09-28",
+  "start": "2026-11-01",
+  "end": "2026-11-30",
+  "cat": "Equal Chances",
+  "edge": true,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_season",
+  "var": "temp",
+  "issued": "2026-09-01",
+  "logged": "2026-09-28",
+  "start": "2026-09-01",
+  "end": "2026-11-30",
+  "cat": "Above Normal",
+  "edge": false,
+  "p": [
+   0.217,
+   0.333,
+   0.45
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_season",
+  "var": "prcp",
+  "issued": "2026-09-01",
+  "logged": "2026-09-28",
+  "start": "2026-09-01",
+  "end": "2026-11-30",
+  "cat": "Below Normal",
+  "edge": false,
+  "p": [
+   0.45,
+   0.333,
+   0.217
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_month",
+  "var": "temp",
+  "issued": "2026-09-01",
+  "logged": "2026-09-28",
+  "start": "2026-12-01",
+  "end": "2026-12-31",
+  "cat": "Much Above Normal",
+  "edge": false,
+  "p": [
+   0.067,
+   0.333,
+   0.6
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_month",
+  "var": "prcp",
+  "issued": "2026-09-01",
+  "logged": "2026-09-28",
+  "start": "2026-12-01",
+  "end": "2026-12-31",
+  "cat": "Equal Chances",
+  "edge": false,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_month",
+  "var": "temp",
+  "issued": "2026-09-07",
+  "logged": "2026-09-28",
+  "start": "2027-01-01",
+  "end": "2027-01-31",
+  "cat": "Much Above Normal",
+  "edge": false,
+  "p": [
+   0.067,
+   0.333,
+   0.6
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_month",
+  "var": "prcp",
+  "issued": "2026-09-07",
+  "logged": "2026-09-28",
+  "start": "2027-01-01",
+  "end": "2027-01-31",
+  "cat": "Above Normal",
+  "edge": true,
+  "p": [
+   0.217,
+   0.333,
+   0.45
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_month",
+  "var": "temp",
+  "issued": "2026-09-23",
+  "logged": "2026-09-28",
+  "start": "2027-02-01",
+  "end": "2027-02-28",
+  "cat": "Equal Chances",
+  "edge": true,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_month",
+  "var": "prcp",
+  "issued": "2026-09-23",
+  "logged": "2026-09-28",
+  "start": "2027-02-01",
+  "end": "2027-02-28",
+  "cat": "Below Normal",
+  "edge": true,
+  "p": [
+   0.45,
+   0.333,
+   0.217
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_season",
+  "var": "temp",
+  "issued": "2026-09-01",
+  "logged": "2026-09-28",
+  "start": "2026-12-01",
+  "end": "2027-02-28",
+  "cat": "Much Above Normal",
+  "edge": false,
+  "p": [
+   0.067,
+   0.333,
+   0.6
+  ]
+ },
+ {
+  "kind": "bam",
+  "source": "bam_season",
+  "var": "prcp",
+  "issued": "2026-09-01",
+  "logged": "2026-09-28",
+  "start": "2026-12-01",
+  "end": "2027-02-28",
+  "cat": "Equal Chances",
+  "edge": true,
+  "p": [
+   0.333,
+   0.333,
+   0.333
+  ]
+ }
+]

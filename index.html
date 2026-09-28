@@ -236,7 +236,8 @@
 // ── Data ──────────────────────────────────────────────────────────────────
 let DB = { forecasts: [], actuals: {}, meta: {}, longrange: [], lrScores: null };
 const LR_LABEL = { cpc_610: "NOAA CPC 6–10 day", cpc_814: "NOAA CPC 8–14 day", cpc_wk34: "NOAA CPC week 3–4",
-                   cpc_month: "NOAA CPC monthly", cfs: "CFSv2 ensemble", gfs_ens: "GFS ensemble" };
+                   cpc_month: "NOAA CPC monthly", cfs: "CFSv2 ensemble", gfs_ens: "GFS ensemble",
+                   bam_wk34: "BAM week 3–4", bam_month: "BAM monthly", bam_season: "BAM seasonal" };
 const SOURCES = [
   { id: "nws",      label: "NWS / Weather.gov",  color: "#38bdf8", dot: "dot-wu"   },
   { id: "om_gfs",   label: "Open-Meteo GFS",     color: "#4ade80", dot: "dot-wc"   },
