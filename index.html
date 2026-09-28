@@ -83,6 +83,7 @@
   .dot-wc   { background: var(--wc); }
   .dot-aw   { background: var(--aw); }
   .dot-hrrr { background: var(--hrrr); }
+  .dot-bam  { background: #facc15; }
 
   .pill { display: inline-block; padding: 2px 8px; border-radius: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
 
@@ -244,6 +245,7 @@ const SOURCES = [
   { id: "om_ecmwf", label: "Open-Meteo ECMWF",   color: "#a78bfa", dot: "dot-ecmwf"},
   { id: "om_icon",  label: "Open-Meteo ICON",     color: "#f472b6", dot: "dot-icon" },
   { id: "hrrr",     label: "NOAA HRRR",           color: "#fb923c", dot: "dot-hrrr" },
+  { id: "bam",      label: "BAM Weather",         color: "#facc15", dot: "dot-bam"  },
 ];
 const SRC = Object.fromEntries(SOURCES.map(s => [s.id, s]));
 let charts = {};

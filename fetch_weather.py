@@ -8,6 +8,7 @@ Forecast sources (all free, no API key required):
   om_ecmwf   — Open-Meteo / ECMWF      (European model, global gold standard)
   om_icon    — Open-Meteo / ICON        (German DWD model)
   wttr       — wttr.in                  (aggregated forecast service)
+  bam        — BAM Weather (Clarity)    (paid; needs BAM_EMAIL / BAM_PASSWORD repo secrets, skipped without them)
 
 Actuals sources:
   Temperature: Richmond Municipal Airport ASOS (KRID, ~8 mi) via Iowa Environmental Mesonet — a real
@@ -38,7 +39,10 @@ SOURCES = [
     {"id": "om_ecmwf", "label": "Open-Meteo ECMWF"},
     {"id": "om_icon",  "label": "Open-Meteo ICON"},
     {"id": "hrrr",     "label": "NOAA HRRR"},
+    {"id": "bam",      "label": "BAM Weather", "needs": ("BAM_EMAIL", "BAM_PASSWORD")},
 ]
+BAM_API = "https://bamweather.com/api"
+BAM_LOCATION_ID = 40412           # Kevin's saved Fountain City location in the BAM app
 
 def today_et():
     return datetime.now(ET).strftime("%Y-%m-%d")
@@ -360,12 +364,62 @@ def fetch_hrrr(log_date):
         })
     return result
 
+# ── Source 6: BAM Weather daily forecast (paid subscription) ─────────────
+def fetch_bam(log_date):
+    """
+    BAM's own daily forecast, the same one their app shows (POST /clarity-api/future-daily).
+    Logs in with the BAM_EMAIL / BAM_PASSWORD secrets; they are only sent to bamweather.com and never
+    printed or saved. Values are already °F and inches; validAt is local midnight.
+    Also keeps BAM's own 10-90% ranges so their spread can be checked against what happened.
+    """
+    s = requests.Session()
+    s.headers.update({**HEADERS, "Accept": "application/json", "Content-Type": "application/json"})
+    r = s.post(f"{BAM_API}/auth/login", timeout=30,
+               json={"loginId": os.environ["BAM_EMAIL"], "password": os.environ["BAM_PASSWORD"],
+                     "stayLoggedIn": False})
+    if r.status_code != 200 or not r.json().get("success"):
+        raise ValueError(f"BAM login failed (HTTP {r.status_code})")
+    body = {"lat": LAT, "lng": LON, "locationId": BAM_LOCATION_ID}
+    r = s.post(f"{BAM_API}/clarity-api/future-daily", json=body, timeout=30)
+    if r.status_code == 401:
+        # some deployments want the session token as a header rather than only the cookie
+        tok = s.cookies.get("authToken") or s.cookies.get("tkn")
+        if tok:
+            r = s.post(f"{BAM_API}/clarity-api/future-daily", json=body, timeout=30,
+                       headers={"Authorization": f"Bearer {tok}"})
+    r.raise_for_status()
+    d = r.json()
+    if not d.get("success"):
+        raise ValueError("BAM forecast request not successful")
+    tz = ZoneInfo(d.get("tzName") or "America/Indiana/Indianapolis")
+    out = []
+    for x in d.get("dailyForecast") or []:
+        dt = datetime.fromisoformat(x["validAt"].replace("Z", "+00:00")).astimezone(tz).date().isoformat()
+        if dt < log_date:
+            continue
+        pops = [v for v in (x.get("popAm"), x.get("popPm")) if v is not None]
+        rain = x.get("rain")
+        out.append({
+            "date":          dt,
+            "high":          round(x["tmax"]) if x.get("tmax") is not None else None,
+            "low":           round(x["tmin"]) if x.get("tmin") is not None else None,
+            "cloud_cover":   x.get("cloudCover"),
+            "precip_prob":   max(pops) if pops else None,
+            "precip_amount": round(rain, 2) if rain is not None else None,
+            "bam_high_p10":  x.get("tmpMaxAtPct_10"), "bam_high_p90": x.get("tmpMaxAtPct_90"),
+            "bam_low_p10":   x.get("tmpMinAtPct_10"), "bam_low_p90":  x.get("tmpMinAtPct_90"),
+            "bam_rain_max":  x.get("rainRangeMax"),
+            "bam_rain_p010": x.get("rainProb_0_10"),
+        })
+    return out
+
 FETCH_FNS = {
     "nws":      fetch_nws,
     "om_gfs":   fetch_om_gfs,
     "om_ecmwf": fetch_om_ecmwf,
     "om_icon":  fetch_om_icon,
     "hrrr":     fetch_hrrr,
+    "bam":      fetch_bam,
 }
 
 # ── Actuals: Open-Meteo archive (primary) ────────────────────────────────
@@ -567,6 +621,9 @@ def main():
 
     # 1. Fetch forecasts from all sources
     for src in SOURCES:
+        if any(not os.environ.get(k) for k in src.get("needs", ())):
+            print(f"Skipping {src['label']} (no login secrets set)")
+            continue
         print(f"Fetching {src['label']}...")
         try:
             days = FETCH_FNS[src["id"]](log_date)
@@ -592,7 +649,9 @@ def main():
                 }
                 # Persist extended agronomic fields (HRRR only — absent on other sources)
                 for xk in ("shortwave_radiation", "wind_speed_max",
-                            "humidity_max", "humidity_min", "humidity_avg"):
+                            "humidity_max", "humidity_min", "humidity_avg",
+                            "bam_high_p10", "bam_high_p90", "bam_low_p10", "bam_low_p90",
+                            "bam_rain_max", "bam_rain_p010"):
                     if xk in day:
                         entry[xk] = day[xk]
                 forecasts.append(entry)

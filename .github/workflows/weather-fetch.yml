@@ -55,6 +55,8 @@ jobs:
         timeout-minutes: 25
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          BAM_EMAIL: ${{ secrets.BAM_EMAIL }}
+          BAM_PASSWORD: ${{ secrets.BAM_PASSWORD }}
         run: python fetch_weather.py
 
       - name: Commit and push updated data
