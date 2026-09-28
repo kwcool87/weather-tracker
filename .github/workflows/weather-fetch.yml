@@ -32,7 +32,7 @@ jobs:
         run: sudo apt-get install -y libeccodes-dev
 
       - name: Install dependencies
-        run: pip install requests herbie-data cfgrib xarray numpy
+        run: pip install requests herbie-data cfgrib xarray numpy pyshp
 
       - name: Check if already fetched today
         id: check

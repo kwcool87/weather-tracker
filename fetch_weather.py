@@ -10,8 +10,12 @@ Forecast sources (all free, no API key required):
   wttr       — wttr.in                  (aggregated forecast service)
 
 Actuals sources:
-  Open-Meteo archive (primary)
-  NASA POWER         (secondary validation)
+  Temperature: Richmond Municipal Airport ASOS (KRID, ~8 mi) via Iowa Environmental Mesonet — a real
+               thermometer (2026-09-28). The Open-Meteo archive (ERA5 reanalysis, i.e. ECMWF's own model)
+               is kept as om_high / om_low: scoring the models against it partly graded ECMWF against itself.
+  Precipitation: MRMS radar + gauge QPE via IEM (primary); Open-Meteo archive fallback
+  NASA POWER   (secondary validation)
+Long-range (weeks 2-8) sources are collected and scored in longrange.py.
 """
 
 import json
@@ -26,6 +30,7 @@ LAT = 39.9499
 LON = -84.9385
 ZIP = "47341"
 HEADERS = {"User-Agent": "weather-tracker/1.0 (github.com/kwcool87/weather-tracker)"}
+STATION = ("RID", "IN_ASOS")      # Richmond Municipal Airport ASOS, via IEM
 
 SOURCES = [
     {"id": "nws",      "label": "NWS / Weather.gov"},
@@ -375,6 +380,19 @@ def _cloud_to_condition(cloud_cover, precip_amount):
     if cloud_cover < 80:  return "Mostly Cloudy"
     return "Overcast"
 
+def station_temps(target_date):
+    """(high, low) in whole degrees F from the KRID ASOS daily summary, or None."""
+    r = requests.get("https://mesonet.agron.iastate.edu/api/1/daily.json",
+                     params={"station": STATION[0], "network": STATION[1], "date": target_date},
+                     headers=HEADERS, timeout=30)
+    r.raise_for_status()
+    rows = r.json().get("data") or []
+    if not rows:
+        return None
+    hi, lo = rows[0].get("max_tmpf"), rows[0].get("min_tmpf")
+    return (round(hi) if hi is not None else None, round(lo) if lo is not None else None)
+
+
 def fetch_actual(target_date):
     # ── Temperature & cloud cover: Open-Meteo archive ─────────────────────
     r = requests.get(
@@ -414,10 +432,23 @@ def fetch_actual(target_date):
     actual = {
         "high":        high_r,
         "low":         low_r,
+        "om_high":     high_r,
+        "om_low":      low_r,
+        "temp_source": "open_meteo",
         "cloud_cover": cloud_r,
         "precip_amount": om_p_r,   # will be overridden by MRMS if available
         "condition":   _cloud_to_condition(cloud_r, om_p_r),
     }
+
+    # ── Temperature: KRID station (primary) ───────────────────────────────
+    try:
+        st_ = station_temps(target_date)
+        if st_ and st_[0] is not None and st_[1] is not None:
+            actual["high"], actual["low"] = st_
+            actual["temp_source"] = "KRID"
+            print(f"  KRID station: H:{st_[0]} L:{st_[1]}  (Open-Meteo archive was H:{high_r} L:{low_r})")
+    except Exception as e:
+        print(f"  KRID station failed (non-fatal): {e}; using Open-Meteo archive temps")
 
     # ── Precipitation: MRMS QPE via IEM (primary) ─────────────────────────
     # Iowa Environmental Mesonet archives MRMS MultiSensor_QPE data and
@@ -584,6 +615,18 @@ def main():
 
     # 3. Save
     save_data(forecasts, actuals)
+
+    # 3b. Long-range (weeks 2-8) collection + scoring — non-fatal
+    try:
+        import longrange
+        print("\nLong-range sources...")
+        new = longrange.collect(log_date, LAT, LON)
+        results["fetched"]["longrange"] = len(new)
+        print("Scoring long-range...")
+        longrange.score(LAT, LON)
+    except Exception as e:
+        print(f"  Long-range ERROR (non-fatal): {e}")
+        results["errors"].append(f"Long-range: {e}")
     print(f"\nSaved: {len(forecasts)} forecast entries, {len(actuals)} actuals")
 
     # 4. Notify

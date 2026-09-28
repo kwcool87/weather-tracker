@@ -1,15 +1,18 @@
 {
   "2026-05-10": {
     "high": 64,
-    "low": 51,
+    "low": 52,
     "cloud_cover": 44,
     "precip_amount": 0.01,
     "precip_source": "mrms",
-    "condition": "Rain"
+    "condition": "Rain",
+    "om_high": 64,
+    "om_low": 51,
+    "temp_source": "KRID"
   },
   "2026-05-11": {
-    "high": 67,
-    "low": 44,
+    "high": 68,
+    "low": 41,
     "cloud_cover": 20,
     "precip_amount": 0.0,
     "precip_source": "mrms",
@@ -17,11 +20,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 67,
+    "om_low": 44,
+    "temp_source": "KRID"
   },
   "2026-05-12": {
-    "high": 70,
-    "low": 42,
+    "high": 73,
+    "low": 39,
     "cloud_cover": 28,
     "precip_amount": 0.01,
     "precip_source": "mrms",
@@ -29,10 +35,13 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 70,
+    "om_low": 42,
+    "temp_source": "KRID"
   },
   "2026-05-13": {
-    "high": 62,
+    "high": 63,
     "low": 46,
     "cloud_cover": 35,
     "precip_amount": 0.09,
@@ -41,11 +50,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 62,
+    "om_low": 46,
+    "temp_source": "KRID"
   },
   "2026-05-14": {
-    "high": 62,
-    "low": 40,
+    "high": 63,
+    "low": 37,
     "cloud_cover": 28,
     "precip_amount": 0.0,
     "precip_source": "mrms",
@@ -53,11 +65,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 62,
+    "om_low": 40,
+    "temp_source": "KRID"
   },
   "2026-05-15": {
-    "high": 62,
-    "low": 42,
+    "high": 63,
+    "low": 41,
     "cloud_cover": 62,
     "precip_amount": 0.02,
     "precip_source": "mrms",
@@ -65,11 +80,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 62,
+    "om_low": 42,
+    "temp_source": "KRID"
   },
   "2026-05-16": {
-    "high": 73,
-    "low": 57,
+    "high": 70,
+    "low": 54,
     "cloud_cover": 85,
     "precip_amount": 0.16,
     "precip_source": "mrms",
@@ -77,11 +95,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 73,
+    "om_low": 57,
+    "temp_source": "KRID"
   },
   "2026-05-17": {
-    "high": 80,
-    "low": 61,
+    "high": 82,
+    "low": 59,
     "cloud_cover": 25,
     "precip_amount": 0.0,
     "precip_source": "mrms",
@@ -89,11 +110,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 80,
+    "om_low": 61,
+    "temp_source": "KRID"
   },
   "2026-05-18": {
-    "high": 81,
-    "low": 66,
+    "high": 84,
+    "low": 63,
     "cloud_cover": 52,
     "precip_amount": 1.67,
     "precip_source": "mrms",
@@ -101,11 +125,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 81,
+    "om_low": 66,
+    "temp_source": "KRID"
   },
   "2026-05-19": {
     "high": 82,
-    "low": 65,
+    "low": 63,
     "cloud_cover": 59,
     "precip_amount": 0.67,
     "precip_source": "mrms",
@@ -113,11 +140,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 82,
+    "om_low": 65,
+    "temp_source": "KRID"
   },
   "2026-05-20": {
-    "high": 67,
-    "low": 53,
+    "high": 68,
+    "low": 52,
     "cloud_cover": 99,
     "precip_amount": 0.74,
     "condition": "Rain",
@@ -125,10 +155,13 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 67,
+    "om_low": 53,
+    "temp_source": "KRID"
   },
   "2026-05-21": {
-    "high": 64,
+    "high": 66,
     "low": 50,
     "cloud_cover": 69,
     "precip_amount": 0.0,
@@ -137,10 +170,13 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 64,
+    "om_low": 50,
+    "temp_source": "KRID"
   },
   "2026-05-22": {
-    "high": 62,
+    "high": 61,
     "low": 52,
     "cloud_cover": 97,
     "precip_amount": 0.42,
@@ -149,11 +185,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 62,
+    "om_low": 52,
+    "temp_source": "KRID"
   },
   "2026-05-23": {
-    "high": 68,
-    "low": 61,
+    "high": 64,
+    "low": 59,
     "cloud_cover": 97,
     "precip_amount": 0.04,
     "condition": "Rain",
@@ -161,11 +200,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 68,
+    "om_low": 61,
+    "temp_source": "KRID"
   },
   "2026-05-24": {
     "high": 70,
-    "low": 58,
+    "low": 54,
     "cloud_cover": 79,
     "precip_amount": 0.03,
     "condition": "Rain",
@@ -173,11 +215,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 70,
+    "om_low": 58,
+    "temp_source": "KRID"
   },
   "2026-05-25": {
-    "high": 74,
-    "low": 58,
+    "high": 75,
+    "low": 59,
     "cloud_cover": 80,
     "precip_amount": 0.0,
     "condition": "Overcast",
@@ -185,11 +230,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 74,
+    "om_low": 58,
+    "temp_source": "KRID"
   },
   "2026-05-26": {
-    "high": 76,
-    "low": 57,
+    "high": 73,
+    "low": 55,
     "cloud_cover": 96,
     "precip_amount": 0.0,
     "condition": "Overcast",
@@ -197,11 +245,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 76,
+    "om_low": 57,
+    "temp_source": "KRID"
   },
   "2026-05-27": {
-    "high": 75,
-    "low": 62,
+    "high": 70,
+    "low": 61,
     "cloud_cover": 76,
     "precip_amount": 1.05,
     "condition": "Rain",
@@ -209,11 +260,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 75,
+    "om_low": 62,
+    "temp_source": "KRID"
   },
   "2026-05-28": {
-    "high": 78,
-    "low": 58,
+    "high": 79,
+    "low": 55,
     "cloud_cover": 52,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -221,10 +275,13 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 78,
+    "om_low": 58,
+    "temp_source": "KRID"
   },
   "2026-05-29": {
-    "high": 76,
+    "high": 79,
     "low": 50,
     "cloud_cover": 81,
     "precip_amount": 0.0,
@@ -233,11 +290,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 76,
+    "om_low": 50,
+    "temp_source": "KRID"
   },
   "2026-05-30": {
-    "high": 72,
-    "low": 56,
+    "high": 77,
+    "low": 54,
     "cloud_cover": 93,
     "precip_amount": 0.0,
     "condition": "Overcast",
@@ -245,11 +305,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 72,
+    "om_low": 56,
+    "temp_source": "KRID"
   },
   "2026-05-31": {
-    "high": 72,
-    "low": 49,
+    "high": 77,
+    "low": 46,
     "cloud_cover": 77,
     "precip_amount": 0.0,
     "condition": "Mostly Cloudy",
@@ -257,11 +320,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 72,
+    "om_low": 49,
+    "temp_source": "KRID"
   },
   "2026-06-01": {
     "high": 72,
-    "low": 56,
+    "low": 55,
     "cloud_cover": 77,
     "precip_amount": 0.02,
     "condition": "Rain",
@@ -269,11 +335,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 72,
+    "om_low": 56,
+    "temp_source": "KRID"
   },
   "2026-06-02": {
-    "high": 72,
-    "low": 53,
+    "high": 73,
+    "low": 52,
     "cloud_cover": 1,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -281,11 +350,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 72,
+    "om_low": 53,
+    "temp_source": "KRID"
   },
   "2026-06-03": {
-    "high": 75,
-    "low": 51,
+    "high": 79,
+    "low": 50,
     "cloud_cover": 16,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -293,11 +365,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 75,
+    "om_low": 51,
+    "temp_source": "KRID"
   },
   "2026-06-04": {
-    "high": 78,
-    "low": 55,
+    "high": 81,
+    "low": 52,
     "cloud_cover": 53,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -305,11 +380,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 78,
+    "om_low": 55,
+    "temp_source": "KRID"
   },
   "2026-06-05": {
-    "high": 79,
-    "low": 59,
+    "high": 82,
+    "low": 57,
     "cloud_cover": 48,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -317,11 +395,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 79,
+    "om_low": 59,
+    "temp_source": "KRID"
   },
   "2026-06-06": {
-    "high": 83,
-    "low": 66,
+    "high": 86,
+    "low": 68,
     "cloud_cover": 84,
     "precip_amount": 0.25,
     "condition": "Rain",
@@ -329,11 +410,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 83,
+    "om_low": 66,
+    "temp_source": "KRID"
   },
   "2026-06-07": {
-    "high": 83,
-    "low": 67,
+    "high": 86,
+    "low": 64,
     "cloud_cover": 79,
     "precip_amount": 0.06,
     "condition": "Rain",
@@ -341,11 +425,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 83,
+    "om_low": 67,
+    "temp_source": "KRID"
   },
   "2026-06-08": {
     "high": 79,
-    "low": 67,
+    "low": 64,
     "cloud_cover": 96,
     "precip_amount": 0.02,
     "condition": "Rain",
@@ -353,11 +440,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 79,
+    "om_low": 67,
+    "temp_source": "KRID"
   },
   "2026-06-09": {
-    "high": 82,
-    "low": 70,
+    "high": 84,
+    "low": 68,
     "cloud_cover": 87,
     "precip_amount": 0.37,
     "condition": "Rain",
@@ -365,11 +455,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 82,
+    "om_low": 70,
+    "temp_source": "KRID"
   },
   "2026-06-10": {
     "high": 86,
-    "low": 69,
+    "low": 68,
     "cloud_cover": 67,
     "precip_amount": 0.04,
     "condition": "Rain",
@@ -377,11 +470,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 86,
+    "om_low": 69,
+    "temp_source": "KRID"
   },
   "2026-06-11": {
-    "high": 84,
-    "low": 67,
+    "high": 86,
+    "low": 72,
     "cloud_cover": 84,
     "precip_amount": 0.28,
     "condition": "Rain",
@@ -389,11 +485,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 84,
+    "om_low": 67,
+    "temp_source": "KRID"
   },
   "2026-06-12": {
-    "high": 76,
-    "low": 66,
+    "high": 77,
+    "low": 63,
     "cloud_cover": 45,
     "precip_amount": 0.15,
     "condition": "Rain",
@@ -401,11 +500,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 76,
+    "om_low": 66,
+    "temp_source": "KRID"
   },
   "2026-06-13": {
     "high": 79,
-    "low": 59,
+    "low": 55,
     "cloud_cover": 49,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -413,11 +515,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 79,
+    "om_low": 59,
+    "temp_source": "KRID"
   },
   "2026-06-14": {
-    "high": 76,
-    "low": 61,
+    "high": 77,
+    "low": 59,
     "cloud_cover": 77,
     "precip_amount": 0.52,
     "condition": "Rain",
@@ -425,11 +530,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 76,
+    "om_low": 61,
+    "temp_source": "KRID"
   },
   "2026-06-15": {
-    "high": 68,
-    "low": 52,
+    "high": 70,
+    "low": 50,
     "cloud_cover": 13,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -437,11 +545,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 68,
+    "om_low": 52,
+    "temp_source": "KRID"
   },
   "2026-06-16": {
-    "high": 72,
-    "low": 52,
+    "high": 73,
+    "low": 50,
     "cloud_cover": 47,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -449,11 +560,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 72,
+    "om_low": 52,
+    "temp_source": "KRID"
   },
   "2026-06-17": {
     "high": 73,
-    "low": 55,
+    "low": 54,
     "cloud_cover": 71,
     "precip_amount": 1.17,
     "condition": "Rain",
@@ -461,11 +575,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 73,
+    "om_low": 55,
+    "temp_source": "KRID"
   },
   "2026-06-18": {
     "high": 73,
-    "low": 62,
+    "low": 61,
     "cloud_cover": 53,
     "precip_amount": 0.2,
     "condition": "Rain",
@@ -473,11 +590,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 73,
+    "om_low": 62,
+    "temp_source": "KRID"
   },
   "2026-06-19": {
-    "high": 74,
-    "low": 55,
+    "high": 77,
+    "low": 54,
     "cloud_cover": 28,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -485,11 +605,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 74,
+    "om_low": 55,
+    "temp_source": "KRID"
   },
   "2026-06-20": {
-    "high": 75,
-    "low": 59,
+    "high": 79,
+    "low": 57,
     "cloud_cover": 50,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -497,11 +620,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 75,
+    "om_low": 59,
+    "temp_source": "KRID"
   },
   "2026-06-21": {
-    "high": 74,
-    "low": 56,
+    "high": 75,
+    "low": 52,
     "cloud_cover": 92,
     "precip_amount": 0.41,
     "condition": "Rain",
@@ -509,11 +635,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 74,
+    "om_low": 56,
+    "temp_source": "KRID"
   },
   "2026-06-22": {
-    "high": 68,
-    "low": 62,
+    "high": 72,
+    "low": 59,
     "cloud_cover": 98,
     "precip_amount": 0.29,
     "condition": "Rain",
@@ -521,11 +650,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 68,
+    "om_low": 62,
+    "temp_source": "KRID"
   },
   "2026-06-23": {
-    "high": 74,
-    "low": 57,
+    "high": 75,
+    "low": 55,
     "cloud_cover": 14,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -533,11 +665,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 74,
+    "om_low": 57,
+    "temp_source": "KRID"
   },
   "2026-06-24": {
-    "high": 75,
-    "low": 54,
+    "high": 77,
+    "low": 52,
     "cloud_cover": 21,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -545,11 +680,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 75,
+    "om_low": 54,
+    "temp_source": "KRID"
   },
   "2026-06-25": {
-    "high": 78,
-    "low": 62,
+    "high": 77,
+    "low": 59,
     "cloud_cover": 74,
     "precip_amount": 0.0,
     "condition": "Mostly Cloudy",
@@ -557,11 +695,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 78,
+    "om_low": 62,
+    "temp_source": "KRID"
   },
   "2026-06-26": {
-    "high": 73,
-    "low": 64,
+    "high": 72,
+    "low": 63,
     "cloud_cover": 100,
     "precip_amount": 0.44,
     "condition": "Rain",
@@ -569,11 +710,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 73,
+    "om_low": 64,
+    "temp_source": "KRID"
   },
   "2026-06-27": {
-    "high": 77,
-    "low": 65,
+    "high": 79,
+    "low": 66,
     "cloud_cover": 81,
     "precip_amount": 0.01,
     "condition": "Overcast",
@@ -581,11 +725,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 77,
+    "om_low": 65,
+    "temp_source": "KRID"
   },
   "2026-06-28": {
     "high": 82,
-    "low": 67,
+    "low": 68,
     "cloud_cover": 72,
     "precip_amount": 0.0,
     "condition": "Mostly Cloudy",
@@ -593,11 +740,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 82,
+    "om_low": 67,
+    "temp_source": "KRID"
   },
   "2026-06-29": {
-    "high": 87,
-    "low": 70,
+    "high": 88,
+    "low": 68,
     "cloud_cover": 41,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -605,11 +755,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 87,
+    "om_low": 70,
+    "temp_source": "KRID"
   },
   "2026-06-30": {
     "high": 88,
-    "low": 74,
+    "low": 70,
     "cloud_cover": 31,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -617,10 +770,13 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 88,
+    "om_low": 74,
+    "temp_source": "KRID"
   },
   "2026-07-01": {
-    "high": 89,
+    "high": 90,
     "low": 72,
     "cloud_cover": 8,
     "precip_amount": 0.0,
@@ -629,11 +785,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 89,
+    "om_low": 72,
+    "temp_source": "KRID"
   },
   "2026-07-02": {
-    "high": 89,
-    "low": 72,
+    "high": 90,
+    "low": 70,
     "cloud_cover": 19,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -641,11 +800,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 89,
+    "om_low": 72,
+    "temp_source": "KRID"
   },
   "2026-07-03": {
-    "high": 89,
-    "low": 73,
+    "high": 90,
+    "low": 70,
     "cloud_cover": 33,
     "precip_amount": 0.04,
     "condition": "Rain",
@@ -653,11 +815,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 89,
+    "om_low": 73,
+    "temp_source": "KRID"
   },
   "2026-07-04": {
-    "high": 84,
-    "low": 70,
+    "high": 88,
+    "low": 66,
     "cloud_cover": 45,
     "precip_amount": 0.64,
     "condition": "Rain",
@@ -665,11 +830,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 84,
+    "om_low": 70,
+    "temp_source": "KRID"
   },
   "2026-07-05": {
-    "high": 82,
-    "low": 69,
+    "high": 81,
+    "low": 66,
     "cloud_cover": 54,
     "precip_amount": 0.01,
     "condition": "Partly Cloudy",
@@ -677,11 +845,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 82,
+    "om_low": 69,
+    "temp_source": "KRID"
   },
   "2026-07-06": {
-    "high": 81,
-    "low": 69,
+    "high": 82,
+    "low": 66,
     "cloud_cover": 37,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -689,11 +860,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 81,
+    "om_low": 69,
+    "temp_source": "KRID"
   },
   "2026-07-07": {
     "high": 82,
-    "low": 68,
+    "low": 64,
     "cloud_cover": 54,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -701,11 +875,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 82,
+    "om_low": 68,
+    "temp_source": "KRID"
   },
   "2026-07-08": {
-    "high": 83,
-    "low": 67,
+    "high": 84,
+    "low": 63,
     "cloud_cover": 86,
     "precip_amount": 0.0,
     "condition": "Overcast",
@@ -713,11 +890,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 83,
+    "om_low": 67,
+    "temp_source": "KRID"
   },
   "2026-07-09": {
-    "high": 83,
-    "low": 67,
+    "high": 84,
+    "low": 64,
     "cloud_cover": 38,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -725,10 +905,13 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 83,
+    "om_low": 67,
+    "temp_source": "KRID"
   },
   "2026-07-10": {
-    "high": 84,
+    "high": 82,
     "low": 68,
     "cloud_cover": 64,
     "precip_amount": 3.36,
@@ -737,11 +920,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 84,
+    "om_low": 68,
+    "temp_source": "KRID"
   },
   "2026-07-11": {
-    "high": 75,
-    "low": 69,
+    "high": 77,
+    "low": 68,
     "cloud_cover": 95,
     "precip_amount": 1.96,
     "condition": "Rain",
@@ -749,11 +935,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 75,
+    "om_low": 69,
+    "temp_source": "KRID"
   },
   "2026-07-12": {
     "high": 82,
-    "low": 66,
+    "low": 64,
     "cloud_cover": 31,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -761,11 +950,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 82,
+    "om_low": 66,
+    "temp_source": "KRID"
   },
   "2026-07-13": {
-    "high": 83,
-    "low": 62,
+    "high": 84,
+    "low": 63,
     "cloud_cover": 3,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -773,11 +965,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 83,
+    "om_low": 62,
+    "temp_source": "KRID"
   },
   "2026-07-14": {
-    "high": 86,
-    "low": 66,
+    "high": 88,
+    "low": 63,
     "cloud_cover": 3,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -785,11 +980,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 86,
+    "om_low": 66,
+    "temp_source": "KRID"
   },
   "2026-07-15": {
-    "high": 87,
-    "low": 68,
+    "high": 86,
+    "low": 64,
     "cloud_cover": 10,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -797,11 +995,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 87,
+    "om_low": 68,
+    "temp_source": "KRID"
   },
   "2026-07-16": {
-    "high": 87,
-    "low": 71,
+    "high": 88,
+    "low": 68,
     "cloud_cover": 46,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -809,11 +1010,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 87,
+    "om_low": 71,
+    "temp_source": "KRID"
   },
   "2026-07-17": {
     "high": 86,
-    "low": 73,
+    "low": 70,
     "cloud_cover": 54,
     "precip_amount": 0.11,
     "condition": "Rain",
@@ -821,11 +1025,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 86,
+    "om_low": 73,
+    "temp_source": "KRID"
   },
   "2026-07-18": {
-    "high": 84,
-    "low": 71,
+    "high": 86,
+    "low": 70,
     "cloud_cover": 43,
     "precip_amount": 0.21,
     "condition": "Rain",
@@ -833,11 +1040,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 84,
+    "om_low": 71,
+    "temp_source": "KRID"
   },
   "2026-07-19": {
-    "high": 78,
-    "low": 66,
+    "high": 81,
+    "low": 63,
     "cloud_cover": 29,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -845,11 +1055,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 78,
+    "om_low": 66,
+    "temp_source": "KRID"
   },
   "2026-07-20": {
-    "high": 81,
-    "low": 61,
+    "high": 82,
+    "low": 59,
     "cloud_cover": 54,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -857,11 +1070,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 81,
+    "om_low": 61,
+    "temp_source": "KRID"
   },
   "2026-07-21": {
-    "high": 82,
-    "low": 69,
+    "high": 86,
+    "low": 68,
     "cloud_cover": 70,
     "precip_amount": 0.02,
     "condition": "Rain",
@@ -869,11 +1085,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 82,
+    "om_low": 69,
+    "temp_source": "KRID"
   },
   "2026-07-22": {
     "high": 70,
-    "low": 59,
+    "low": 54,
     "cloud_cover": 41,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -881,11 +1100,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 70,
+    "om_low": 59,
+    "temp_source": "KRID"
   },
   "2026-07-23": {
-    "high": 73,
-    "low": 54,
+    "high": 75,
+    "low": 50,
     "cloud_cover": 33,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -893,11 +1115,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 73,
+    "om_low": 54,
+    "temp_source": "KRID"
   },
   "2026-07-24": {
-    "high": 73,
-    "low": 56,
+    "high": 75,
+    "low": 54,
     "cloud_cover": 78,
     "precip_amount": 0.01,
     "condition": "Mostly Cloudy",
@@ -905,11 +1130,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 73,
+    "om_low": 56,
+    "temp_source": "KRID"
   },
   "2026-07-25": {
-    "high": 76,
-    "low": 57,
+    "high": 77,
+    "low": 52,
     "cloud_cover": 47,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -917,11 +1145,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 76,
+    "om_low": 57,
+    "temp_source": "KRID"
   },
   "2026-07-26": {
     "high": 79,
-    "low": 65,
+    "low": 63,
     "cloud_cover": 71,
     "precip_amount": 0.0,
     "condition": "Mostly Cloudy",
@@ -929,11 +1160,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 79,
+    "om_low": 65,
+    "temp_source": "KRID"
   },
   "2026-07-27": {
-    "high": 84,
-    "low": 65,
+    "high": 82,
+    "low": 59,
     "cloud_cover": 65,
     "precip_amount": 0.34,
     "condition": "Rain",
@@ -941,11 +1175,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 84,
+    "om_low": 65,
+    "temp_source": "KRID"
   },
   "2026-07-28": {
-    "high": 81,
-    "low": 71,
+    "high": 82,
+    "low": 66,
     "cloud_cover": 44,
     "precip_amount": 0.07,
     "condition": "Rain",
@@ -953,11 +1190,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 81,
+    "om_low": 71,
+    "temp_source": "KRID"
   },
   "2026-07-29": {
-    "high": 77,
-    "low": 63,
+    "high": 79,
+    "low": 61,
     "cloud_cover": 16,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -965,11 +1205,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 77,
+    "om_low": 63,
+    "temp_source": "KRID"
   },
   "2026-07-30": {
-    "high": 81,
-    "low": 59,
+    "high": 82,
+    "low": 55,
     "cloud_cover": 29,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -977,11 +1220,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 81,
+    "om_low": 59,
+    "temp_source": "KRID"
   },
   "2026-07-31": {
     "high": 81,
-    "low": 63,
+    "low": 59,
     "cloud_cover": 76,
     "precip_amount": 0.03,
     "condition": "Rain",
@@ -989,11 +1235,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 81,
+    "om_low": 63,
+    "temp_source": "KRID"
   },
   "2026-08-01": {
-    "high": 78,
-    "low": 68,
+    "high": 79,
+    "low": 64,
     "cloud_cover": 92,
     "precip_amount": 3.36,
     "condition": "Rain",
@@ -1001,11 +1250,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 78,
+    "om_low": 68,
+    "temp_source": "KRID"
   },
   "2026-08-02": {
-    "high": 74,
-    "low": 66,
+    "high": 73,
+    "low": 64,
     "cloud_cover": 71,
     "precip_amount": 0.0,
     "condition": "Mostly Cloudy",
@@ -1013,11 +1265,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 74,
+    "om_low": 66,
+    "temp_source": "KRID"
   },
   "2026-08-03": {
-    "high": 77,
-    "low": 62,
+    "high": 79,
+    "low": 59,
     "cloud_cover": 33,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -1025,11 +1280,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 77,
+    "om_low": 62,
+    "temp_source": "KRID"
   },
   "2026-08-04": {
-    "high": 80,
-    "low": 57,
+    "high": 81,
+    "low": 54,
     "cloud_cover": 9,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -1037,11 +1295,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 80,
+    "om_low": 57,
+    "temp_source": "KRID"
   },
   "2026-08-05": {
-    "high": 80,
-    "low": 62,
+    "high": 81,
+    "low": 59,
     "cloud_cover": 7,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -1049,11 +1310,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 80,
+    "om_low": 62,
+    "temp_source": "KRID"
   },
   "2026-08-06": {
-    "high": 81,
-    "low": 65,
+    "high": 82,
+    "low": 61,
     "cloud_cover": 62,
     "precip_amount": 0.01,
     "condition": "Mostly Cloudy",
@@ -1061,11 +1325,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 81,
+    "om_low": 65,
+    "temp_source": "KRID"
   },
   "2026-08-07": {
-    "high": 80,
-    "low": 67,
+    "high": 81,
+    "low": 68,
     "cloud_cover": 86,
     "precip_amount": 0.76,
     "condition": "Rain",
@@ -1073,10 +1340,13 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 80,
+    "om_low": 67,
+    "temp_source": "KRID"
   },
   "2026-08-08": {
-    "high": 84,
+    "high": 82,
     "low": 68,
     "cloud_cover": 35,
     "precip_amount": 0.0,
@@ -1085,11 +1355,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 84,
+    "om_low": 68,
+    "temp_source": "KRID"
   },
   "2026-08-09": {
     "high": 84,
-    "low": 67,
+    "low": 64,
     "cloud_cover": 72,
     "precip_amount": 0.0,
     "condition": "Mostly Cloudy",
@@ -1097,11 +1370,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 84,
+    "om_low": 67,
+    "temp_source": "KRID"
   },
   "2026-08-10": {
-    "high": 84,
-    "low": 68,
+    "high": 86,
+    "low": 72,
     "cloud_cover": 99,
     "precip_amount": 0.0,
     "condition": "Overcast",
@@ -1109,11 +1385,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 84,
+    "om_low": 68,
+    "temp_source": "KRID"
   },
   "2026-08-11": {
-    "high": 73,
-    "low": 67,
+    "high": 79,
+    "low": 63,
     "cloud_cover": 98,
     "precip_amount": 1.46,
     "condition": "Rain",
@@ -1121,11 +1400,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 73,
+    "om_low": 67,
+    "temp_source": "KRID"
   },
   "2026-08-12": {
-    "high": 71,
-    "low": 65,
+    "high": 68,
+    "low": 63,
     "cloud_cover": 93,
     "precip_amount": 5.85,
     "condition": "Rain",
@@ -1133,11 +1415,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 71,
+    "om_low": 65,
+    "temp_source": "KRID"
   },
   "2026-08-13": {
-    "high": 83,
-    "low": 63,
+    "high": 81,
+    "low": 61,
     "cloud_cover": 75,
     "precip_amount": 0.09,
     "condition": "Rain",
@@ -1145,10 +1430,13 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 83,
+    "om_low": 63,
+    "temp_source": "KRID"
   },
   "2026-08-14": {
-    "high": 79,
+    "high": 81,
     "low": 68,
     "cloud_cover": 80,
     "precip_amount": 1.59,
@@ -1157,11 +1445,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 79,
+    "om_low": 68,
+    "temp_source": "KRID"
   },
   "2026-08-15": {
     "high": 81,
-    "low": 70,
+    "low": 68,
     "cloud_cover": 93,
     "precip_amount": 0.54,
     "condition": "Rain",
@@ -1169,11 +1460,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 81,
+    "om_low": 70,
+    "temp_source": "KRID"
   },
   "2026-08-16": {
-    "high": 80,
-    "low": 72,
+    "high": 84,
+    "low": 70,
     "cloud_cover": 88,
     "precip_amount": 0.37,
     "condition": "Rain",
@@ -1181,11 +1475,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 80,
+    "om_low": 72,
+    "temp_source": "KRID"
   },
   "2026-08-17": {
-    "high": 80,
-    "low": 70,
+    "high": 79,
+    "low": 68,
     "cloud_cover": 74,
     "precip_amount": 0.54,
     "condition": "Rain",
@@ -1193,11 +1490,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 80,
+    "om_low": 70,
+    "temp_source": "KRID"
   },
   "2026-08-18": {
-    "high": 78,
-    "low": 60,
+    "high": 79,
+    "low": 59,
     "cloud_cover": 36,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -1205,11 +1505,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 78,
+    "om_low": 60,
+    "temp_source": "KRID"
   },
   "2026-08-19": {
-    "high": 78,
-    "low": 65,
+    "high": 73,
+    "low": 61,
     "cloud_cover": 76,
     "precip_amount": 1.21,
     "condition": "Rain",
@@ -1217,11 +1520,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 78,
+    "om_low": 65,
+    "temp_source": "KRID"
   },
   "2026-08-20": {
-    "high": 78,
-    "low": 65,
+    "high": 79,
+    "low": 63,
     "cloud_cover": 52,
     "precip_amount": 0.35,
     "condition": "Rain",
@@ -1229,11 +1535,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 78,
+    "om_low": 65,
+    "temp_source": "KRID"
   },
   "2026-08-21": {
-    "high": 80,
-    "low": 64,
+    "high": 82,
+    "low": 63,
     "cloud_cover": 14,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -1241,11 +1550,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 80,
+    "om_low": 64,
+    "temp_source": "KRID"
   },
   "2026-08-22": {
-    "high": 78,
-    "low": 64,
+    "high": 79,
+    "low": 61,
     "cloud_cover": 45,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -1253,11 +1565,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 78,
+    "om_low": 64,
+    "temp_source": "KRID"
   },
   "2026-08-23": {
-    "high": 74,
-    "low": 59,
+    "high": 73,
+    "low": 55,
     "cloud_cover": 13,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -1265,11 +1580,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 74,
+    "om_low": 59,
+    "temp_source": "KRID"
   },
   "2026-08-24": {
-    "high": 74,
-    "low": 54,
+    "high": 73,
+    "low": 52,
     "cloud_cover": 22,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -1277,11 +1595,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 74,
+    "om_low": 54,
+    "temp_source": "KRID"
   },
   "2026-08-25": {
-    "high": 76,
-    "low": 54,
+    "high": 77,
+    "low": 50,
     "cloud_cover": 27,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -1289,11 +1610,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 76,
+    "om_low": 54,
+    "temp_source": "KRID"
   },
   "2026-08-26": {
-    "high": 80,
-    "low": 58,
+    "high": 81,
+    "low": 55,
     "cloud_cover": 30,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -1301,11 +1625,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 80,
+    "om_low": 58,
+    "temp_source": "KRID"
   },
   "2026-08-27": {
-    "high": 80,
-    "low": 63,
+    "high": 81,
+    "low": 61,
     "cloud_cover": 6,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -1313,11 +1640,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 80,
+    "om_low": 63,
+    "temp_source": "KRID"
   },
   "2026-08-28": {
-    "high": 78,
-    "low": 60,
+    "high": 79,
+    "low": 59,
     "cloud_cover": 6,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -1325,11 +1655,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 78,
+    "om_low": 60,
+    "temp_source": "KRID"
   },
   "2026-08-29": {
-    "high": 79,
-    "low": 59,
+    "high": 81,
+    "low": 57,
     "cloud_cover": 52,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -1337,11 +1670,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 79,
+    "om_low": 59,
+    "temp_source": "KRID"
   },
   "2026-08-30": {
-    "high": 82,
-    "low": 65,
+    "high": 81,
+    "low": 63,
     "cloud_cover": 76,
     "precip_amount": 0.0,
     "condition": "Mostly Cloudy",
@@ -1349,11 +1685,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 82,
+    "om_low": 65,
+    "temp_source": "KRID"
   },
   "2026-08-31": {
-    "high": 87,
-    "low": 70,
+    "high": 88,
+    "low": 68,
     "cloud_cover": 84,
     "precip_amount": 0.0,
     "condition": "Overcast",
@@ -1361,11 +1700,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 87,
+    "om_low": 70,
+    "temp_source": "KRID"
   },
   "2026-09-01": {
     "high": 90,
-    "low": 73,
+    "low": 66,
     "cloud_cover": 43,
     "precip_amount": 0.0,
     "condition": "Partly Cloudy",
@@ -1373,11 +1715,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 90,
+    "om_low": 73,
+    "temp_source": "KRID"
   },
   "2026-09-02": {
-    "high": 89,
-    "low": 72,
+    "high": 90,
+    "low": 68,
     "cloud_cover": 22,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -1385,11 +1730,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 89,
+    "om_low": 72,
+    "temp_source": "KRID"
   },
   "2026-09-03": {
     "high": 90,
-    "low": 74,
+    "low": 72,
     "cloud_cover": 19,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -1397,11 +1745,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 90,
+    "om_low": 74,
+    "temp_source": "KRID"
   },
   "2026-09-04": {
-    "high": 88,
-    "low": 73,
+    "high": 91,
+    "low": 70,
     "cloud_cover": 21,
     "precip_amount": 0.57,
     "condition": "Rain",
@@ -1409,11 +1760,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 88,
+    "om_low": 73,
+    "temp_source": "KRID"
   },
   "2026-09-05": {
-    "high": 86,
-    "low": 68,
+    "high": 88,
+    "low": 64,
     "cloud_cover": 49,
     "precip_amount": 0.2,
     "condition": "Rain",
@@ -1421,11 +1775,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 86,
+    "om_low": 68,
+    "temp_source": "KRID"
   },
   "2026-09-06": {
-    "high": 76,
-    "low": 63,
+    "high": 77,
+    "low": 61,
     "cloud_cover": 9,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -1433,10 +1790,13 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 76,
+    "om_low": 63,
+    "temp_source": "KRID"
   },
   "2026-09-07": {
-    "high": 79,
+    "high": 81,
     "low": 59,
     "cloud_cover": 13,
     "precip_amount": 0.0,
@@ -1445,11 +1805,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 79,
+    "om_low": 59,
+    "temp_source": "KRID"
   },
   "2026-09-08": {
-    "high": 83,
-    "low": 63,
+    "high": 84,
+    "low": 61,
     "cloud_cover": 63,
     "precip_amount": 0.0,
     "condition": "Mostly Cloudy",
@@ -1457,11 +1820,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 83,
+    "om_low": 63,
+    "temp_source": "KRID"
   },
   "2026-09-09": {
-    "high": 86,
-    "low": 71,
+    "high": 88,
+    "low": 68,
     "cloud_cover": 46,
     "precip_amount": 0.01,
     "condition": "Partly Cloudy",
@@ -1469,11 +1835,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 86,
+    "om_low": 71,
+    "temp_source": "KRID"
   },
   "2026-09-10": {
-    "high": 81,
-    "low": 67,
+    "high": 79,
+    "low": 64,
     "cloud_cover": 82,
     "precip_amount": 0.08,
     "condition": "Rain",
@@ -1481,11 +1850,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 81,
+    "om_low": 67,
+    "temp_source": "KRID"
   },
   "2026-09-11": {
     "high": 79,
-    "low": 62,
+    "low": 61,
     "cloud_cover": 88,
     "precip_amount": 0.0,
     "condition": "Overcast",
@@ -1493,11 +1865,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 79,
+    "om_low": 62,
+    "temp_source": "KRID"
   },
   "2026-09-12": {
-    "high": 78,
-    "low": 68,
+    "high": 77,
+    "low": 66,
     "cloud_cover": 77,
     "precip_amount": 0.18,
     "condition": "Rain",
@@ -1505,11 +1880,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 78,
+    "om_low": 68,
+    "temp_source": "KRID"
   },
   "2026-09-13": {
-    "high": 83,
-    "low": 63,
+    "high": 86,
+    "low": 61,
     "cloud_cover": 63,
     "precip_amount": 0.0,
     "condition": "Mostly Cloudy",
@@ -1517,11 +1895,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 83,
+    "om_low": 63,
+    "temp_source": "KRID"
   },
   "2026-09-14": {
-    "high": 71,
-    "low": 53,
+    "high": 72,
+    "low": 52,
     "cloud_cover": 32,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -1529,11 +1910,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 71,
+    "om_low": 53,
+    "temp_source": "KRID"
   },
   "2026-09-15": {
-    "high": 87,
-    "low": 60,
+    "high": 90,
+    "low": 55,
     "cloud_cover": 38,
     "precip_amount": 0.0,
     "condition": "Mostly Clear",
@@ -1541,11 +1925,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 87,
+    "om_low": 60,
+    "temp_source": "KRID"
   },
   "2026-09-16": {
-    "high": 85,
-    "low": 69,
+    "high": 90,
+    "low": 68,
     "cloud_cover": 66,
     "precip_amount": 1.07,
     "condition": "Rain",
@@ -1553,11 +1940,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 85,
+    "om_low": 69,
+    "temp_source": "KRID"
   },
   "2026-09-17": {
-    "high": 85,
-    "low": 70,
+    "high": 86,
+    "low": 68,
     "cloud_cover": 47,
     "precip_amount": 0.13,
     "condition": "Rain",
@@ -1565,11 +1955,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 85,
+    "om_low": 70,
+    "temp_source": "KRID"
   },
   "2026-09-18": {
-    "high": 74,
-    "low": 68,
+    "high": 75,
+    "low": 64,
     "cloud_cover": 74,
     "precip_amount": 0.3,
     "condition": "Rain",
@@ -1577,11 +1970,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 74,
+    "om_low": 68,
+    "temp_source": "KRID"
   },
   "2026-09-19": {
-    "high": 80,
-    "low": 66,
+    "high": 81,
+    "low": 64,
     "cloud_cover": 81,
     "precip_amount": 0.22,
     "condition": "Rain",
@@ -1589,11 +1985,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 80,
+    "om_low": 66,
+    "temp_source": "KRID"
   },
   "2026-09-20": {
-    "high": 81,
-    "low": 64,
+    "high": 84,
+    "low": 63,
     "cloud_cover": 90,
     "precip_amount": 0.88,
     "condition": "Rain",
@@ -1601,11 +2000,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 81,
+    "om_low": 64,
+    "temp_source": "KRID"
   },
   "2026-09-21": {
-    "high": 64,
-    "low": 57,
+    "high": 63,
+    "low": 54,
     "cloud_cover": 96,
     "precip_amount": 0.33,
     "condition": "Rain",
@@ -1613,11 +2015,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 64,
+    "om_low": 57,
+    "temp_source": "KRID"
   },
   "2026-09-22": {
     "high": 63,
-    "low": 56,
+    "low": 54,
     "cloud_cover": 100,
     "precip_amount": 0.0,
     "condition": "Overcast",
@@ -1625,11 +2030,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 63,
+    "om_low": 56,
+    "temp_source": "KRID"
   },
   "2026-09-23": {
-    "high": 63,
-    "low": 57,
+    "high": 59,
+    "low": 55,
     "cloud_cover": 99,
     "precip_amount": 0.0,
     "condition": "Overcast",
@@ -1637,11 +2045,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 63,
+    "om_low": 57,
+    "temp_source": "KRID"
   },
   "2026-09-24": {
-    "high": 65,
-    "low": 55,
+    "high": 63,
+    "low": 50,
     "cloud_cover": 79,
     "precip_amount": 0.0,
     "condition": "Mostly Cloudy",
@@ -1649,11 +2060,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 65,
+    "om_low": 55,
+    "temp_source": "KRID"
   },
   "2026-09-25": {
-    "high": 67,
-    "low": 47,
+    "high": 70,
+    "low": 43,
     "cloud_cover": 60,
     "precip_amount": 0.0,
     "condition": "Mostly Cloudy",
@@ -1661,11 +2075,14 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 67,
+    "om_low": 47,
+    "temp_source": "KRID"
   },
   "2026-09-26": {
-    "high": 70,
-    "low": 48,
+    "high": 72,
+    "low": 45,
     "cloud_cover": 10,
     "precip_amount": 0.0,
     "condition": "Clear",
@@ -1673,6 +2090,9 @@
     "nasa_high": null,
     "nasa_low": null,
     "nasa_precip": null,
-    "nasa_cloud": null
+    "nasa_cloud": null,
+    "om_high": 70,
+    "om_low": 48,
+    "temp_source": "KRID"
   }
 }
