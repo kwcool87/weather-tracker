@@ -2169,5 +2169,20 @@
     "nasa_low": null,
     "nasa_precip": null,
     "nasa_cloud": null
+  },
+  "2026-10-02": {
+    "high": 72,
+    "low": 52,
+    "om_high": 74,
+    "om_low": 53,
+    "temp_source": "KRID",
+    "cloud_cover": 91,
+    "precip_amount": 0.66,
+    "condition": "Rain",
+    "precip_source": "mrms",
+    "nasa_high": null,
+    "nasa_low": null,
+    "nasa_precip": null,
+    "nasa_cloud": null
   }
 }
