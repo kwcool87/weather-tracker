@@ -1,0 +1,53 @@
+name: Backfill Weather Data
+
+on:
+  workflow_dispatch:
+    inputs:
+      dates:
+        description: 'Space-separated ISO dates to backfill (e.g. "2026-10-09 2026-10-10")'
+        required: true
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install system GRIB2 library
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libeccodes-dev
+
+      - name: Install dependencies
+        run: pip install requests herbie-data cfgrib xarray numpy pyshp
+
+      - name: Run backfill
+        timeout-minutes: 15
+        run: |
+          ARGS=""
+          for d in ${{ github.event.inputs.dates }}; do
+            ARGS="$ARGS --date $d"
+          done
+          echo "Backfilling: $ARGS"
+          python backfill.py $ARGS
+
+      - name: Commit and push updated data
+        run: |
+          git config --local user.email "weather-bot@users.noreply.github.com"
+          git config --local user.name "Weather Bot"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "Backfill weather data: ${{ github.event.inputs.dates }}"
+            git push
+          fi
