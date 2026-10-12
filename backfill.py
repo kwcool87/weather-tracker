@@ -28,6 +28,7 @@ Usage:
 
 import argparse
 import json
+import time
 from datetime import date
 
 import requests
@@ -72,7 +73,7 @@ def fetch_hist_forecast(logged_date: str, model_param: str):
         "timezone":           "America/Indiana/Indianapolis",
         "models":             model_param,
     }
-    r = requests.get(OPEN_METEO_HIST, params=params, headers=HEADERS, timeout=30)
+    r = requests.get(OPEN_METEO_HIST, params=params, headers=HEADERS, timeout=90)
     r.raise_for_status()
     d = r.json()["daily"]
     n = len(d["time"])
@@ -125,12 +126,42 @@ def main():
 
         # --- Forecasts (as logged_date for Open-Meteo sources only) -----
         for src_id, model_param in MODELS:
+            # Safety: never clobber real-time rows. If any existing row for
+            # this (logged_date, source) is NOT already backfill-tagged, skip
+            # this source entirely — the real-time fetch is authoritative.
+            existing = [f for f in forecasts
+                        if f["logged_date"] == log_date and f["source"] == src_id]
+            if existing and any(not r.get("backfill") for r in existing):
+                print(f"  {src_id}: skipped (real-time rows exist; refusing to overwrite)")
+                continue
+
+            # Try once, then retry once on network error (Open-Meteo's
+            # historical API has been flaky on back-to-back calls)
+            days = None
+            last_err = None
+            for attempt in (1, 2):
+                try:
+                    days = fetch_hist_forecast(log_date, model_param)
+                    break
+                except (requests.exceptions.Timeout,
+                        requests.exceptions.ConnectionError) as e:
+                    last_err = e
+                    if attempt == 1:
+                        print(f"  {src_id}: network error, retrying in 10s… ({e})")
+                        time.sleep(10)
+                except Exception as e:
+                    last_err = e
+                    break
+            if days is None:
+                print(f"  {src_id} FAILED: {last_err}")
+                continue
+
             try:
-                days = fetch_hist_forecast(log_date, model_param)
                 if not days:
                     raise ValueError("Empty historical response")
 
-                # Drop existing rows for (logged_date, source) to make this idempotent
+                # Drop existing backfill rows for (logged_date, source) — safe
+                # now because the guard above ensured none are real-time
                 before = len(forecasts)
                 forecasts = [
                     f for f in forecasts
