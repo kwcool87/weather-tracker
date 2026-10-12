@@ -41,7 +41,12 @@ jobs:
         run: |
           TODAY=$(TZ="America/Indiana/Indianapolis" date +%Y-%m-%d)
           echo "today=$TODAY" >> $GITHUB_OUTPUT
-          if [ -f data/meta.json ]; then
+          # Manual dispatches always run — the user asked for it. Only the
+          # scheduled trigger uses the already-ran guard, which prevents
+          # duplicate work when more than one of the 5 cron slots fires.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "already_ran=false" >> $GITHUB_OUTPUT
+          elif [ -f data/meta.json ]; then
             LAST=$(python3 -c "import json; d=json.load(open('data/meta.json')); print((d.get('last_run') or '')[:10])")
             if [ "$LAST" = "$TODAY" ]; then
               echo "already_ran=true" >> $GITHUB_OUTPUT
