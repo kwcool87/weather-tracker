@@ -29,7 +29,9 @@ jobs:
           python-version: '3.11'
 
       - name: Install system GRIB2 library
-        run: sudo apt-get install -y libeccodes-dev
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libeccodes-dev
 
       - name: Install dependencies
         run: pip install requests herbie-data cfgrib xarray numpy pyshp
