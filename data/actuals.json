@@ -2274,5 +2274,35 @@
     "nasa_low": null,
     "nasa_precip": null,
     "nasa_cloud": null
+  },
+  "2026-10-08": {
+    "high": 73,
+    "low": 46,
+    "om_high": 72,
+    "om_low": 51,
+    "temp_source": "KRID",
+    "cloud_cover": 3,
+    "precip_amount": 0.0,
+    "condition": "Clear",
+    "precip_source": "mrms",
+    "nasa_high": 75,
+    "nasa_low": 52,
+    "nasa_precip": null,
+    "nasa_cloud": null
+  },
+  "2026-10-09": {
+    "high": 79,
+    "low": 45,
+    "om_high": 76,
+    "om_low": 48,
+    "temp_source": "KRID",
+    "cloud_cover": 23,
+    "precip_amount": 0.0,
+    "condition": "Mostly Clear",
+    "precip_source": "mrms",
+    "nasa_high": 78,
+    "nasa_low": 51,
+    "nasa_precip": null,
+    "nasa_cloud": null
   }
 }
