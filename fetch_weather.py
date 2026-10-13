@@ -583,16 +583,26 @@ def load_data():
     actuals   = json.loads(ac_path.read_text()) if ac_path.exists() else {}
     return forecasts, actuals
 
-def save_data(forecasts, actuals):
+def save_data(forecasts, actuals, update_last_run=True):
     DATA_DIR.mkdir(exist_ok=True)
     (DATA_DIR / "forecasts.json").write_text(json.dumps(forecasts, indent=2))
     (DATA_DIR / "actuals.json").write_text(json.dumps(actuals, indent=2))
+    meta_path = DATA_DIR / "meta.json"
+    # Preserve existing last_run when the caller is a backfill — only the
+    # primary scheduled/manual fetch bumps the "last successful daily run"
+    # timestamp that the already-ran-today guard reads.
+    prev_last_run = None
+    if not update_last_run and meta_path.exists():
+        try:
+            prev_last_run = json.loads(meta_path.read_text()).get("last_run")
+        except Exception:
+            pass
     meta = {
-        "last_run":               datetime.now(ET).isoformat(),
+        "last_run":               datetime.now(ET).isoformat() if update_last_run else prev_last_run,
         "total_forecast_entries": len(forecasts),
         "total_actuals":          len(actuals),
     }
-    (DATA_DIR / "meta.json").write_text(json.dumps(meta, indent=2))
+    meta_path.write_text(json.dumps(meta, indent=2))
 
 # ── ntfy.sh notification ──────────────────────────────────────────────────
 def send_notification(title, message, ntfy_topic):
