@@ -2,11 +2,15 @@ name: Daily Weather Fetch
 
 on:
   schedule:
-    - cron: '0 12 * * *'   # 8 AM EDT
-    - cron: '0 13 * * *'   # 9 AM EDT / 8 AM EST
-    - cron: '0 14 * * *'   # 10 AM EDT fallback
-    - cron: '0 15 * * *'   # 11 AM EDT fallback
-    - cron: '0 16 * * *'   # 12 PM EDT fallback
+    # Off-peak UTC — GitHub Actions scheduled triggers get delayed or
+    # dropped during peak hours (12-16 UTC = US morning + EU midday).
+    # 06-10 UTC = 2-6 AM EDT / 1-5 AM EST, well off-peak. All five slots
+    # fall after midnight ET so today_et() returns the right date.
+    - cron: '0 6 * * *'    # 2 AM EDT / 1 AM EST
+    - cron: '0 7 * * *'    # 3 AM EDT / 2 AM EST
+    - cron: '0 8 * * *'    # 4 AM EDT / 3 AM EST
+    - cron: '0 9 * * *'    # 5 AM EDT / 4 AM EST
+    - cron: '0 10 * * *'   # 6 AM EDT / 5 AM EST
   workflow_dispatch:
 
 jobs:

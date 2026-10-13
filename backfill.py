@@ -190,7 +190,7 @@ def main():
             except Exception as e:
                 print(f"  {src_id} FAILED: {e}")
 
-    save_data(forecasts, actuals)
+    save_data(forecasts, actuals, update_last_run=False)
     print(f"\nSaved: +{added_fx} forecast rows ({replaced_fx} replaced), +{added_ac} actuals ({skipped_ac} skipped)")
     print(f"Totals: {len(forecasts)} forecast entries, {len(actuals)} actuals")
 
