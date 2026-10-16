@@ -2364,5 +2364,20 @@
     "nasa_low": null,
     "nasa_precip": null,
     "nasa_cloud": null
+  },
+  "2026-10-15": {
+    "high": 70,
+    "low": 58,
+    "om_high": 70,
+    "om_low": 58,
+    "temp_source": "open_meteo",
+    "cloud_cover": 86,
+    "precip_amount": 0.21,
+    "condition": "Rain",
+    "precip_source": "mrms",
+    "nasa_high": null,
+    "nasa_low": null,
+    "nasa_precip": null,
+    "nasa_cloud": null
   }
 }
