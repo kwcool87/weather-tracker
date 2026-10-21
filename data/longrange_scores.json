@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-20T11:10:57",
+ "updated": "2026-10-21T11:26:10",
  "note": "RPSS > 0 = better than climatology (1/3 each); hit rate = favoured category came true, when a category was favoured",
  "rows": [
   {
@@ -24,19 +24,19 @@
    "source": "cpc_814",
    "window": "window",
    "var": "prcp",
-   "n": 7,
+   "n": 8,
    "rpss": 0.072,
-   "calls": 7,
-   "hit_rate": 0.571
+   "calls": 8,
+   "hit_rate": 0.625
   },
   {
    "source": "cpc_814",
    "window": "window",
    "var": "temp",
-   "n": 7,
-   "rpss": 0.068,
-   "calls": 7,
-   "hit_rate": 0.429
+   "n": 8,
+   "rpss": 0.074,
+   "calls": 8,
+   "hit_rate": 0.5
   },
   {
    "source": "cpc_month",
