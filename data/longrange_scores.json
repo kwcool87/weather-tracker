@@ -1,96 +1,42 @@
 {
- "updated": "2026-10-24T10:30:02",
+ "updated": "2026-10-25T11:02:49",
  "note": "RPSS > 0 = better than climatology (1/3 each); hit rate = favoured category came true, when a category was favoured",
  "rows": [
   {
-   "source": "bam_wk34",
+   "source": "cpc_month",
    "window": "window",
    "var": "prcp",
-   "n": 1,
-   "rpss": -0.002,
-   "calls": 0,
-   "hit_rate": null
-  },
-  {
-   "source": "bam_wk34",
-   "window": "window",
-   "var": "temp",
-   "n": 1,
-   "rpss": -0.468,
-   "calls": 1,
+   "n": 4,
+   "rpss": -0.02,
+   "calls": 2,
    "hit_rate": 0.0
   },
   {
-   "source": "cpc_610",
-   "window": "window",
-   "var": "prcp",
-   "n": 12,
-   "rpss": -0.002,
-   "calls": 12,
-   "hit_rate": 0.333
-  },
-  {
-   "source": "cpc_610",
+   "source": "cpc_month",
    "window": "window",
    "var": "temp",
-   "n": 12,
-   "rpss": 0.238,
-   "calls": 12,
+   "n": 4,
+   "rpss": 0.369,
+   "calls": 4,
    "hit_rate": 0.75
   },
   {
-   "source": "cpc_814",
-   "window": "window",
-   "var": "prcp",
-   "n": 10,
-   "rpss": 0.073,
-   "calls": 10,
-   "hit_rate": 0.7
-  },
-  {
-   "source": "cpc_814",
-   "window": "window",
-   "var": "temp",
-   "n": 10,
-   "rpss": 0.074,
-   "calls": 10,
-   "hit_rate": 0.5
-  },
-  {
-   "source": "cpc_month",
-   "window": "window",
-   "var": "prcp",
-   "n": 13,
-   "rpss": 0.067,
-   "calls": 4,
-   "hit_rate": 0.25
-  },
-  {
-   "source": "cpc_month",
-   "window": "window",
-   "var": "temp",
-   "n": 13,
-   "rpss": 0.242,
-   "calls": 12,
-   "hit_rate": 0.667
-  },
-  {
    "source": "cpc_wk34",
    "window": "window",
    "var": "prcp",
-   "n": 56,
-   "rpss": -0.002,
-   "calls": 17,
-   "hit_rate": 0.529
+   "n": 31,
+   "rpss": -0.055,
+   "calls": 11,
+   "hit_rate": 0.364
   },
   {
    "source": "cpc_wk34",
    "window": "window",
    "var": "temp",
-   "n": 56,
-   "rpss": 0.019,
-   "calls": 36,
-   "hit_rate": 0.306
+   "n": 31,
+   "rpss": 0.035,
+   "calls": 24,
+   "hit_rate": 0.375
   }
  ]
 }
