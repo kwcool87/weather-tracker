@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-28T12:22:30",
+ "updated": "2026-10-29T12:31:41",
  "note": "RPSS > 0 = better than climatology (1/3 each); hit rate = favoured category came true, when a category was favoured",
  "rows": [
   {
@@ -24,55 +24,55 @@
    "source": "cfs",
    "window": "d15-28",
    "var": "prcp",
-   "n": 1,
-   "rpss": 0.624,
-   "calls": 1,
+   "n": 2,
+   "rpss": 0.761,
+   "calls": 2,
    "hit_rate": 1.0
   },
   {
    "source": "cfs",
    "window": "d15-28",
    "var": "temp",
-   "n": 1,
-   "rpss": 0.853,
-   "calls": 1,
+   "n": 2,
+   "rpss": 0.867,
+   "calls": 2,
    "hit_rate": 1.0
   },
   {
    "source": "cpc_610",
    "window": "window",
    "var": "prcp",
-   "n": 16,
-   "rpss": 0.087,
-   "calls": 16,
-   "hit_rate": 0.5
+   "n": 17,
+   "rpss": 0.123,
+   "calls": 17,
+   "hit_rate": 0.529
   },
   {
    "source": "cpc_610",
    "window": "window",
    "var": "temp",
-   "n": 16,
-   "rpss": 0.373,
-   "calls": 16,
-   "hit_rate": 0.812
+   "n": 17,
+   "rpss": 0.401,
+   "calls": 17,
+   "hit_rate": 0.824
   },
   {
    "source": "cpc_814",
    "window": "window",
    "var": "prcp",
-   "n": 12,
-   "rpss": 0.067,
-   "calls": 12,
-   "hit_rate": 0.667
+   "n": 13,
+   "rpss": 0.059,
+   "calls": 13,
+   "hit_rate": 0.615
   },
   {
    "source": "cpc_814",
    "window": "window",
    "var": "temp",
-   "n": 12,
-   "rpss": 0.199,
-   "calls": 12,
-   "hit_rate": 0.583
+   "n": 13,
+   "rpss": 0.257,
+   "calls": 13,
+   "hit_rate": 0.615
   },
   {
    "source": "cpc_month",
@@ -114,18 +114,18 @@
    "source": "gfs_ens",
    "window": "d15-28",
    "var": "prcp",
-   "n": 1,
-   "rpss": 0.841,
-   "calls": 1,
+   "n": 2,
+   "rpss": 0.695,
+   "calls": 2,
    "hit_rate": 1.0
   },
   {
    "source": "gfs_ens",
    "window": "d15-28",
    "var": "temp",
-   "n": 1,
-   "rpss": -0.171,
-   "calls": 1,
+   "n": 2,
+   "rpss": -0.174,
+   "calls": 2,
    "hit_rate": 0.0
   }
  ]
