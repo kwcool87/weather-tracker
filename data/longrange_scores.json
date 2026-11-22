@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-21T14:23:44",
+ "updated": "2026-11-22T14:16:07",
  "note": "RPSS > 0 = better than climatology (1/3 each); hit rate = favoured category came true, when a category was favoured",
  "rows": [
   {
@@ -42,19 +42,19 @@
    "source": "cfs",
    "window": "d15-28",
    "var": "prcp",
-   "n": 23,
-   "rpss": 0.34,
-   "calls": 23,
-   "hit_rate": 0.565
+   "n": 24,
+   "rpss": 0.309,
+   "calls": 24,
+   "hit_rate": 0.542
   },
   {
    "source": "cfs",
    "window": "d15-28",
    "var": "temp",
-   "n": 23,
-   "rpss": 0.76,
-   "calls": 23,
-   "hit_rate": 0.913
+   "n": 24,
+   "rpss": 0.766,
+   "calls": 24,
+   "hit_rate": 0.917
   },
   {
    "source": "cfs",
@@ -78,37 +78,37 @@
    "source": "cpc_610",
    "window": "window",
    "var": "prcp",
-   "n": 40,
-   "rpss": 0.195,
-   "calls": 40,
-   "hit_rate": 0.55
+   "n": 41,
+   "rpss": 0.2,
+   "calls": 41,
+   "hit_rate": 0.561
   },
   {
    "source": "cpc_610",
    "window": "window",
    "var": "temp",
-   "n": 40,
-   "rpss": 0.377,
-   "calls": 40,
-   "hit_rate": 0.7
+   "n": 41,
+   "rpss": 0.385,
+   "calls": 41,
+   "hit_rate": 0.707
   },
   {
    "source": "cpc_814",
    "window": "window",
    "var": "prcp",
-   "n": 36,
+   "n": 37,
    "rpss": 0.105,
-   "calls": 36,
-   "hit_rate": 0.667
+   "calls": 37,
+   "hit_rate": 0.676
   },
   {
    "source": "cpc_814",
    "window": "window",
    "var": "temp",
-   "n": 36,
-   "rpss": 0.376,
-   "calls": 36,
-   "hit_rate": 0.667
+   "n": 37,
+   "rpss": 0.366,
+   "calls": 37,
+   "hit_rate": 0.649
   },
   {
    "source": "cpc_month",
@@ -132,37 +132,37 @@
    "source": "cpc_wk34",
    "window": "window",
    "var": "prcp",
-   "n": 60,
-   "rpss": 0.01,
-   "calls": 20,
-   "hit_rate": 0.6
+   "n": 61,
+   "rpss": 0.012,
+   "calls": 21,
+   "hit_rate": 0.619
   },
   {
    "source": "cpc_wk34",
    "window": "window",
    "var": "temp",
-   "n": 60,
-   "rpss": 0.026,
-   "calls": 37,
-   "hit_rate": 0.324
+   "n": 61,
+   "rpss": 0.034,
+   "calls": 38,
+   "hit_rate": 0.342
   },
   {
    "source": "gfs_ens",
    "window": "d15-28",
    "var": "prcp",
-   "n": 23,
-   "rpss": 0.448,
-   "calls": 23,
-   "hit_rate": 0.696
+   "n": 24,
+   "rpss": 0.441,
+   "calls": 24,
+   "hit_rate": 0.708
   },
   {
    "source": "gfs_ens",
    "window": "d15-28",
    "var": "temp",
-   "n": 23,
-   "rpss": 0.189,
-   "calls": 23,
-   "hit_rate": 0.435
+   "n": 24,
+   "rpss": 0.215,
+   "calls": 24,
+   "hit_rate": 0.458
   }
  ]
 }
