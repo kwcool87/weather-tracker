@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T14:16:07",
+ "updated": "2026-11-23T17:41:19",
  "note": "RPSS > 0 = better than climatology (1/3 each); hit rate = favoured category came true, when a category was favoured",
  "rows": [
   {
@@ -42,19 +42,19 @@
    "source": "cfs",
    "window": "d15-28",
    "var": "prcp",
-   "n": 24,
-   "rpss": 0.309,
-   "calls": 24,
-   "hit_rate": 0.542
+   "n": 25,
+   "rpss": 0.277,
+   "calls": 25,
+   "hit_rate": 0.52
   },
   {
    "source": "cfs",
    "window": "d15-28",
    "var": "temp",
-   "n": 24,
-   "rpss": 0.766,
-   "calls": 24,
-   "hit_rate": 0.917
+   "n": 25,
+   "rpss": 0.771,
+   "calls": 25,
+   "hit_rate": 0.92
   },
   {
    "source": "cfs",
@@ -78,37 +78,37 @@
    "source": "cpc_610",
    "window": "window",
    "var": "prcp",
-   "n": 41,
-   "rpss": 0.2,
-   "calls": 41,
-   "hit_rate": 0.561
+   "n": 42,
+   "rpss": 0.194,
+   "calls": 42,
+   "hit_rate": 0.548
   },
   {
    "source": "cpc_610",
    "window": "window",
    "var": "temp",
-   "n": 41,
-   "rpss": 0.385,
-   "calls": 41,
-   "hit_rate": 0.707
+   "n": 42,
+   "rpss": 0.396,
+   "calls": 42,
+   "hit_rate": 0.714
   },
   {
    "source": "cpc_814",
    "window": "window",
    "var": "prcp",
-   "n": 37,
+   "n": 38,
    "rpss": 0.105,
-   "calls": 37,
-   "hit_rate": 0.676
+   "calls": 38,
+   "hit_rate": 0.684
   },
   {
    "source": "cpc_814",
    "window": "window",
    "var": "temp",
-   "n": 37,
-   "rpss": 0.366,
-   "calls": 37,
-   "hit_rate": 0.649
+   "n": 38,
+   "rpss": 0.382,
+   "calls": 38,
+   "hit_rate": 0.658
   },
   {
    "source": "cpc_month",
@@ -150,19 +150,19 @@
    "source": "gfs_ens",
    "window": "d15-28",
    "var": "prcp",
-   "n": 24,
-   "rpss": 0.441,
-   "calls": 24,
-   "hit_rate": 0.708
+   "n": 25,
+   "rpss": 0.388,
+   "calls": 25,
+   "hit_rate": 0.68
   },
   {
    "source": "gfs_ens",
    "window": "d15-28",
    "var": "temp",
-   "n": 24,
-   "rpss": 0.215,
-   "calls": 24,
-   "hit_rate": 0.458
+   "n": 25,
+   "rpss": 0.238,
+   "calls": 25,
+   "hit_rate": 0.48
   }
  ]
 }
