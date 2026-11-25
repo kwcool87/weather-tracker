@@ -1,42 +1,168 @@
 {
- "updated": "2026-11-24T17:14:18",
+ "updated": "2026-11-25T16:57:48",
  "note": "RPSS > 0 = better than climatology (1/3 each); hit rate = favoured category came true, when a category was favoured",
  "rows": [
   {
-   "source": "cpc_month",
+   "source": "bam_month",
    "window": "window",
    "var": "prcp",
-   "n": 4,
-   "rpss": -0.02,
-   "calls": 2,
+   "n": 1,
+   "rpss": -0.002,
+   "calls": 0,
+   "hit_rate": null
+  },
+  {
+   "source": "bam_month",
+   "window": "window",
+   "var": "temp",
+   "n": 1,
+   "rpss": -0.468,
+   "calls": 1,
    "hit_rate": 0.0
   },
   {
+   "source": "bam_wk34",
+   "window": "window",
+   "var": "prcp",
+   "n": 1,
+   "rpss": -0.002,
+   "calls": 0,
+   "hit_rate": null
+  },
+  {
+   "source": "bam_wk34",
+   "window": "window",
+   "var": "temp",
+   "n": 1,
+   "rpss": -0.468,
+   "calls": 1,
+   "hit_rate": 0.0
+  },
+  {
+   "source": "cfs",
+   "window": "d15-28",
+   "var": "prcp",
+   "n": 27,
+   "rpss": 0.214,
+   "calls": 27,
+   "hit_rate": 0.481
+  },
+  {
+   "source": "cfs",
+   "window": "d15-28",
+   "var": "temp",
+   "n": 27,
+   "rpss": 0.768,
+   "calls": 27,
+   "hit_rate": 0.926
+  },
+  {
+   "source": "cfs",
+   "window": "d29-42",
+   "var": "prcp",
+   "n": 13,
+   "rpss": -0.22,
+   "calls": 13,
+   "hit_rate": 0.231
+  },
+  {
+   "source": "cfs",
+   "window": "d29-42",
+   "var": "temp",
+   "n": 13,
+   "rpss": 0.723,
+   "calls": 13,
+   "hit_rate": 0.846
+  },
+  {
+   "source": "cpc_610",
+   "window": "window",
+   "var": "prcp",
+   "n": 44,
+   "rpss": 0.183,
+   "calls": 44,
+   "hit_rate": 0.523
+  },
+  {
+   "source": "cpc_610",
+   "window": "window",
+   "var": "temp",
+   "n": 44,
+   "rpss": 0.426,
+   "calls": 44,
+   "hit_rate": 0.727
+  },
+  {
+   "source": "cpc_814",
+   "window": "window",
+   "var": "prcp",
+   "n": 40,
+   "rpss": 0.095,
+   "calls": 40,
+   "hit_rate": 0.65
+  },
+  {
+   "source": "cpc_814",
+   "window": "window",
+   "var": "temp",
+   "n": 40,
+   "rpss": 0.411,
+   "calls": 40,
+   "hit_rate": 0.675
+  },
+  {
+   "source": "cpc_month",
+   "window": "window",
+   "var": "prcp",
+   "n": 15,
+   "rpss": 0.056,
+   "calls": 4,
+   "hit_rate": 0.25
+  },
+  {
    "source": "cpc_month",
    "window": "window",
    "var": "temp",
-   "n": 4,
-   "rpss": 0.369,
-   "calls": 4,
-   "hit_rate": 0.75
+   "n": 15,
+   "rpss": 0.233,
+   "calls": 13,
+   "hit_rate": 0.692
   },
   {
    "source": "cpc_wk34",
    "window": "window",
    "var": "prcp",
-   "n": 31,
-   "rpss": -0.055,
-   "calls": 11,
-   "hit_rate": 0.364
+   "n": 61,
+   "rpss": 0.012,
+   "calls": 21,
+   "hit_rate": 0.619
   },
   {
    "source": "cpc_wk34",
    "window": "window",
    "var": "temp",
-   "n": 31,
-   "rpss": 0.035,
-   "calls": 24,
-   "hit_rate": 0.375
+   "n": 61,
+   "rpss": 0.034,
+   "calls": 38,
+   "hit_rate": 0.342
+  },
+  {
+   "source": "gfs_ens",
+   "window": "d15-28",
+   "var": "prcp",
+   "n": 27,
+   "rpss": 0.343,
+   "calls": 27,
+   "hit_rate": 0.667
+  },
+  {
+   "source": "gfs_ens",
+   "window": "d15-28",
+   "var": "temp",
+   "n": 27,
+   "rpss": 0.273,
+   "calls": 27,
+   "hit_rate": 0.519
   }
  ]
 }
